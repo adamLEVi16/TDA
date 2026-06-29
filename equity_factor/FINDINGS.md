@@ -61,6 +61,42 @@ To get an honest shot at edge we must change the **inputs**, not keep tuning:
 point-in-time universe (kill survivorship), fundamentals (value/quality), a
 broader universe incl. small-caps, and a longer multi-regime history.
 
+## Round 4 — multi-asset trend + risk parity (survivorship-FREE, 8 ETFs)
+
+GTAA: each asset trend-filtered (10m SMA, to cash when below), inverse-vol
+weighted. 2007–2024, incl. the 2008 crisis. (`multi_asset.py`)
+
+| Portfolio | CAGR | Vol | Sharpe | MaxDD | corr SPY |
+|---|---|---|---|---|---|
+| RP+Trend | 4.2% | 5.4% | **0.79** | **−7.0%** | 0.42 |
+| RP+Trend 2x const lev | 4.0% | 10.8% | 0.41 | −20.7% | 0.42 |
+| EW+Trend | 4.4% | 6.0% | 0.75 | −8.5% | 0.53 |
+| 60/40 | 7.8% | 9.6% | 0.84 | −29.5% | 0.96 |
+| SPY | 10.4% | 15.7% | 0.71 | −50.8% | 1.00 |
+
+**First strategy to beat SPY risk-adjusted (full sample): 0.79 vs 0.71, with a
+−7% drawdown vs −51%.** BUT two honest caveats kill the "money machine" reading:
+
+**(a) The edge is ENTIRELY the 2008 crash.** Sub-period Sharpe (RP+Trend vs SPY):
+- 2007–2009: **1.18 vs −0.19**  (RP+Trend wins massively)
+- 2010–2024: 0.69 vs **0.97**  (SPY wins)
+- 2015–2024: 0.64 vs **0.88**  (SPY wins)
+
+In every post-crisis window, plain SPY beat it on Sharpe *and* return. The strategy
+is **crash insurance**: it trades bull-market upside for tail protection.
+
+**(b) You can't cheaply lever the gap.** Its ~4% return barely exceeds financing,
+so constant leverage adds risk without return (Sharpe 0.41 at 2x). Dynamic
+vol-targeting was worse (Sharpe 0.29) — it levered up into drawdowns.
+
+### Honest bottom line
+Across single-stock factors, trend overlays, and multi-asset diversification,
+**nothing reliably beats buy-and-hold across all regimes.** The one genuine,
+survivorship-free win is *drawdown reduction*: a diversified trend strategy cut the
+worst-case loss from −51% to −7% and had a better full-cycle Sharpe — valuable if
+you fear crashes, but it underperforms in bull markets. That is the real, complete
+answer, consistent with 15 years of tactical strategies lagging the S&P.
+
 ## Reproduce
 ```bash
 cd equity_factor
