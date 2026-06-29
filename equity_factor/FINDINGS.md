@@ -34,6 +34,33 @@ selection skill).
 - Price-only factors on a biased large-cap set over a bull decade are a hard place
   to find honest alpha. This is a real result, not a bug.
 
+## Round 3 — trend / regime overlay (risk management, not selection)
+
+10-month SMA rule, cash when below trend (survivorship-free on SPY):
+
+| Portfolio | CAGR | Vol | Sharpe | MaxDD |
+|---|---|---|---|---|
+| SPY buy & hold | 14.8% | 14.5% | **1.03** | −23.9% |
+| SPY + trend overlay | 7.5% | 11.0% | 0.71 | −23.0% |
+| EW buy & hold | 17.3% | 15.0% | **1.15** | −22.0% |
+| EW + trend overlay | 9.6% | 11.3% | 0.87 | **−15.4%** |
+
+**The overlay lowered Sharpe in both cases.** It cut the EW drawdown nicely
+(−15.4% vs −22%) but at a heavy return cost; on SPY it barely helped drawdown
+because monthly signals are too slow for fast crashes (2020). 2010–2024's
+V-shaped recoveries punish trend filters (whipsaw).
+
+## Overall honest conclusion (rounds 1–3)
+Nothing tested — momentum, low-vol, long-short, or a trend overlay — beats
+buy-and-hold **risk-adjusted** over 2010–2024 on this universe. This is the
+genuine answer for a **price-only, large-cap, survivorship-biased, single-regime**
+setup, not a lack of effort. Beating a strong bull market with simple robust rules
+is legitimately hard, and most apparent edges are survivorship or overfitting.
+
+To get an honest shot at edge we must change the **inputs**, not keep tuning:
+point-in-time universe (kill survivorship), fundamentals (value/quality), a
+broader universe incl. small-caps, and a longer multi-regime history.
+
 ## Reproduce
 ```bash
 cd equity_factor
