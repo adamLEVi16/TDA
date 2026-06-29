@@ -2,43 +2,45 @@
 
 Quantitative research into topological data analysis (TDA) applied to equity market regime detection.
 
-## Finding
+## Finding (honest, reproduced from real data)
 
-No strategy tested produced positive risk-adjusted returns in a look-ahead-free, factor-regression-verified backtest. The best approach (beta-spread + Fiedler regime filter) achieves Sharpe −0.77 over 2022–2024. Topology provides measurable risk-reduction benefit over no filter, but is outperformed by a simpler realized-volatility filter.
+**No version of the strategy is profitable, and none shows alpha.** Across every
+real-data, look-ahead-free, factor-regression-verified backtest (test window 2022–2024):
 
-The mathematical framework (correlation-CV bound, spectral gap analysis, ghost loop detection) is a genuine contribution independent of strategy performance.
+- Best variant (beta-spread + Fiedler) = Sharpe **−0.77**; the pure spectral/TDA
+  strategy = Sharpe **−2.57**. SPY buy-and-hold over the same window = **+0.49**.
+- Factor regression shows **significantly negative** alpha (t ≈ −5 for the spectral
+  strategies), with β≈0 — they are not disguised market bets, they destroy value.
+- ML on the spectral/topology features gives **AUC ≈ 0.50** (a coin flip): no predictive
+  power for next-day returns.
+
+Full reproduced tables and an honest discussion of where alpha could *plausibly* come
+from are in **[`HONEST_RESULTS.md`](HONEST_RESULTS.md)**.
+
+The mathematical framework (correlation–CV bound, spectral-gap analysis) may still be a
+valid *descriptive* contribution, but the *trading* claim is a clean negative result.
 
 ## Repository Structure
 
 ```
-thesis_latex/                     LaTeX source for the full thesis
-  sections/                       Individual section files
-  tables/                         Authoritative result tables
-  figures/                        Figure manifest and generated figures
-  references.bib                  Complete bibliography (24 entries)
+risk_report.py                    Verified backtest — Strategies A–D + FF5/UMD regression  [REAL]
+tda_sector_backtest.py            Walk-forward sector backtest with ripser topology        [REAL]
+strategy_variants_real.py         Strategy variants V1–V4, real data, 1-day lag            [REAL]
+ml_integration_real.py            ML benchmark on real data, 1-day lag                     [REAL]
+run_all_real.sh                   One-shot Colab runner for the real pipelines
+HONEST_RESULTS.md                 Reproduced real numbers + alpha analysis
 
-risk_report.py                    Section 12 verified backtest (Sharpe −0.77)
-ml_integration_real.py            Section 10 ML benchmark on REAL data, 1-day lag
-strategy_variants_real.py         Section 8 variants on REAL data, 1-day lag
-run_all_real.sh                   One-shot Colab runner for all three pipelines
+thesis_latex/                     LaTeX source for the thesis (figures/appendix tables are
+                                  synthetic — see disclosure banners in sec07–sec10)
 
-null_model_test.py                Null-model TDA significance test
-validation_tests.py               Cross-market validation on real FTSE/DAX/Nikkei
-visualizations_3d.py              Interactive 3D topology visualisations
-
-thesis_expansion/                 Phase-by-phase analysis code (legacy)
-  phase1_intraday/                Intraday topology
-  phase2_sector_topology/         Section 7 source (look-ahead biased; fixed in
-                                  risk_report.py Strategy D)
-  phase3_strategy_variants/       Look-ahead biased; replaced by
-                                  strategy_variants_real.py
-  phase4_cross_market/            Calibrated simulation; replaced by
-                                  validation_tests.py for real cross-market
-  phase5_ml_integration/          Synthetic-data ML; replaced by
-                                  ml_integration_real.py
-  phase6_theory/                  Theoretical bound on simulated correlation
-                                  matrices (standard for theoretical validation)
+legacy_simulated/                 QUARANTINE — simulated/fabricated code, NOT validation.
+                                  See legacy_simulated/README.md. Includes the figure
+                                  generator, validation_tests, null_model_test,
+                                  visualizations_3d, and the legacy thesis_expansion/ phases.
 ```
+
+> Note: yfinance's `curl_cffi` backend may fail behind some corporate/agent proxies.
+> On Google Colab it works out of the box. The real scripts are otherwise unmodified.
 
 ## Reproducing All Numbers (Google Colab)
 

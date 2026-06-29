@@ -330,7 +330,10 @@ def load_ff_factors(start: str, end: str) -> pd.DataFrame:
                              "famafrench", start, end)[0]
         mom.columns = ["UMD"]
         factors = ff5.join(mom, how="inner") / 100.0
-        factors.index = pd.to_datetime(factors.index)
+        # Ken French data comes back with a PeriodIndex; convert to timestamps.
+        idx = factors.index
+        factors.index = idx.to_timestamp() if hasattr(idx, "to_timestamp") \
+            else pd.to_datetime(idx)
         print("    Fama-French factors downloaded OK.")
         return factors
     except Exception as exc:
