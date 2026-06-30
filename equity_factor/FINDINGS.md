@@ -151,6 +151,24 @@ next step is **extending history to 1990 (or 1973) with index/fund proxies** —
 more independent crashes and a rising-rate regime where the bond sleeve can't
 help. That, not more tuning, is how you'd actually prove or break this.
 
+## Round 7 — the RIGHT lens: alpha as low correlation (`portfolio_blend.py`)
+
+Judging a 0.42-correlation sleeve by its standalone Sharpe vs SPY is the wrong test.
+The right test is its marginal contribution to a portfolio.
+
+- **CAPM alpha** of RP+Trend vs the market: **+1.93%/yr, t = 1.75**, beta 0.14
+  (nearly market-neutral). This is "return not explained by market correlation."
+- **Adding it to SPY improves the portfolio.** 70% SPY / 30% RP+Trend: CAGR 8.9%
+  (vs SPY 10.4%), Sharpe 0.79 (vs 0.71), MaxDD −37.5% (vs −50.8%). Sharpe-max blend
+  (~82% sleeve) hits 0.95. Blend-vs-SPY ΔSharpe +0.22, **p = 0.10** — much stronger
+  than the standalone test (p = 0.32), though still short of p<0.05.
+
+**Reframe:** standalone = "not proven"; as an uncorrelated sleeve = "promising,
+nearly significant." The value is diversification, not standalone outperformance.
+
+**Forward principle (Dalio's "Holy Grail"):** stack 3–5 genuinely uncorrelated
+positive-return sleeves rather than over-tuning this one. Correlation does the work.
+
 ## Reproduce
 ```bash
 cd equity_factor
