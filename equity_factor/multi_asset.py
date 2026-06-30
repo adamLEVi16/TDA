@@ -40,9 +40,12 @@ SMA_MONTHS = 10     # ~200-day trend filter (monthly)
 VOL_WIN = 12        # trailing months for inverse-vol weights
 COST_BPS = 10       # per side, on turnover
 
-def load_prices():
-    px = D.get_prices(tickers=ASSETS, start="2005-01-01", end="2024-12-31", verbose=False)
-    return px.resample("ME").last().dropna()       # common history only
+def load_prices(assets=None, shift_days=0):
+    assets = list(assets) if assets is not None else list(ASSETS)
+    px = D.get_prices(tickers=assets, start="2005-01-01", end="2024-12-31", verbose=False)
+    if shift_days:                                  # rebalance-date robustness
+        px = px.shift(shift_days)
+    return px.resample("ME").last().dropna()        # common history only
 
 _RF_CACHE = None
 def get_rf_monthly(index):
@@ -67,17 +70,25 @@ def get_rf_monthly(index):
             return pd.Series(0.0, index=index)
     return _RF_CACHE.reindex(index).fillna(0.0)
 
-def run(sma_months=SMA_MONTHS, vol_win=VOL_WIN, cost_bps=COST_BPS):
-    mpx = load_prices()
+def run(sma_months=SMA_MONTHS, vol_win=VOL_WIN, cost_bps=COST_BPS,
+        assets=None, shift_days=0):
+    assets = list(assets) if assets is not None else list(ASSETS)
+    mpx = load_prices(assets=assets, shift_days=shift_days)
+    # Benchmarks (SPY, IEF) use full data regardless of the strategy universe,
+    # so drop-one / subset tests don't change what we compare against.
+    bench = load_prices(assets=["SPY", "IEF"], shift_days=shift_days)
+    idx = mpx.index.intersection(bench.index)
+    mpx, bench = mpx.loc[idx], bench.loc[idx]
     mret = mpx.pct_change()
+    bret = bench.pct_change()
     sma = mpx.rolling(sma_months).mean()
     vol = mret.rolling(vol_win).std()
     rf = get_rf_monthly(mpx.index)
     dates = mpx.index
 
-    prev_rp = pd.Series(0.0, index=ASSETS)
-    prev_ew = pd.Series(0.0, index=ASSETS)
-    prev_st = pd.Series(0.0, index=ASSETS)
+    prev_rp = pd.Series(0.0, index=assets)
+    prev_ew = pd.Series(0.0, index=assets)
+    prev_st = pd.Series(0.0, index=assets)
     rows, wlog = [], {}
 
     for i in range(1, len(dates)):
@@ -89,9 +100,9 @@ def run(sma_months=SMA_MONTHS, vol_win=VOL_WIN, cost_bps=COST_BPS):
         rp_full = inv / inv.sum()                      # static risk parity (no trend)
         w_rp = rp_full.where(tr, 0.0)                  # trend-to-cash
         on = tr[tr].index
-        w_ew = pd.Series(0.0, index=ASSETS)
+        w_ew = pd.Series(0.0, index=assets)
         if len(on) > 0:
-            w_ew[on] = 1.0 / len(ASSETS)               # 1/N eligible, rest cash
+            w_ew[on] = 1.0 / len(assets)               # 1/N eligible, rest cash
 
         r = mret.loc[hold]
         rf_h = float(rf.loc[hold])
@@ -103,9 +114,10 @@ def run(sma_months=SMA_MONTHS, vol_win=VOL_WIN, cost_bps=COST_BPS):
         ew = sleeve(w_ew, prev_ew); prev_ew = w_ew
         st = sleeve(rp_full, prev_st); prev_st = rp_full
 
+        spy_r = float(bret.loc[hold, "SPY"])
         rows.append({"date": hold, "RP+Trend": rp, "EW+Trend": ew,
-                     "RP static": st, "SPY": float(r["SPY"]),
-                     "60/40": float(0.6 * r["SPY"] + 0.4 * r["IEF"])})
+                     "RP static": st, "SPY": spy_r,
+                     "60/40": 0.6 * spy_r + 0.4 * float(bret.loc[hold, "IEF"])})
         wlog[hold] = w_rp.copy()
 
     bt = pd.DataFrame(rows).set_index("date")

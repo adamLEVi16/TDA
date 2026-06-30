@@ -124,6 +124,33 @@ added a **no-trend control**, and stress-tested. (`multi_asset.py`, `present.py`
 beats buy-and-hold *risk-adjusted* (higher Sharpe, 1/8th the drawdown). It does NOT
 out-*return* SPY in bull markets — its value is consistency and crash protection.
 
+## Round 6 — TORTURE TESTS (trying hard to kill it). `torture_test.py`
+
+Healthy skepticism applied. Results that matter:
+
+| Test | Result | Verdict |
+|---|---|---|
+| Sharpe diff vs SPY (block bootstrap) | ΔSharpe +0.13, **95% CI [−0.38, +0.64]**, p=0.32 | **NOT significant** |
+| Sharpe diff vs 60/40 | ΔSharpe +0.00 | indistinguishable |
+| Deflated Sharpe (6–20 trials) | P(true Sharpe>0) ≈ 0.96–0.99 | positive Sharpe is real… |
+| Drop-one-asset | 0.73–0.92; drop ALL bonds → 0.70 | robust but bond-dependent |
+| Rebalance-date shift ±10d | Sharpe 0.66–0.86 (month-end = best) | **date-luck present** |
+| Trend vs static diversification | ΔSharpe +0.26, p=0.08; DD −6.5% vs −20.7% | trend adds value, mostly via DD |
+
+### Honest verdict
+**The Sharpe edge over buy-and-hold is NOT statistically significant.** We have a
+strategy with a robustly *positive* Sharpe and robust *drawdown reduction*
+(−6.5% vs SPY −51%), but its risk-adjusted advantage over SPY/60/40 is within the
+noise — and the headline 0.86 is the lucky-rebalance-day, bond-bull, 2008-driven
+best case (a fairer figure is ~0.75). What survives torture is **crash protection**,
+not market-beating alpha.
+
+### The only test that can settle it
+Confidence intervals are huge because the sample has ~2 crashes. The definitive
+next step is **extending history to 1990 (or 1973) with index/fund proxies** —
+more independent crashes and a rising-rate regime where the bond sleeve can't
+help. That, not more tuning, is how you'd actually prove or break this.
+
 ## Reproduce
 ```bash
 cd equity_factor
