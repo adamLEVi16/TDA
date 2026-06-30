@@ -201,6 +201,26 @@ out-*return* equities in raging bulls (ties on Sharpe in 2010–24), and its edg
 a strong 60/40 is only borderline-significant. It is a genuine **defensive core /
 diversifying sleeve**, now backed by out-of-sample evidence — not a lucky backtest.
 
+## Round 9 — vs the actual competing PRODUCTS (`competitors.py`)
+
+Benchmarked against real funds, not just SPY/60-40.
+
+**vs AQR Managed Futures (AQMNX), 2010–2024:** ours Sharpe 0.83 / DD −6.5% vs
+AQR 0.33 / −25.1%. We beat AQR's flagship trend fund over this window — BUT
+(a) 2010–2024 was a notoriously bad decade for managed futures and excludes AQR's
+huge +2008, and (b) AQR is a *truer* diversifier: it can short, so its equity corr
+is −0.21 vs our +0.48. Correlation of ours to AQR MF is only 0.17 — different tools.
+
+**vs static multi-asset funds:** ours beats PRPFX (Permanent Portfolio) and VBIAX
+(Vanguard Balanced) on Sharpe and drawdown in every window. Over 37 years (1987–2024)
+ours matched PRPFX's return (6.8% vs 6.7%) at much higher Sharpe (1.16 vs 0.80) and
+smaller drawdown (−12.8% vs −19.1%).
+
+**Honest structural point:** ours is LONG-ONLY (de-risks to cash, can't short), so it
+is a *defensive long allocator* (+0.48 equity corr), NOT a true managed-futures hedge
+(AQR's −0.21). It is not a replacement for AQR; it's a simpler, gentler cousin that
+happened to have a higher Sharpe in this window.
+
 ## Reproduce
 ```bash
 cd equity_factor
