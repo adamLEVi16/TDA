@@ -169,6 +169,38 @@ nearly significant." The value is diversification, not standalone outperformance
 **Forward principle (Dalio's "Holy Grail"):** stack 3–5 genuinely uncorrelated
 positive-return sleeves rather than over-tuning this one. Correlation does the work.
 
+## Round 8 — LONG-HISTORY VALIDATION (1987–2024): it passes. `long_history.py`
+
+Re-ran the identical engine on dividend-adjusted fund proxies back to 1987 (VFINX,
+VWIGX, VUSTX, VGPMX, VWEHX) — adding Black Monday '87, the 1990 recession, the 1994
+bond crash, 1998 LTCM, 2000–02 dot-com, plus a high/rising-rate regime. 451 months.
+
+| Portfolio | CAGR | Sharpe | MaxDD |
+|---|---|---|---|
+| **RP+Trend** | 6.8% | **1.16** | **−12.8%** |
+| 60/40 | 9.2% | 0.93 | −29.9% |
+| VFINX buy & hold | 10.5% | 0.74 | −51.0% |
+
+- **The Sharpe edge over buy-and-hold is now SIGNIFICANT: ΔSharpe +0.43, 95% CI
+  [+0.13, +0.75], p = 0.002** (short sample was p = 0.32). More crashes → the
+  confidence interval collapsed. vs 60/40 it's borderline (+0.24, p = 0.065).
+- **Robust on every axis:** rebalance-date shifts ≥1.03 (short sample was a fragile
+  0.66–0.86); 40 bps costs → 1.06; trend window 6–14m → 1.15–1.17; drop any asset →
+  0.96–1.32 (all still beat buy-and-hold).
+- **Consistent across regimes** (Sharpe): '87–'99 = 1.34, '00–'09 = 1.27 (VFINX
+  0.02!), '10–'24 = 0.94 (≈ VFINX 0.96). Positive returns in 2000/01/02 and ~flat
+  in 2008 while equities lost 37%.
+- Works on a *different* instrument set than the 8 ETFs → the edge is the
+  mechanism (trend + risk parity), not the specific tickers picked.
+
+### Verdict (upgraded, earned)
+The strategy is **validated**: a statistically significant, robust improvement in
+risk-adjusted return over equity buy-and-hold across 37 years and 7+ crises, driven
+by crash avoidance and slow-bear protection. Honest limits remain: it does NOT
+out-*return* equities in raging bulls (ties on Sharpe in 2010–24), and its edge over
+a strong 60/40 is only borderline-significant. It is a genuine **defensive core /
+diversifying sleeve**, now backed by out-of-sample evidence — not a lucky backtest.
+
 ## Reproduce
 ```bash
 cd equity_factor
