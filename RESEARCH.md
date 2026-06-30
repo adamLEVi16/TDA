@@ -116,12 +116,25 @@ realistic 10 bps it's ~0.09, and **negative on the liquid large-caps you could
 actually trade in size**. Holding longer doesn't help (signal dilutes faster
 than turnover falls). That cost wall is *why* the inefficiency persists.
 
+**Follow-up — the earnings-date channel (also tested, also reported):** since the
+weekly edge dies on turnover, the natural fix is the *fundamental* channel —
+attention as a same-store-sales nowcast, priced at the next earnings report (a
+2-day hold ~4×/yr, so costs are negligible). I built a real earnings calendar
+from **SEC EDGAR** (8-K Item 2.02 filing dates) — 550 events, 22 names,
+2016–2024 — and tested whether cumulative pre-earnings attention predicts the
+announcement reaction, in both *level* and *YoY-growth* specifications.
+**Null on both** (reaction t = −0.69 and +0.07; placebo p = 0.47; tradable
+long/short p = 0.26). The earnings version clears the cost wall but has no signal
+to harvest — by report time, consensus has already absorbed the demand info.
+
 **Takeaway:** the hardest and most valuable judgment in applied quant — the gap
-between "statistically significant" and "tradable after costs." This is a real,
-momentum-independent piece of public information that is nonetheless not worth a
-fund's transaction costs to harvest. Its legitimate use is as a free, real-time
-*attention monitor* feeding a discretionary, low-turnover process — explicitly
-not pitched as a standalone strategy.
+between "statistically significant" and "tradable after costs," and the
+discipline to chase the follow-up and report it null. The complete, honest arc:
+free public-attention data holds a real but un-monetizable *short-horizon* edge
+(killed by costs) and no detectable *fundamental-horizon* edge (killed by
+consensus). Its one legitimate use is as a free, real-time *attention monitor*
+feeding a discretionary, low-turnover process — explicitly not a standalone
+strategy.
 
 ---
 
@@ -138,14 +151,19 @@ robustness · explicit no-look-ahead and determinism checks.
 # each study is independent; free data, no keys
 cd equity_factor   && python3 long_history.py && python3 torture_test.py
 cd ../weather_alpha   && python3 weather_data.py && python3 test_signal.py
-cd ../attention_alpha && python3 wiki_data.py   && python3 test_signal.py && python3 torture_test.py
+cd ../attention_alpha && python3 wiki_data.py && python3 test_signal.py && \
+                         python3 torture_test.py && python3 earnings_study.py
 ```
 Per-study write-ups: `equity_factor/FINDINGS.md`, `weather_alpha/FINDINGS.md`,
 `attention_alpha/FINDINGS.md`.
 
 ## What I'd pursue next
-The attention result points to the higher-conviction follow-up: the *fundamental*
-channel rather than the 1-week pop — cumulative attention over a fiscal quarter
-vs. the stock's move on its **next earnings date** (attention as a same-store-
-sales nowcast). Slower-decaying and far less turnover-sensitive, so it can clear
-the cost wall that kills the weekly version. Needs a historical earnings calendar.
+The free-data signals are now mapped: a real-but-untradable short-horizon
+attention edge, and nulls at the weather and fundamental/earnings horizons. The
+honest read is that the remaining edge is unlikely to live in *free, public*
+data (which gets arbitraged or absorbed into consensus), but in (a) combining
+weak signals into a portfolio of genuinely uncorrelated sleeves — the Study-1
+diversification principle applied to *signals* — or (b) richer proprietary
+inputs (transaction/credit-card panels, store-level footprint) where the same
+rigorous harness here would carry directly over. The methodology transfers; the
+data is the constraint.

@@ -86,10 +86,39 @@ money-making strategy on its own, and is not presented as one.**
 - **−** Honest risk: 24 names is a thin cross-section; the standalone-trade
   result is already dead, so only the *monitor* use survives scrutiny.
 
+## Follow-up — the earnings-date channel (the slow, low-turnover version): also NULL
+`earnings_data.py`, `earnings_study.py`
+
+The weekly signal dies on turnover; the proposed fix was to test the *fundamental*
+channel instead — attention as a same-store-sales nowcast, priced at the next
+earnings report (a 2-day hold ~4×/yr, so costs are negligible). Built a real
+earnings calendar from **SEC EDGAR** (8-K Item 2.02 filing dates — the actual
+earnings releases), 550 events across 22 names, 2016–2024.
+
+Does cumulative pre-earnings attention predict the announcement reaction?
+
+| Signal | → 2-day reaction | → drift (+2..+21d) |
+|---|---|---|
+| attention **level** (mean abnormal attention over the quarter) | t=−0.69, p=0.49 | t=−0.03, p=0.97 |
+| attention **YoY growth** (this quarter vs same quarter last year) | t=+0.07, p=0.94 | t=−0.83, p=0.41 |
+
+Placebo confirms (p=0.47). Tradable long/short-into-earnings: Sharpe +0.21,
+**p=0.26 — not significant**.
+
+**Null on both specifications.** The earnings-date version clears the cost wall,
+but there is no signal there to harvest: by the time a consumer name reports,
+analyst consensus has already absorbed whatever demand information sits in its
+public attention. So the *only* real attention effect is the 1-week pop — and
+that one is precluded by transaction costs. The honest end of the arc: free
+public-attention data contains a real but un-monetizable short-horizon edge and
+no detectable edge at the fundamental/earnings horizon.
+
 ## Reproduce
 ```bash
 cd attention_alpha
-python3 wiki_data.py     # fetch/cache pageviews (free, no key), 2015-2024
-python3 test_signal.py   # panel + placebo + basket
-python3 torture_test.py  # costs, momentum control, sub-periods, drop-one, holding
+python3 wiki_data.py      # fetch/cache pageviews (free, no key), 2015-2024
+python3 test_signal.py    # weekly: panel + placebo + basket
+python3 torture_test.py   # weekly: costs, momentum control, sub-periods, drop-one, holding
+python3 earnings_data.py  # earnings calendar from SEC EDGAR (free, no key)
+python3 earnings_study.py # earnings-date event study (level + YoY growth)
 ```

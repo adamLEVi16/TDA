@@ -1,5 +1,13 @@
 # TDA Trading Strategy — Adam Levine
 
+> **Looking for the current research?** See **[`RESEARCH.md`](RESEARCH.md)** — a
+> portfolio of three self-contained, reproducible quant studies (a validated
+> defensive strategy, an honest null, and a real-signal-killed-by-costs), all on
+> free data. The TDA material below is earlier work, kept for the record with an
+> honest negative result.
+
+---
+
 Quantitative research into topological data analysis (TDA) applied to equity market regime detection.
 
 ## Finding (honest, reproduced from real data)
