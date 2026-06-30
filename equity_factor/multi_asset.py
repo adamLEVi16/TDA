@@ -2,91 +2,129 @@
 Multi-asset trend + risk-parity ("Global Tactical Asset Allocation").
 
 Universe: liquid ETFs across asset classes (survivorship-FREE — real instruments).
-Each month-end m (decide at m, hold m+1, no look-ahead):
-  - trend filter: asset eligible only if price > its 10-month SMA, else that
-    sleeve goes to cash;
-  - risk weighting: inverse-volatility (trailing 12m) across the eligible assets,
-    normalized by the all-asset inverse-vol sum so risk-off = partial/full cash.
-Cash earns 0% (conservative; real T-bills would only help).
+Each month-end m (decide using data through m, hold month m+1 — no look-ahead):
+  - trend filter: an asset is eligible only if its price > its 10-month SMA;
+    otherwise that sleeve goes to CASH (which earns the 1-month T-bill yield);
+  - risk weighting: inverse-volatility (trailing 12m) across ALL assets,
+    so eligible assets keep their risk-parity weight and ineligible ones are
+    parked in cash. Risk-off months => largely cash, earning T-bills.
 
-Two strategy variants + two benchmarks:
-  RP+Trend  = inverse-vol, trend-to-cash
+Portfolios produced:
+  RP+Trend  = inverse-vol weights, trend-to-cash, cash earns T-bills   [the strategy]
   EW+Trend  = equal-weight eligible assets, trend-to-cash (Faber GTAA)
-  SPY       = 100% equity buy & hold
+  RP static = inverse-vol, NO trend filter (control: isolates trend's value)
   60/40     = 60% SPY / 40% IEF, monthly rebalanced
-Win condition: higher Sharpe AND smaller drawdown than both benchmarks.
+  SPY       = 100% equity buy & hold
+
+run() returns (returns_df, weights_panel) so the presentation can show what the
+strategy actually holds over time.
 """
 import warnings; warnings.filterwarnings("ignore")
 import numpy as np, pandas as pd
 import data as D
 from backtest import metrics
 
-ASSETS = ["SPY", "EFA", "EEM", "TLT", "IEF", "GLD", "DBC", "VNQ"]
-SMA_MONTHS = 10
-VOL_WIN = 12
-COST_BPS = 10
+# ── EXACT UNIVERSE: 8 liquid ETFs, one per major return driver ────────────────
+ASSET_META = [
+    ("SPY", "US large-cap equity",        "Growth / equity beta"),
+    ("EFA", "Developed intl equity (ex-US)","Geographic equity diversification"),
+    ("EEM", "Emerging-market equity",      "Higher-beta global growth"),
+    ("TLT", "20+yr US Treasuries",         "Deflation / flight-to-quality hedge"),
+    ("IEF", "7-10yr US Treasuries",        "Duration, lower-vol bond ballast"),
+    ("GLD", "Gold",                        "Inflation / crisis hedge, low equity corr"),
+    ("DBC", "Broad commodities",           "Inflation hedge, real-asset exposure"),
+    ("VNQ", "US REITs (real estate)",      "Income / real-asset, distinct cycle"),
+]
+ASSETS = [a[0] for a in ASSET_META]
+SMA_MONTHS = 10     # ~200-day trend filter (monthly)
+VOL_WIN = 12        # trailing months for inverse-vol weights
+COST_BPS = 10       # per side, on turnover
 
-def load():
+def load_prices():
     px = D.get_prices(tickers=ASSETS, start="2005-01-01", end="2024-12-31", verbose=False)
-    m = px.resample("ME").last()
-    # restrict to common history (all assets present)
-    m = m.dropna()
-    return m
+    return px.resample("ME").last().dropna()       # common history only
 
-def run():
-    mpx = load()
+_RF_CACHE = None
+def get_rf_monthly(index):
+    """1-month T-bill (risk-free) from Ken French, aligned to `index`. 0 if offline.
+    Cached on disk + in memory so parameter sweeps don't re-hit the network."""
+    global _RF_CACHE
+    import os
+    fp = os.path.join(D.CACHE_DIR, "_rf_monthly.csv")
+    if _RF_CACHE is None and os.path.exists(fp):
+        _RF_CACHE = pd.read_csv(fp, index_col=0, parse_dates=True).iloc[:, 0]
+    if _RF_CACHE is None:
+        try:
+            import pandas_datareader.data as web
+            ff = web.DataReader("F-F_Research_Data_5_Factors_2x3", "famafrench",
+                                "2005-01-01", "2024-12-31")[0]
+            rf = (ff["RF"] / 100.0)
+            rf.index = rf.index.to_timestamp("M")
+            rf.to_frame("RF").to_csv(fp)
+            _RF_CACHE = rf
+        except Exception as e:
+            print(f"  [rf] T-bill unavailable ({type(e).__name__}); cash earns 0%")
+            return pd.Series(0.0, index=index)
+    return _RF_CACHE.reindex(index).fillna(0.0)
+
+def run(sma_months=SMA_MONTHS, vol_win=VOL_WIN, cost_bps=COST_BPS):
+    mpx = load_prices()
     mret = mpx.pct_change()
-    sma = mpx.rolling(SMA_MONTHS).mean()
-    vol = mret.rolling(VOL_WIN).std()
+    sma = mpx.rolling(sma_months).mean()
+    vol = mret.rolling(vol_win).std()
+    rf = get_rf_monthly(mpx.index)
     dates = mpx.index
 
-    prev = pd.Series(0.0, index=ASSETS)
-    rows = []
+    prev_rp = pd.Series(0.0, index=ASSETS)
+    prev_ew = pd.Series(0.0, index=ASSETS)
+    prev_st = pd.Series(0.0, index=ASSETS)
+    rows, wlog = [], {}
+
     for i in range(1, len(dates)):
         m, hold = dates[i - 1], dates[i]
-        trend_on = (mpx.loc[m] > sma.loc[m])
-        v = vol.loc[m]
-        if v.isna().any() or trend_on.isna().any():
+        v = vol.loc[m]; tr = mpx.loc[m] > sma.loc[m]
+        if v.isna().any() or sma.loc[m].isna().any():
             continue
         inv = 1.0 / v
-        denom = inv.sum()                       # all-asset inverse-vol
-        w_rp = (inv / denom).where(trend_on, 0.0)          # risk-off -> cash
-        on = trend_on[trend_on].index
+        rp_full = inv / inv.sum()                      # static risk parity (no trend)
+        w_rp = rp_full.where(tr, 0.0)                  # trend-to-cash
+        on = tr[tr].index
         w_ew = pd.Series(0.0, index=ASSETS)
         if len(on) > 0:
-            w_ew[on] = 1.0 / len(ASSETS)        # 1/N, off sleeves -> cash
+            w_ew[on] = 1.0 / len(ASSETS)               # 1/N eligible, rest cash
 
         r = mret.loc[hold]
-        turn = (w_rp - prev).abs().sum()
-        rp_ret = float((w_rp * r).sum()) - turn * COST_BPS / 1e4
-        ew_ret = float((w_ew * r).sum())        # (cost approx on RP only for brevity)
-        prev = w_rp
-        rows.append({"date": hold, "RP+Trend": rp_ret, "EW+Trend": ew_ret,
-                     "SPY": float(r["SPY"]),
-                     "60/40": float(0.6 * r["SPY"] + 0.4 * r["IEF"])})
-    return pd.DataFrame(rows).set_index("date")
+        rf_h = float(rf.loc[hold])
+        def sleeve(w, prev):
+            cash_w = max(0.0, 1.0 - w.sum())           # uninvested -> T-bills
+            turn = (w - prev).abs().sum()
+            return float((w * r).sum() + cash_w * rf_h - turn * cost_bps / 1e4)
+        rp = sleeve(w_rp, prev_rp); prev_rp = w_rp
+        ew = sleeve(w_ew, prev_ew); prev_ew = w_ew
+        st = sleeve(rp_full, prev_st); prev_st = rp_full
 
-def constant_leverage(rp_ret, lev=2.0, fin_rate=0.04):
-    """Scale a positive-Sharpe strategy by a FIXED leverage (preserves Sharpe,
-    minus financing). The honest way to raise the risk budget — unlike dynamic
-    vol-targeting, which backfired here by levering up into drawdowns."""
-    financing = max(lev - 1, 0) * fin_rate / 12
-    return (lev * rp_ret - financing).rename(f"RP+Trend ({lev:g}x const)")
+        rows.append({"date": hold, "RP+Trend": rp, "EW+Trend": ew,
+                     "RP static": st, "SPY": float(r["SPY"]),
+                     "60/40": float(0.6 * r["SPY"] + 0.4 * r["IEF"])})
+        wlog[hold] = w_rp.copy()
+
+    bt = pd.DataFrame(rows).set_index("date")
+    weights = pd.DataFrame(wlog).T
+    weights["CASH"] = (1.0 - weights.sum(axis=1)).clip(lower=0)
+    return bt, weights
 
 if __name__ == "__main__":
-    bt = run()
-    bt["RP+Trend (2x const)"] = constant_leverage(bt["RP+Trend"], 2.0)
-    print("=" * 72)
-    print(f"  MULTI-ASSET TREND + RISK PARITY  —  {len(ASSETS)} ETFs, "
-          f"{SMA_MONTHS}m SMA, inv-vol")
+    bt, w = run()
+    print("=" * 78)
+    print(f"  MULTI-ASSET TREND + RISK PARITY  —  {len(ASSETS)} ETFs, {SMA_MONTHS}m SMA, "
+          f"inv-vol, cash=T-bills")
     print(f"  {bt.index.min().date()} → {bt.index.max().date()}  ({len(bt)} months)"
           f"   cost={COST_BPS}bps/side")
-    print("=" * 72)
-    print(f"{'Portfolio':<28}{'CAGR':>9}{'Vol':>8}{'Sharpe':>8}{'MaxDD':>9}{'Hit':>7}{'corrSPY':>9}")
-    print("-" * 72)
-    for col in ["RP+Trend", "RP+Trend (2x const)", "EW+Trend", "60/40", "SPY"]:
-        mm = metrics(bt[col].dropna())
-        c = bt[col].corr(bt["SPY"])
-        print(f"{col:<28}{mm['CAGR']:>8.1%}{mm['Vol']:>8.1%}{mm['Sharpe']:>8.2f}"
+    print("=" * 78)
+    print(f"{'Portfolio':<14}{'CAGR':>9}{'Vol':>8}{'Sharpe':>8}{'MaxDD':>9}{'Hit':>7}{'corrSPY':>9}")
+    print("-" * 78)
+    for col in ["RP+Trend", "EW+Trend", "RP static", "60/40", "SPY"]:
+        mm = metrics(bt[col]); c = bt[col].corr(bt["SPY"])
+        print(f"{col:<14}{mm['CAGR']:>8.1%}{mm['Vol']:>8.1%}{mm['Sharpe']:>8.2f}"
               f"{mm['MaxDD']:>9.1%}{mm['Hit']:>7.0%}{c:>9.2f}")
-    print("-" * 72)
+    print("-" * 78)

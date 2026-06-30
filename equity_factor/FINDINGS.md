@@ -97,6 +97,33 @@ worst-case loss from −51% to −7% and had a better full-cycle Sharpe — valu
 you fear crashes, but it underperforms in bull markets. That is the real, complete
 answer, consistent with 15 years of tactical strategies lagging the S&P.
 
+## Round 5 — productionizing option 1 (cash yield, control, robustness)
+
+Refined the multi-asset strategy: cash now earns the **1-month T-bill** (was 0%),
+added a **no-trend control**, and stress-tested. (`multi_asset.py`, `present.py`)
+
+| Portfolio | CAGR | Vol | Sharpe | MaxDD |
+|---|---|---|---|---|
+| **RP+Trend** (the strategy) | 4.6% | 5.4% | **0.86** | **−6.5%** |
+| 60/40 | 7.8% | 9.6% | 0.84 | −29.5% |
+| SPY | 10.4% | 15.7% | 0.71 | −50.8% |
+| RP static (no trend, control) | 5.1% | 9.2% | 0.58 | −20.7% |
+
+- **The trend filter is the active ingredient:** same 8 assets without it = Sharpe
+  0.58 / −20.7% DD. Adding trend → 0.86 / −6.5%.
+- **Robust, not cherry-picked:** trend window 6–14m → Sharpe 0.86–0.93; vol window
+  6–18m → 0.78–0.86; survives 40 bps/side costs (0.73).
+- **Consistent across regimes** (Sharpe): crisis '07–09 = 1.23 (SPY −0.19);
+  bull '10–24 = 0.77 (SPY 0.97); recent '15–24 = 0.77 (SPY 0.88). It never blows
+  up; SPY out-returns it in calm decades but craters in crises.
+- Verified: deterministic re-run, weights+cash=1, no leverage/shorting, and a
+  hand-recomputed last-month weight check confirms **no look-ahead**. See
+  `presentation.html` (run `python3 present.py`).
+
+**Honest verdict on option 1:** a real, survivorship-free, reproducible strategy that
+beats buy-and-hold *risk-adjusted* (higher Sharpe, 1/8th the drawdown). It does NOT
+out-*return* SPY in bull markets — its value is consistency and crash protection.
+
 ## Reproduce
 ```bash
 cd equity_factor
