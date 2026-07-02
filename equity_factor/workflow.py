@@ -14,8 +14,58 @@ import multi_asset as MA
 OUT = os.path.join(os.path.dirname(__file__), "workflow.html")
 NAMES = {"SPY":"US stocks","EFA":"Intl stocks","EEM":"EM stocks","TLT":"Long bonds",
          "IEF":"Mid bonds","GLD":"Gold","DBC":"Commodities","VNQ":"Real estate","CASH":"Cash (T-bills)"}
-COL = {"SPY":"#d95f02","EFA":"#e6ab02","EEM":"#a6761d","TLT":"#1b9e77","IEF":"#66c2a5",
-       "GLD":"#e7d020","DBC":"#8c6d31","VNQ":"#7570b3","CASH":"#cccccc"}
+# validated reference palette (dataviz), fixed slot order; CASH = neutral gray
+COL = {"SPY":"#2a78d6","EFA":"#1baf7a","EEM":"#eda100","TLT":"#008300","IEF":"#4a3aa7",
+       "GLD":"#e34948","DBC":"#e87ba4","VNQ":"#eb6834","CASH":"#c3c2b7"}
+SURF, INK, INK2, MUTED, GRID = "#fcfcfb", "#0b0b0b", "#52514e", "#898781", "#e1e0d9"
+
+def fig_timeline():
+    """WHEN each step happens: the exact monthly cadence, with the data each
+    step is allowed to see (no look-ahead)."""
+    fig, ax = plt.subplots(figsize=(10.5, 3.1)); ax.set_xlim(0, 14); ax.set_ylim(0, 5)
+    ax.axis("off"); fig.patch.set_facecolor(SURF)
+    ax.add_patch(FancyArrowPatch((0.3, 1.5), (13.7, 1.5), arrowstyle="-|>",
+                 mutation_scale=20, lw=2, color=INK2))
+    pts = [(1.6, "T &minus; 10 months", "history window\nOPENS", "10 month-end closes\nfeed the trend average"),
+           (5.6, "month-end T,\nat the close", "SIGNAL", "for each ETF:\nclose vs 10-mo average;\n12-mo vol for sizing"),
+           (8.3, "T (close) /\nnext open", "TRADE", "rotate only what\nchanged; pay ~10 bps\non changes"),
+           (11.2, "T+1 .. next\nmonth-end", "HOLD", "no intramonth action —\nnothing to watch,\nnothing to panic-sell"),
+           (13.2, "next\nmonth-end", "REPEAT", "")]
+    for x, when, what, detail in pts:
+        ax.plot([x], [1.5], "o", ms=11, color="#2a78d6", mec=SURF, mew=2, zorder=5)
+        ax.text(x, 2.15, what.replace("&minus;", "−"), ha="center", fontsize=11,
+                weight="bold", color=INK)
+        ax.text(x, 0.95, when.replace("&minus;", "−"), ha="center", va="top",
+                fontsize=8.5, color=MUTED)
+        if detail:
+            ax.text(x, 2.75, detail, ha="center", va="bottom", fontsize=8.5, color=INK2)
+    ax.text(0.3, 4.6, "One month in the life of the strategy — every input is a PAST close (no look-ahead)",
+            fontsize=11.5, weight="bold", color=INK)
+    return png(fig)
+
+def fig_alloc_history(w):
+    """WHAT it held WHEN: full monthly allocation history, 2007-2024."""
+    cols = MA.ASSETS + ["CASH"]
+    ww = w[cols].clip(lower=0)
+    fig, ax = plt.subplots(figsize=(10.5, 3.6)); fig.patch.set_facecolor(SURF)
+    ax.set_facecolor(SURF)
+    ax.stackplot(ww.index, [ww[c].values for c in cols],
+                 colors=[COL[c] for c in cols], labels=cols, lw=0)
+    ax.set_ylim(0, 1); ax.set_xlim(ww.index[0], ww.index[-1])
+    ax.yaxis.set_major_formatter(lambda y, _: f"{y:.0%}")
+    ax.grid(False); [s.set_visible(False) for s in ax.spines.values()]
+    ax.tick_params(colors=MUTED)
+    for dt, lab in [("2008-10-31", "2008:\nall cash"), ("2020-03-31", "2020:\nmostly cash"),
+                    ("2022-06-30", "2022:\nde-risked")]:
+        d = pd.Timestamp(dt)
+        ax.axvline(d, color=INK, lw=1, ls=(0, (2, 2)), alpha=0.6)
+        ax.text(d, 1.03, lab, ha="center", va="bottom", fontsize=8.5, color=INK2)
+    ax.legend([plt.Rectangle((0, 0), 1, 1, fc=COL[c]) for c in cols],
+              [f"{c} — {NAMES[c]}" for c in cols], loc="upper center",
+              bbox_to_anchor=(0.5, -0.08), ncol=5, fontsize=8, frameon=False)
+    ax.set_title("What it actually held, month by month (2007–2024) — gray is cash",
+                 fontsize=11.5, weight="bold", loc="left", color=INK, pad=24)
+    return png(fig)
 
 def png(fig):
     b = io.BytesIO(); fig.savefig(b, format="png", bbox_inches="tight", dpi=115); plt.close(fig)
@@ -89,9 +139,20 @@ img{{width:100%;border:1px solid #eee;border-radius:8px;margin:10px 0}}
 <div class="box"><b>Plain English:</b> once a month, check each of 8 boring index ETFs. Keep the ones
 trending up (sized so no single one dominates the risk); dump the ones trending down into cash.
 That's it. No options, no leverage, no shorting — just deciding <i>when</i> to own ordinary assets.</div>
+<h2>When everything happens — the monthly cadence</h2>
+<img src="data:image/png;base64,{fig_timeline()}">
+<div class="box">The strategy touches the market <b>one day a month</b>. Signals use only month-end
+closes that already happened; the position then sits untouched until the next month-end. Rebalance-date
+tests show the exact day doesn't matter (trading 5, 10, even 21 sessions late still works).</div>
 <h2>The monthly decision flow</h2>
 <img src="data:image/png;base64,{fig_flow()}">
-<h2>What it actually holds — real allocations (auto-adapts by regime)</h2>
+<h2>What it held, when — full 18-year allocation history</h2>
+<img src="data:image/png;base64,{fig_alloc_history(w)}">
+<div class="box">Reading the chart: in calm bull years the book is fully invested across all eight
+assets. As trends break, slices flip to gray (cash) — fully by late 2008, mostly in the 2020 crash and
+the 2022 bond-equity bear. That automatic de-risking is the entire source of the drawdown edge
+(−12.8% worst vs −51% for equity).</div>
+<h2>Snapshots — real allocations (auto-adapts by regime)</h2>
 <img src="data:image/png;base64,{fig_pies(w)}">
 <div class="box">Left: a calm month — fully invested, risk-balanced across everything. Middle: today.
 Right: a risk-off month where every asset was below trend, so it sat <b>100% in cash</b> and waited.
