@@ -227,3 +227,27 @@ cd equity_factor
 python3 data.py        # fetch/caches the price panel (urllib; proxy-safe)
 python3 backtest.py    # prints the table above + factor regression
 ```
+
+## Round 10 — the alpha hunt, concluded (`alpha_test.py`, `dual_momentum.py`, `turn_of_month.py`, plus insider_alpha/, squeeze_monitor/flag_pnl.py)
+
+Systematic sweep for standalone alpha in free public data. Honest nulls, all
+pre-committed specs: **flag→long P&L** (concentration, alpha t=0.53); **insider
+cluster buys** on 112 consumer events 2014-24 (AR63 = 0.00%, placebo p=0.87);
+**dual momentum / GEM** on 37y (beats VFINX CAGR 11.5% vs 10.5% but ΔSharpe
+p=0.31, edge entirely 2000-09); **turn-of-month** (strong pre-2010 t=2.94, dead
+since, t=0.25). Pattern: every published public-data anomaly is dead or
+insignificant where institutions can trade it.
+
+**The one result that formally clears the alpha bar is RP+Trend itself:**
+
+| Test (1987-2024, 451 mo, net of costs) | alpha/yr | t | p |
+|---|---|---|---|
+| CAPM (vs market) | **+1.80%** | **+2.30** | **0.022** |
+| Spanning (vs all 5 own assets — strictest) | +1.40% | +1.89 | 0.058 |
+| second half alone | +1.98% | +1.88 | 0.060 |
+
+Significant CAPM alpha at beta 0.24, **stronger in the second half than the
+first** (no post-discovery decay), on top of the already-established Sharpe
+significance (p=0.002) and timing-vs-static significance (p=0.025). Verdict:
+a modest, real, verifiable ~1.8%/yr of defensive timing alpha — the honest
+final answer of the whole search.
