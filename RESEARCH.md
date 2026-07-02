@@ -168,6 +168,29 @@ the free-public-data edges are arbitraged out — the remaining edge is in
 proprietary data (transaction panels, store-level signals), which is exactly
 where a systematic harness like this one should be pointed.
 
+## Study 5 — Squeeze early-warning monitor  → a working risk tool (the applied payoff)
+`squeeze_monitor/` · `monitor.py`, `short_interest.py`, `demo.py` → `demo.html`
+
+The applied synthesis of the portfolio: the one validated positive signal
+(abnormal public attention, Study 3) repurposed where turnover costs don't
+apply — as a **risk flag for a consumer/retail short book**. Crowding from
+FINRA short interest used **only from its real publication date** (~9 business
+days after settlement); attention from daily Wikipedia pageviews.
+
+- **Pre-committed rule, evaluated on 10,049 name-weeks (2018–2024): a flagged
+  crowded short is 2.3× as likely to rip ≥ +25% in the next 4 weeks** (14.3% vs
+  6.1%; week-clustered bootstrap p = 0.015). ~13 flags/yr across 30 names.
+- The episode check exposed a real mechanical insight: **days-to-cover fails
+  during the squeeze itself** (GME Jan-2021: DTC "fell" to 2.1 because volume
+  exploded while short interest was still ~61M shares). The volume-independent
+  V2 crowding measure + daily attention timing flags **GME on 2020-11-12** (76
+  days before the peak) and **AMC on 2021-05-11** (22 days before the peak) —
+  with the misses (BYND, CVNA) and V2's weaker panel significance stated
+  plainly rather than hidden.
+- Framed as what it is: a monitor that says "size down," not a return
+  predictor — and a prototype whose crowding leg upgrades directly with desk
+  data (daily borrow/utilization instead of lagged twice-monthly FINRA).
+
 ## Methods toolkit (shared across studies)
 
 Block bootstrap (Sharpe-difference CIs, preserving autocorrelation) · time-shift
