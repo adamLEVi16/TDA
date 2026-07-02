@@ -138,6 +138,36 @@ strategy.
 
 ---
 
+## Study 4 — PEAD in consumer names, conditioned on attention  → the classic is dead where it matters, and the harness proves it
+`attention_alpha/` · `pead_study.py`, `xbrl_data.py`, `pead_diagnostics.py`
+
+Replicate-then-extend on the most-documented anomaly in the literature:
+post-earnings-announcement drift. 1,837 earnings events (SEC EDGAR 8-K dates),
+25 consumer names, 2005–2024; surprise measured both as the 2-day market-adjusted
+announcement reaction and as Bernard–Thomas SUE built from **point-in-time SEC
+XBRL EPS** (earliest-filed values — no restatement look-ahead). Extension:
+Hirshleifer's limited-attention prediction (drift stronger when announcement
+attention is low), tested with the Wikipedia attention data from Study 3.
+
+- Full sample: **no tradable drift** (calendar-time L/S, point-in-time tercile
+  assignment, net of costs ≈ 0).
+- **The era split recovers the published record**: the drift portfolio earned
+  +7.2%/yr net (Sharpe +0.39) through 2016 — then went to **−13%/yr (2017–20)
+  and −10%/yr (2021–24)**, with the SUE extremes mildly *reversing* post-2016
+  (crowding now front-runs the announcement). This matches the documented
+  post-2015 attenuation of PEAD in liquid names (e.g. Martineau 2021), found
+  here independently on out-of-sample data and a different universe.
+- The attention extension: null — low-attention events drift no more than
+  high-attention ones in this universe.
+
+**Takeaway:** the harness doesn't just fail to find false positives — it
+*recovers known truths on both sides*: the anomaly where the literature says it
+lived, and its death where the literature says it died. And the practical
+conclusion is the portfolio's central thesis: in liquid US consumer equities,
+the free-public-data edges are arbitraged out — the remaining edge is in
+proprietary data (transaction panels, store-level signals), which is exactly
+where a systematic harness like this one should be pointed.
+
 ## Methods toolkit (shared across studies)
 
 Block bootstrap (Sharpe-difference CIs, preserving autocorrelation) · time-shift

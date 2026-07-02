@@ -113,12 +113,45 @@ that one is precluded by transaction costs. The honest end of the arc: free
 public-attention data contains a real but un-monetizable short-horizon edge and
 no detectable edge at the fundamental/earnings horizon.
 
+## PEAD × attention (the classic anomaly, extended) — dead where we trade
+`price_history.py`, `xbrl_data.py`, `pead_study.py`, `pead_diagnostics.py`
+
+Replicate-then-extend: post-earnings-announcement drift (the most-documented
+anomaly in the literature) on 1,837 EDGAR-dated earnings events across the same
+25 consumer names, 2005–2024, with surprise measured two pre-committed ways
+(2-day market-adjusted announcement reaction; Bernard–Thomas SUE from
+point-in-time SEC XBRL EPS). Extension: Hirshleifer limited-attention theory
+predicts drift is stronger when announcement attention (Wikipedia) is LOW.
+
+**Result: PEAD is dead in liquid consumer names — and our harness recovers both
+the anomaly and its documented death.**
+
+- Full-sample drift regressions: null on both surprise measures (all |t| ≤ 1.2).
+- Calendar-time L/S (point-in-time terciles, 10 bps): ~0 net.
+- **Era split matches the published attenuation record** (e.g. Martineau 2021):
+  the reaction-sorted portfolio earned +7.2%/yr net, Sharpe +0.39 (p=0.078)
+  through 2016, then **−13%/yr in 2017–2020 and −10%/yr in 2021–2024**. In the
+  SUE extremes post-2016 the drift mildly *reverses* (top–bottom decile −5.6%,
+  t=−1.8) — consistent with crowding now front-running the announcement.
+- The attention-conditioning extension: null at every horizon (interaction
+  |t| ≤ 1.0, inconsistent signs). No rescue.
+
+**Read:** this is not an implementation failure — the harness detects the effect
+exactly where the literature says it lived (pre-2016) and its disappearance
+exactly where the literature says it died (liquid names, post-2015). Textbook
+PEAD robustness comes from broad universes with small caps and older data. In
+the liquid consumer names a retail-sector fund actually trades, this public-data
+edge has been arbitraged away — which is precisely the argument for proprietary
+data (transaction panels) over free signals in this space.
+
 ## Reproduce
 ```bash
 cd attention_alpha
-python3 wiki_data.py      # fetch/cache pageviews (free, no key), 2015-2024
-python3 test_signal.py    # weekly: panel + placebo + basket
-python3 torture_test.py   # weekly: costs, momentum control, sub-periods, drop-one, holding
-python3 earnings_data.py  # earnings calendar from SEC EDGAR (free, no key)
-python3 earnings_study.py # earnings-date event study (level + YoY growth)
+python3 wiki_data.py       # fetch/cache pageviews (free, no key), 2015-2024
+python3 test_signal.py     # weekly: panel + placebo + basket
+python3 torture_test.py    # weekly: costs, momentum control, sub-periods, drop-one, holding
+python3 earnings_data.py   # earnings calendar from SEC EDGAR (free, no key)
+python3 earnings_study.py  # earnings-date event study (level + YoY growth)
+python3 pead_study.py      # PEAD replication + attention conditioning
+python3 pead_diagnostics.py# era split / extremes diagnostics (post-hoc, labeled)
 ```
