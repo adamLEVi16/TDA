@@ -17,14 +17,15 @@ img{width:100%;border:1px solid #eee;border-radius:5px}
 ul{margin:4px 0 4px 0;padding-left:20px} li{margin:2px 0}</style></head><body>
 
 <h1>Multi-Asset Trend + Risk-Parity Strategy</h1>
-<div class="tag">Long-only, systematic, monthly. Classification: <b>alternative beta (trend-following premium)
-with a small alpha residual</b> — a defensive allocation sleeve, not standalone alpha.</div>
+<div class="tag">Long-only, systematic, monthly. Classification: <b>defensive allocation sleeve with
+statistically verified timing alpha</b> — trend-following premium plus a significant residual no static
+portfolio replicates.</div>
 
 <div class="kpi">
-<div><b>1.16</b><span>Sharpe, 1987–2024<br>(vs equity 0.74)</span></div>
+<div><b>+1.8%</b><span>CAPM alpha/yr, 1987–2024<br>(t = 2.3, p = 0.022, β = 0.24)</span></div>
+<div><b>1.16</b><span>Sharpe, 1987–2024<br>(vs equity 0.74, p = 0.002)</span></div>
 <div><b>&minus;12.8%</b><span>max drawdown<br>(vs equity &minus;51%)</span></div>
-<div><b>p = 0.002</b><span>Sharpe edge vs equity<br>(block bootstrap)</span></div>
-<div><b>+1.9%</b><span>CAPM alpha/yr<br>(t = 1.8)</span></div>
+<div><b>+2.0%</b><span>alpha/yr, recent half<br>(edge did not decay)</span></div>
 </div>
 
 <h2>What it does</h2>
@@ -49,6 +50,17 @@ forecasting. Universe: <b>SPY, EFA, EEM, TLT, IEF, GLD, DBC, VNQ</b>. ~110%/yr t
 AQR can short (equity ρ &minus;0.21) and is a truer hedge; this strategy is long-only (ρ +0.48) — it
 <b>shields by moving to cash, it does not profit from crashes</b>. They are complementary, not substitutes.</div>
 
+<h2>Alpha verification (451 months, net of costs — alpha_test.py)</h2>
+<ul>
+<li><b>CAPM alpha +1.80%/yr, t = 2.30, p = 0.022</b> at β = 0.24 — clears the
+standard significance bar over the full 37 years.</li>
+<li><b>Spanning test</b> (vs all five of its own underlying funds — could ANY constant-weight mix
+replicate it?): +1.40%/yr, p = 0.058 — borderline; stated, not rounded up.</li>
+<li><b>No decay:</b> recent-half alpha +1.98%/yr exceeds the first half's — unlike the published
+anomalies we tested and found dead (PEAD, turn-of-month, insider clusters; see FINDINGS.md).</li>
+<li>Timing beats the identical static-weight portfolio (ΔSharpe +0.26, p = 0.025).</li>
+</ul>
+
 <h2>Robustness (full suite in torture_test.py)</h2>
 <ul>
 <li>Trend window 6–14 mo → Sharpe 1.15–1.17 (no fitted parameters).</li>
@@ -58,6 +70,8 @@ AQR can short (equity ρ &minus;0.21) and is a truer hedge; this strategy is lon
 
 <h2>Known limitations</h2>
 <div class="warn"><ul>
+<li><b>The alpha is modest.</b> ~1.8%/yr at β 0.24 — a diversifying return stream, not a return engine;
+sized as a sleeve (e.g. 20–30%), not a portfolio.</li>
 <li><b>Gives up upside.</b> ~6.8%/yr vs equity ~10.5%/yr; lags badly in strong bull markets.</li>
 <li><b>Long-only, not a true hedge.</b> Protects by going to cash (ρ +0.48), unlike short-capable managed futures.</li>
 <li><b>Edge vs a good 60/40 is only borderline</b> (p ≈ 0.07); decisive only vs pure equity buy-and-hold.</li>
