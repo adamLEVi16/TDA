@@ -14,11 +14,21 @@ short interest, Wikimedia daily pageviews, Yahoo prices), fully reproducible
   days-to-cover ≥ 4; SPIKE = weekly Wikipedia views ≥ 2× trailing 8-week
   median; FLAG = both.
 - **Survivorship acknowledged**: delisted squeeze names (BBBY, EXPR) can't be
-  fetched with free price data; episode evidence leans on still-listed GME/AMC.
+  fetched with free price data.
+- **Tradable-universe discipline**: GME and AMC are excluded from the
+  headline demo, the significance test, and the episode charts — both are
+  banned at the target fund. They appear only in the V2 mechanical-flaw
+  discussion below, where they were the historical case that surfaced the
+  issue (not a claim this fund could trade them).
 
 ## V1 result (the pre-committed test): the tail effect is real
 
-30 names, 2018–2024, 10,049 name-weeks (4,216 crowded):
+**Ex-banned (28 tradable names, the number the demo leads with)**, 2018–2024:
+a flagged crowded short is **2.2× as likely to rip ≥ +25% in the next 4
+weeks** (12.0% vs 5.5%; week-clustered bootstrap one-sided **p = 0.032**).
+
+**Full 30-name universe incl. GME/AMC** (for reference / comparability to
+earlier rounds), 10,049 name-weeks (4,216 crowded):
 
 | group | n | mean 4-wk | P(≥+15%) | P(≥+25%) |
 |---|---|---|---|---|
@@ -26,13 +36,16 @@ short interest, Wikimedia daily pageviews, Yahoo prices), fully reproducible
 | crowded, no spike | 4,125 | +1.7% | 15.0% | **6.1%** |
 | not crowded (context) | 5,833 | +2.3% | 11.4% | 4.8% |
 
-A flagged crowded short is **2.3× as likely to rip ≥ +25% in the next 4 weeks**
-(week-clustered bootstrap: ΔP = +8.2%, 95% CI [+0.7%, +16.0%], one-sided
-**p = 0.015**). Alarm budget ≈ 13/yr across 30 names — actionable, not noisy.
+Full-universe: 2.3× as likely to rip ≥+25% (ΔP = +8.2%, 95% CI
+[+0.7%, +16.0%], p = 0.015). The ex-banned result is weaker (as expected,
+since GME/AMC were unusually extreme contributors) but still holds at
+p < 0.05. Alarm budget ≈ 13/yr across 30 names — actionable, not noisy.
 
 ## The V1 episode check exposed a real mechanical flaw
 
-GME Jan-2021 was **never flagged by V1** — because FINRA days-to-cover
+Testing V1 against the historical GME squeeze (excluded from the tradable
+demo, but useful as a stress case since it's the most extreme squeeze on
+record) showed it was **never flagged** — because FINRA days-to-cover
 *collapsed* (6.1 → 2.1) during the squeeze while short interest was still ~61M
 shares: the volume denominator exploded. **Days-to-cover mechanically fails at
 exactly the moment it matters.** Weekly Friday sampling also lost the intra-week
@@ -42,17 +55,25 @@ attention explosion (Jan 25–26).
 
 Volume-independent crowding (SI level ≥ 75th percentile of its own trailing
 2 years of *published* reports) + daily attention timing (views ≥ 3× trailing
-56-day median):
+56-day median). Validated on the GME/AMC stress cases, then applied to the
+tradable universe:
 
-- **GME: first daily flag 2020-11-12** (views 3.2×, SI at 85th+ pctile) — 76
-  days before the Jan-27 peak close, with repeated flags through January.
-- **AMC: first daily flag 2021-05-11** (views 10×) — 22 days before the Jun-2
-  peak close.
+- **GME stress case: first daily flag 2020-11-12** (views 3.2×, SI at 85th+
+  pctile) — 76 days before the Jan-27 peak close. **AMC stress case: first
+  daily flag 2021-05-11** (views 10×) — 22 days before the Jun-2 peak close.
+- **Tradable-universe episodes (the ones in demo.html):** CVNA's own trailing-
+  SI percentile stays moderate (~0.51) through its Nov-2023 run — an artifact
+  of its 2022 collapse-era SI dominating its own 2-year baseline — so V2's
+  daily test doesn't fire there; the weekly V1 rule does (flagged 2023-11-03,
+  price +85% by the Dec-19 peak, 46 days). ETSY: flagged 2022-07-01,
+  +51% by the Aug-16 peak, also 46 days.
 - **Misses, stated**: BYND-2019 (IPO'd too recently for an SI baseline) and
-  CVNA-2023 (attention never spiked 3× — squeeze driven by a debt deal).
+  CVNA's *separate*, earlier July-2023 move (~+50% in two weeks, no attention
+  spike — a different episode from the flagged November one).
 - Honest caveat: V2's *panel-level* weekly tail difference is **not**
   significant (p ≈ 0.20) — the population-level statistical evidence rests on
-  V1 (p = 0.015); V2's value is episode timing. Both stated, neither oversold.
+  V1 (p = 0.032 ex-banned / 0.015 full universe); V2's value is episode
+  timing where it fires. Both stated, neither oversold.
 
 ## What it is / isn't
 

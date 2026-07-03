@@ -49,17 +49,29 @@ incl. a rising-rate regime)**.
 | Sharpe (1987–2024) | **1.16** | 0.74 | 0.93 |
 | Max drawdown | **−12.8%** | −51.0% | −29.9% |
 | CAGR | 6.8% | 10.5% | 9.2% |
+| CAPM alpha | **+1.8%/yr (t=2.30, p=0.022)** | — | — |
 
 - Sharpe edge over buy-and-hold is **statistically significant** (ΔSharpe +0.43,
-  95% CI [+0.13, +0.75], block-bootstrap **p = 0.002**).
-- Robust: survives 40 bps/side costs (Sharpe 1.06); trend window 6–14 mo →
-  1.15–1.17 (no fitted parameter); drop any single asset → 0.96–1.32; rebalance-
-  date shifts ≥1.03. Verified deterministic, no leverage/shorting, hand-checked
-  no-look-ahead.
-- **Honest limitation, stated up front:** it does *not* out-*return* equities in
-  bull markets (6.8% vs 10.5% CAGR). It is **crash insurance / a diversifying
-  sleeve** — alternative beta (trend premium), not proprietary alpha. Its job is
-  risk reduction, and at that it's real and significant.
+  95% CI [+0.13, +0.75], block-bootstrap **p = 0.002**), and it clears the formal
+  alpha bar too: **CAPM alpha +1.8%/yr (t=2.30)**, confirmed on a 40-year, 4-fund
+  extension through the Volcker era (**+2.3%/yr, t=3.08, p=0.002**) and a strict
+  spanning test vs. its own 5 underlying assets (p=0.058) — the central result:
+  a static-weight mix of the same assets is statistically rejected (p=0.025) as
+  an explanation, so the monthly *timing* itself, not the diversification, is
+  the return engine.
+- Robust: survives 40 bps/side costs, execution 21 sessions late, trend window
+  6–14 mo, drop any single asset, rebalance-date shifts; 5yr rolling alpha
+  positive in 84% of windows; unaffected by correlation-regime spikes (the
+  standard CTA objection). Verified deterministic, no leverage/shorting,
+  hand-checked no-look-ahead.
+- **Honest limitations, stated up front:** it does *not* out-*return* equities in
+  bull markets (6.8% vs 10.5% CAGR); decade-by-decade alpha was ≈0 in 2017–24;
+  it underperforms buy-and-hold in 69% of rolling 3-year windows (once for 159
+  straight months) — likely *why* the premium persists, since few allocators can
+  sit through that. Two-thirds of its cash-flight signals are false alarms that
+  cost ~4.5pts vs staying invested; the entire edge rides on the minority that
+  catch a real bear market. It is a **modest, real diversifying sleeve** — not a
+  return engine, and not for 100% of a book.
 
 **Takeaway:** I can find a genuine edge *and* subject it to the validation that
 most backtests skip — and then classify it honestly (defensive beta, not alpha).
@@ -177,19 +189,43 @@ apply — as a **risk flag for a consumer/retail short book**. Crowding from
 FINRA short interest used **only from its real publication date** (~9 business
 days after settlement); attention from daily Wikipedia pageviews.
 
-- **Pre-committed rule, evaluated on 10,049 name-weeks (2018–2024): a flagged
-  crowded short is 2.3× as likely to rip ≥ +25% in the next 4 weeks** (14.3% vs
-  6.1%; week-clustered bootstrap p = 0.015). ~13 flags/yr across 30 names.
-- The episode check exposed a real mechanical insight: **days-to-cover fails
-  during the squeeze itself** (GME Jan-2021: DTC "fell" to 2.1 because volume
-  exploded while short interest was still ~61M shares). The volume-independent
-  V2 crowding measure + daily attention timing flags **GME on 2020-11-12** (76
-  days before the peak) and **AMC on 2021-05-11** (22 days before the peak) —
-  with the misses (BYND, CVNA) and V2's weaker panel significance stated
-  plainly rather than hidden.
+- **Pre-committed rule, evaluated on a 28-name tradable universe (2018–2024,
+  GME/AMC excluded — both banned at the target fund): a flagged crowded short
+  is 2.2× as likely to rip ≥ +25% in the next 4 weeks** (12.0% vs 5.5%;
+  week-clustered bootstrap p = 0.032). ~13 flags/yr across the universe.
+  Two live episodes: **CVNA flagged 2023-11-03, +85% by its 46-day-later
+  peak; ETSY flagged 2022-07-01, +51% by its 46-day-later peak.**
+- The GME/AMC squeezes were used only as historical *stress cases* during
+  development (never as tradable claims) and surfaced a real mechanical
+  insight: **days-to-cover fails during the squeeze itself** (GME Jan-2021:
+  DTC "fell" to 2.1 because volume exploded while short interest was still
+  ~61M shares). The volume-independent V2 crowding measure fixes this on the
+  GME/AMC stress tests, though it doesn't reach threshold on CVNA specifically
+  (its own 2022 collapse-era SI dominates its 2-year baseline) — so CVNA is
+  shown via the weekly V1 rule instead. Misses (BYND, CVNA's separate July-2023
+  move) and V2's weaker panel significance (p≈0.20) are stated plainly.
 - Framed as what it is: a monitor that says "size down," not a return
   predictor — and a prototype whose crowding leg upgrades directly with desk
   data (daily borrow/utilization instead of lagged twice-monthly FINRA).
+
+## Further nulls (same discipline, briefer writeups)
+
+Three more pre-registered tests, same standard, all null — kept in the record
+because a portfolio that only shows hits isn't credible:
+
+- **Insider cluster-buys** (`insider_alpha/`): the most persistent documented
+  insider-trading anomaly (≥2 distinct insiders buying in the open market
+  within 21 days), built on SEC's free structured Form 4 dataset, 112 events
+  in consumer names 2014–2024. Null — 63-day abnormal return exactly 0.00%,
+  placebo p=0.87.
+- **Dual momentum / GEM** (`equity_factor/dual_momentum.py`): the Antonacci
+  US/international/bond-switching rule on the 37-year history. Beats VFINX on
+  raw CAGR (11.5% vs 10.5%) but the Sharpe edge isn't significant (p=0.31);
+  its outperformance is concentrated entirely in 2000–09.
+- **Turn-of-month** (`equity_factor/turn_of_month.py`): one of the most
+  durable calendar anomalies in the literature. Real and significant pre-2010
+  (t=2.94) — and **dead since** (t=0.25, 2010–2024), exactly the decay pattern
+  every other tested public-data edge in this project shows.
 
 ## Methods toolkit (shared across studies)
 

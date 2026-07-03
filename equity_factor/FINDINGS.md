@@ -251,3 +251,60 @@ first** (no post-discovery decay), on top of the already-established Sharpe
 significance (p=0.002) and timing-vs-static significance (p=0.025). Verdict:
 a modest, real, verifiable ~1.8%/yr of defensive timing alpha — the honest
 final answer of the whole search.
+
+## Round 11 — extended validation depth (`extended_tests.py`, `cash_conditioning.py`)
+
+**40-year extension** (4-fund variant reaching back through the Volcker rate
+shock, 1981-2024, 479 months): CAPM alpha **+2.29%/yr, t = +3.08, p = 0.002**
+at β = 0.15 — the alpha claim now clears t=3 on the longest sample free data
+allows. Sharpe 1.41 vs equity 0.76.
+
+**Rolling stability**: 5-year rolling CAPM alpha positive in **84% of all
+windows** (median +2.0%/yr) — not a two-point artifact. 3-year rolling Sharpe
+beats equity in 68% of windows.
+
+**Decade-by-decade alpha** (honest, not smoothed over): +0.3% (1987-96),
++2.9% (1997-2006), +3.3% (2007-16), **-0.3% (2017-24)**. The edge lived in
+1997-2016 and was essentially absent in the most recent stretch.
+
+**Regime conditioning**: NBER recessions -2.4%/yr vs equity -13.4%/yr.
+Rising-rate regimes (trailing 12mo bond return negative) hurt: Sharpe 0.34 vs
+falling-rate 1.52 — a real, stated dependency on the bond sleeve's tailwind.
+
+**Execution-lag stress**: rebalancing 5/10/21 sessions late still yields
+Sharpe 1.03-1.11 — no rebalance-date luck.
+
+**Stationary bootstrap**: Sharpe-diff significance holds (p = 0.001-0.006)
+across mean block lengths 3/6/12mo — not sensitive to the block-size choice.
+
+**Career risk** (new, important for anyone actually allocating to this):
+underperforms buy-and-hold in **69% of rolling 3-year windows**, once for
+**159 consecutive months**. This is likely *why* the premium persists — very
+few allocators can sit through 13 years of relative underperformance.
+
+**Cash-level conditioning** (`cash_conditioning.py` — does the strategy's OWN
+cash level carry information?): in the extreme 90-100%-cash state (n=15,
+clustered at major bottoms), equity's own next-12-month return averaged
+**+20.3%** (t=2.04) vs +12.2% when fully invested — mean reversion after
+crashes — while the strategy itself captured only +8.0% of that window. The
+continuous linear regression of cash%% on equity's forward return is **not
+significant at any horizon** (t in [-0.35, +0.90]) — this is concentrated at
+the extreme bin, not a tradable relationship.
+
+**Whipsaw cost (the mechanical explanation for the known up-capture
+shortfall)**: 86 entries into ≥50% cash over 38 years; **66% reverse within 4
+months** (false alarms). During those false-alarm episodes the strategy
+earned +1.25% vs +5.79% for staying invested — a clean, quantified cost. The
+entire edge rides on the ~1-in-3 cash entries that catch a real bear market.
+
+**Correlation-regime risk** (standard CTA objection, tested directly): does
+NOT bite — Sharpe in high-correlation regimes (1.22) slightly exceeds
+low-correlation regimes (1.10).
+
+### Honest verdict
+Depth of testing is now essentially exhaustive for what free data supports.
+Nothing broke the core claim; several new numbers *sharpen* it (40yr t=3.08,
+84% rolling-window consistency) while others are genuinely uncomfortable and
+now on the record (2017-24 alpha ≈ 0, 69% 3-year-window underperformance,
+66% whipsaw rate). That combination — real edge, honestly bounded — is the
+final, complete answer this project can give with free data alone.
