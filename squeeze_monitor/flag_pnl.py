@@ -24,26 +24,33 @@ import numpy as np, pandas as pd
 import statsmodels.api as sm
 import price_history as PH
 import monitor as MO
-from sq_universe import TICKER_ARTICLE
+from sq_universe import TICKER_ARTICLE, BANNED
 
 HOLD_D, COST_BPS = 20, 10
 
 
 def build_pnl(panel, px, exclude=()):
     """Daily strategy returns from flag events. Entry: close of first session
-    AFTER the flag Friday; hold HOLD_D sessions; equal weight actives daily."""
+    AFTER the flag Friday; hold HOLD_D sessions; equal weight actives daily.
+    One position per name at a time: a re-flag while a position is already
+    open is ignored (no window stacking -- a name that flags on consecutive
+    weeks must NOT be averaged in twice on overlapping days)."""
     cal = px.index
-    events = panel[panel["flag"] & ~panel["ticker"].isin(exclude)]
+    events = panel[panel["flag"] & ~panel["ticker"].isin(exclude)].sort_values("week")
     # active[day_index] -> list of tickers held that day
     active = {}
     entries = []
+    open_until = {}                                     # ticker -> last held day idx
     for r in events.itertuples():
         pos = cal.searchsorted(r.week, side="right")   # first session after Friday t
         if pos + 1 + HOLD_D >= len(cal):
             continue
+        if open_until.get(r.ticker, -1) >= pos:         # position already open
+            continue
         entry = pos                                     # buy at close of cal[pos]
         for d in range(entry + 1, entry + 1 + HOLD_D):  # earn from next session
             active.setdefault(d, []).append(r.ticker)
+        open_until[r.ticker] = entry + HOLD_D
         entries.append((entry, r.ticker))
     rets = px.pct_change()
     cost_by_day = {}
@@ -62,7 +69,7 @@ def build_pnl(panel, px, exclude=()):
             rows.append({"date": cal[d], "ret": gross - cost, "n": len(names)})
         else:
             rows.append({"date": cal[d], "ret": 0.0, "n": 0})
-    return pd.DataFrame(rows).set_index("date"), len(events)
+    return pd.DataFrame(rows).set_index("date"), len(entries)
 
 
 def perf_block(s, spy, label):
@@ -105,7 +112,7 @@ def main():
     print(f"\n[1] FULL UNIVERSE ({n} events)")
     perf_block(s, spy, "long flagged, all names")
 
-    s2, n2 = build_pnl(panel, px, exclude=("GME", "AMC"))
+    s2, n2 = build_pnl(panel, px, exclude=BANNED)
     print(f"\n[2] EX GME/AMC -- the tradable version at the target fund ({n2} events)")
     perf_block(s2, spy, "long flagged, ex GME/AMC")
 
@@ -114,10 +121,10 @@ def main():
     s3 = s2[(s2.index < "2021-01-01") | (s2.index > "2021-12-31")]
     perf_block(s3, spy, "ex GME/AMC, excluding 2021")
     # drop the single best contributing name
-    ev = panel[panel["flag"] & ~panel["ticker"].isin(("GME", "AMC"))]
+    ev = panel[panel["flag"] & ~panel["ticker"].isin(BANNED)]
     contrib = ev.groupby("ticker")["fwd4"].sum().sort_values()
     best = contrib.index[-1]
-    s4, _ = build_pnl(panel, px, exclude=("GME", "AMC", best))
+    s4, _ = build_pnl(panel, px, exclude=BANNED + (best,))
     perf_block(s4, spy, f"ex GME/AMC and best name ({best})")
 
     print("\n[4] EVENT-LEVEL VIEW (ex GME/AMC): per-event 4wk fwd returns")

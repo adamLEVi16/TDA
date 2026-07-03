@@ -8,9 +8,9 @@ survives — including when it doesn't. Every result below is reproducible from
 free data with the code in this repo (urllib-based fetchers, no paid feeds, no
 API keys).
 
-The three studies are deliberately a *spread of outcomes* — one win, one null,
-one "real-but-not-tradable" — because that spread is the honest distribution of
-real research, and distinguishing between those three cases is the actual skill.
+The studies are deliberately a *spread of outcomes* — validated wins, honest
+nulls, and real-but-untradable signals — because that spread is the honest
+distribution of real research, and telling those cases apart is the actual skill.
 
 ---
 
@@ -56,8 +56,9 @@ incl. a rising-rate regime)**.
   alpha bar too: **CAPM alpha +1.8%/yr (t=2.30)**, confirmed on a 40-year, 4-fund
   extension through the Volcker era (**+2.3%/yr, t=3.08, p=0.002**) and a strict
   spanning test vs. its own 5 underlying assets (p=0.058) — the central result:
-  a static-weight mix of the same assets is statistically rejected (p=0.025) as
-  an explanation, so the monthly *timing* itself, not the diversification, is
+  the identical static-weight mix of the same assets earns ΔSharpe −0.26 vs the
+  timed version (one-sided p=0.025, 95% CI grazing zero) — strong, though not
+  airtight, evidence that the monthly *timing*, not the diversification, is
   the return engine.
 - Robust: survives 40 bps/side costs, execution 21 sessions late, trend window
   6–14 mo, drop any single asset, rebalance-date shifts; 5yr rolling alpha
@@ -74,7 +75,7 @@ incl. a rising-rate regime)**.
   return engine, and not for 100% of a book.
 
 **Takeaway:** I can find a genuine edge *and* subject it to the validation that
-most backtests skip — and then classify it honestly (defensive beta, not alpha).
+most backtests skip — and classify it honestly: a defensive sleeve whose modest timing alpha formally clears the significance bar, with every limitation stated next to it.
 
 ---
 
@@ -192,7 +193,7 @@ days after settlement); attention from daily Wikipedia pageviews.
 - **Pre-committed rule, evaluated on a 28-name tradable universe (2018–2024,
   GME/AMC excluded — both banned at the target fund): a flagged crowded short
   is 2.2× as likely to rip ≥ +25% in the next 4 weeks** (12.0% vs 5.5%;
-  week-clustered bootstrap p = 0.032). ~13 flags/yr across the universe.
+  week-clustered bootstrap p = 0.032). ~11 flags/yr across the 28-name tradable universe (~13/yr incl. GME/AMC).
   Two live episodes: **CVNA flagged 2023-11-03, +85% by its 46-day-later
   peak; ETSY flagged 2022-07-01, +51% by its 46-day-later peak.**
 - The GME/AMC squeezes were used only as historical *stress cases* during

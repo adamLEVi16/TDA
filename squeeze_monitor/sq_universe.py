@@ -24,3 +24,7 @@ SQUEEZE_COHORT = {
 }
 
 TICKER_ARTICLE = {**_CONSUMER, **SQUEEZE_COHORT}
+
+# Names banned at the target fund -- excluded from all tradable-universe
+# results and demos. Single source of truth; import this, don't re-hardcode.
+BANNED = ("GME", "AMC")

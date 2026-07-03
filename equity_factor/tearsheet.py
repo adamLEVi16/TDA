@@ -96,7 +96,8 @@ def chart_rolling():
     a2.fill_between(ra.index, ra.values, 0, where=ra.values < 0, color=ORG, alpha=0.12, lw=0)
     a2.axhline(0, color=AXIS, lw=1)
     a2.yaxis.set_major_formatter(lambda x, _: f"{x:+.0%}")
-    a2.set_title("Rolling 5-year CAPM alpha (positive in 84% of windows)",
+    pos_frac = (ra > 0).mean()
+    a2.set_title(f"Rolling 5-year CAPM alpha (positive in {pos_frac:.0%} of windows)",
                  fontsize=10.5, loc="left", color=INK2)
     return png(fig)
 
@@ -250,8 +251,9 @@ forecasting. Universe: <b>SPY, EFA, EEM, TLT, IEF, GLD, DBC, VNQ</b>. ~110%/yr t
 <li><b>Spanning test</b> (vs all five underlying funds — could any static mix replicate it?):
 +{asp:.2%}/yr, p = {psp:.3f} — borderline; stated, not rounded up.</li>
 <li><b>The central result — this is not "just risk parity":</b> the identical static-weight portfolio of the
-same assets earns ΔSharpe &minus;0.26 vs the timed version (p = 0.025). The static-mix explanation is
-statistically rejected; the trend <i>timing</i> is the return engine, inverse-vol sizing only shapes risk.</li>
+same assets earns ΔSharpe &minus;0.26 vs the timed version (one-sided p = 0.025, 95% CI grazing zero at
+[&minus;0.00, +0.55]). Strong — though not airtight — evidence that the trend <i>timing</i>, not the asset mix,
+is the return engine; the stricter spanning test (p = 0.058) points the same way.</li>
 <li>Stationary bootstrap p = 0.001–0.006 across block choices.</li>
 <li>Survives rebalancing 5/10/21 sessions late (Sharpe 1.03–1.11) — no date luck.</li>
 </ul>
@@ -280,8 +282,9 @@ drop any single asset → 0.96–1.32.</li>
 ≈ 0 in 2017–2024 (see chart). A diversifying sleeve (20–30%), not a return engine.</li>
 <li><b>Gives up upside — severe career risk.</b> 6.8%/yr vs equity 10.5%/yr; lags buy-and-hold in
 <b>69% of rolling 3-year windows</b>, once for 159 consecutive months. This discomfort is likely why the premium persists.</li>
-<li><b>Rising-rate regimes hurt</b> (Sharpe 0.34 vs equity 0.52 when trailing bond returns are negative); the bond
-sleeve had a falling-rate tailwind for much of the sample.</li>
+<li><b>Falling-rate tailwind.</b> Ex-ante classified, the strategy's Sharpe is 1.33 in falling-rate months vs
+0.75 in rising-rate months (equity: 0.74 in both) — it still works when rates rise, but most of its edge
+came with the bond sleeve's four-decade tailwind.</li>
 <li><b>Long-only, not a true hedge;</b> monthly rebalancing cannot dodge fast crashes (Oct-1987: &minus;11.8% in one month)
 and re-enters late after V-recoveries (2020).</li>
 <li><b>Edge vs a good 60/40 is only borderline</b> (p ≈ 0.07); decisive only vs pure equity buy-and-hold.</li>

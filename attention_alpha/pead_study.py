@@ -84,7 +84,14 @@ def build_events():
             drifts = {f"drift{h}": madj(e0 + REACT_D, e0 + h) for h in HORIZONS}
             if np.isnan(reaction) or any(np.isnan(v) for v in drifts.values()):
                 continue
-            # match SUE: fiscal quarter ended before E, within 75 days
+            # match SUE: fiscal quarter ended before E, within 75 days.
+            # TIMING NOTE: the EPS for that quarter is public AT E (the 8-K
+            # Item-2.02 announcement itself contains it); the XBRL value we
+            # use is the same number as later filed in the 10-Q/10-K
+            # (earliest-filed dedup guards against restatements). Strictly,
+            # press-release EPS and as-filed XBRL EPS can differ in rare
+            # cases; we accept that proxy error and state it here rather
+            # than lag SUE a full quarter (which would be economically wrong).
             su = np.nan
             if len(s_tk):
                 cand = s_tk[(s_tk.index < E) & (s_tk.index > E - pd.Timedelta(days=75))]

@@ -224,14 +224,19 @@ happened to have a higher Sharpe in this window.
 ## Reproduce
 ```bash
 cd equity_factor
-python3 data.py        # fetch/caches the price panel (urllib; proxy-safe)
-python3 backtest.py    # prints the table above + factor regression
+python3 data.py            # price panel for Rounds 1-3 (urllib; proxy-safe)
+python3 backtest.py        # Rounds 1-2 factor tables
+python3 long_history.py    # Round 8 headline: Sharpe 1.16, significance
+python3 alpha_test.py      # Round 10: CAPM + spanning alpha regressions
+python3 extended_tests.py  # Round 11: 40y extension, rolling, regimes, career risk
+python3 cash_conditioning.py  # Round 11: cash-level, whipsaw, correlation regime
+python3 tearsheet.py       # regenerates tearsheet.html (all figures live)
 ```
 
 ## Round 10 — the alpha hunt, concluded (`alpha_test.py`, `dual_momentum.py`, `turn_of_month.py`, plus insider_alpha/, squeeze_monitor/flag_pnl.py)
 
 Systematic sweep for standalone alpha in free public data. Honest nulls, all
-pre-committed specs: **flag→long P&L** (concentration, alpha t=0.53); **insider
+pre-committed specs: **flag→long P&L** (after fixing an overlapping-window double-count found in code review: ex-banned alpha t=−0.02, CVNA-concentrated — an even cleaner null); **insider
 cluster buys** on 112 consumer events 2014-24 (AR63 = 0.00%, placebo p=0.87);
 **dual momentum / GEM** on 37y (beats VFINX CAGR 11.5% vs 10.5% but ΔSharpe
 p=0.31, edge entirely 2000-09); **turn-of-month** (strong pre-2010 t=2.94, dead
@@ -248,7 +253,7 @@ insignificant where institutions can trade it.
 
 Significant CAPM alpha at beta 0.24, **stronger in the second half than the
 first** (no post-discovery decay), on top of the already-established Sharpe
-significance (p=0.002) and timing-vs-static significance (p=0.025). Verdict:
+significance (p=0.002) and timing-vs-static evidence (ΔSharpe +0.26, one-sided p=0.025, 95% CI grazing zero). Verdict:
 a modest, real, verifiable ~1.8%/yr of defensive timing alpha — the honest
 final answer of the whole search.
 
@@ -268,8 +273,11 @@ beats equity in 68% of windows.
 1997-2016 and was essentially absent in the most recent stretch.
 
 **Regime conditioning**: NBER recessions -2.4%/yr vs equity -13.4%/yr.
-Rising-rate regimes (trailing 12mo bond return negative) hurt: Sharpe 0.34 vs
-falling-rate 1.52 — a real, stated dependency on the bond sleeve's tailwind.
+Rate regimes (ex-ante: month t classified by trailing bond return through
+t-1 — a code-review fix; the original in-sample labeling overstated the
+effect): Sharpe 0.75 in rising-rate months vs 1.33 in falling (equity: 0.74
+in both). It still works when rates rise; most of the edge rode the
+falling-rate era — a real, stated dependency, milder than first measured.
 
 **Execution-lag stress**: rebalancing 5/10/21 sessions late still yields
 Sharpe 1.03-1.11 — no rebalance-date luck.
@@ -297,9 +305,9 @@ months** (false alarms). During those false-alarm episodes the strategy
 earned +1.25% vs +5.79% for staying invested — a clean, quantified cost. The
 entire edge rides on the ~1-in-3 cash entries that catch a real bear market.
 
-**Correlation-regime risk** (standard CTA objection, tested directly): does
-NOT bite — Sharpe in high-correlation regimes (1.22) slightly exceeds
-low-correlation regimes (1.10).
+**Correlation-regime risk** (standard CTA objection, tested directly,
+ex-ante classified): does NOT bite — Sharpe in high-correlation regimes
+(1.36) exceeds low-correlation regimes (0.97).
 
 ### Honest verdict
 Depth of testing is now essentially exhaustive for what free data supports.

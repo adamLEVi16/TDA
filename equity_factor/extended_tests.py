@@ -115,7 +115,9 @@ def main():
 
     print("\n[E5] RATE REGIME (trailing 12m long-Treasury return sign)")
     px = MA.load_prices(assets=["VUSTX"], start=START)
-    bond12 = px["VUSTX"].resample("ME").last().pct_change(12).reindex(rp.index)
+    bond12 = px["VUSTX"].resample("ME").last().pct_change(12).shift(1).reindex(rp.index)
+    # .shift(1): month t is classified by the trailing bond return through t-1,
+    # so the month's own bond move cannot label its own regime (ex-ante)
     rising = bond12 < 0
     for lab, msk in [("rising rates", rising), ("falling rates", ~rising)]:
         print(f"  {lab:<14} (n={msk.sum()}): strategy {rp[msk].mean()*12:+.1%}/yr "

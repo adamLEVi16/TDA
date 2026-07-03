@@ -69,7 +69,12 @@ def build_panel():
             "asvi": a.reindex(idx),
             "ret": r.reindex(idx),
             "ret_fwd1": r.reindex(idx).shift(-1),
-            "ret_fwd4": r.reindex(idx).shift(-1).rolling(4).sum().shift(-3),  # weeks t+1..t+4
+            # weeks t+1..t+4. NOTE: overlapping 4-week sums -> consecutive rows
+        # share 3 of 4 legs, so any Sharpe computed on a weekly series of
+        # these treats correlated observations as independent and OVERSTATES
+        # significance; fine for the (null) H2 verdict, do not reuse for a
+        # positive claim without non-overlapping windows or HAC correction.
+        "ret_fwd4": r.reindex(idx).shift(-1).rolling(4).sum().shift(-3),
         }).dropna(subset=["asvi", "ret"])
         df["ticker"] = tk
         df["week"] = df.index

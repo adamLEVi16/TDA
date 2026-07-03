@@ -19,7 +19,7 @@ from matplotlib.patches import FancyBboxPatch
 import wiki_data as WD
 import price_history as PH
 from short_interest import get_short_interest
-from sq_universe import TICKER_ARTICLE
+from sq_universe import TICKER_ARTICLE, BANNED
 import monitor as MO
 
 OUT = os.path.join(_HERE, "demo.html")
@@ -45,54 +45,16 @@ def png(fig):
     return base64.b64encode(b.getvalue()).decode()
 
 
-def episode_chart(tk, article, start, end, peak_date, si):
-    """Daily-flag (V2) episode chart. Retained for names where the volume-
-    independent daily crowding test actually fires (see monitor.py V2); not
-    used for the current demo episodes -- see episode_chart_weekly below."""
-    px = PH.get_prices_long([tk], verbose=False)[tk].loc[start:end]
-    pv = WD.get_pageviews([article], verbose=False)[article].loc[start:end]
-    flags = MO.daily_flag_dates(tk, article, si[tk], start, end)
-    f0 = flags[0][0] if flags else None
-
-    fig, (a1, a2) = plt.subplots(2, 1, figsize=(7.6, 4.6), sharex=True,
-                                 gridspec_kw={"height_ratios": [3, 2], "hspace": 0.12})
-    a1.plot(px.index, px.values, color=BLUE, lw=2, solid_joinstyle="round")
-    a1.set_ylabel("price (split-adj $)")
-    a1.set_title(f"{tk} — price", loc="left", fontsize=10.5, color=INK2)
-    a2.plot(pv.index, pv.values, color=VIOLET, lw=2, solid_joinstyle="round")
-    a2.fill_between(pv.index, pv.values, color=VIOLET, alpha=0.10, lw=0)
-    a2.set_yscale("log")
-    a2.set_ylabel("Wikipedia views/day")
-    a2.set_title(f"{tk} — public attention", loc="left", fontsize=10.5, color=INK2)
-    for ax in (a1, a2):
-        if f0 is not None:
-            ax.axvline(f0, color=CRIT, lw=2, alpha=0.9)
-        if peak_date is not None:
-            ax.axvline(pd.Timestamp(peak_date), color=MUTED, lw=1, ls=(0, (1, 0)))
-    a2.xaxis.set_major_locator(mdates.MonthLocator())
-    a2.xaxis.set_major_formatter(mdates.DateFormatter("%b %Y"))
-    if f0 is not None:
-        ymax = px.max()
-        a1.annotate(f"⚑ first flag {f0:%b %d}", xy=(f0, ymax * 0.97),
-                    xytext=(8, 0), textcoords="offset points",
-                    fontsize=10, color=INK, weight="bold", va="top")
-        a1.annotate(f"peak {pd.Timestamp(peak_date):%b %d}",
-                    xy=(pd.Timestamp(peak_date), ymax * 0.60), xytext=(8, 0),
-                    textcoords="offset points", fontsize=9.5, color=INK2, va="top")
-        # flag marker dot with surface ring on the attention panel
-        fv = pv.reindex([f0]).values
-        if np.isfinite(fv[0]):
-            a2.plot([f0], fv, "o", ms=9, color=CRIT, mec=SURF, mew=2, zorder=5)
-    return png(fig), f0, flags
-
-
 def episode_chart_weekly(tk, article, start, end, flag_week, si):
     """Weekly-flag episode chart (V1 rule -- the one carrying the population
     significance test), for names where the volume-independent V2 daily test
     doesn't reach its own 2-year-percentile threshold (e.g. a name whose SI
     history is dominated by its own prior extreme, like CVNA post-2022)."""
     px = PH.get_prices_long([tk], verbose=False)[tk].loc[start:end]
-    pv = WD.get_pageviews([article], verbose=False)[article].loc[start:end]
+    pv_all = WD.get_pageviews([article], verbose=False)
+    if article not in pv_all:
+        raise ValueError(f"no pageview data for {article} (404?) -- cannot chart {tk}")
+    pv = pv_all[article].loc[start:end]
     f0 = pd.Timestamp(flag_week)
     entry_px = px.reindex([px.index[px.index.searchsorted(f0)]]).iloc[0]
     peak_date = px.loc[f0:].idxmax()
@@ -150,9 +112,6 @@ def tail_chart(p25_flag, p25_noflag, p25_calm):
     return png(fig)
 
 
-BANNED = ("GME", "AMC")
-
-
 def main():
     tickers = list(TICKER_ARTICLE.keys())
     si = get_short_interest(tickers, verbose=False)
@@ -164,6 +123,7 @@ def main():
     p25f, p25n, p25c = [(g["fwd4"] >= 0.25).mean() for g in (fl, nf, calm)]
     real, ci, pval = MO.cluster_bootstrap_taildiff(cr, 0.25)
     nflags_yr = len(panel[panel["flag"]]) / panel["week"].dt.year.nunique()
+    nuniv = panel["ticker"].nunique()
 
     g_cvna, f_cvna, pk_cvna, ret_cvna = episode_chart_weekly(
         "CVNA", "Carvana", "2023-09-01", "2024-01-31", "2023-11-03", si)
@@ -209,7 +169,7 @@ excluded throughout, including from the significance test.</div>
 <div><b>{cvna_lead} days</b><span>CVNA: flag → peak close<br>(flagged {f_cvna:%b %d, %Y}, +{ret_cvna:.0%})</span></div>
 <div><b>{etsy_lead} days</b><span>ETSY: flag → peak close<br>(flagged {f_etsy:%b %d, %Y}, +{ret_etsy:.0%})</span></div>
 <div><b>{ratio:.1f}×</b><span>tail-risk when flagged<br>P(+25%/4wk): {p25f:.1%} vs {p25n:.1%}, p={pval:.3f}</span></div>
-<div><b>~{nflags_yr:.0f}/yr</b><span>flags across 30 names<br>(actionable, not noisy)</span></div>
+<div><b>~{nflags_yr:.0f}/yr</b><span>flags across {nuniv} tradable names<br>(actionable, not noisy)</span></div>
 </div>
 
 <h2>Episode 1 — Carvana, November 2023</h2>

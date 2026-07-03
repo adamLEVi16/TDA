@@ -62,7 +62,8 @@ def main():
         d = pd.concat([cash.rename("cash"), eq_fwd.rename("fwd")], axis=1).dropna()
         m = sm.OLS(d["fwd"], sm.add_constant(d["cash"])).fit(cov_type="HAC", cov_kwds={"maxlags": h})
         print(f"    +{h:>2}mo: coef={m.params['cash']:+.3f}  t={m.tvalues['cash']:+.2f}  "
-              f"p={m.pvalues['cash']:.3f}  (negative = high cash predicts equity DOES well next -> a timing cost)")
+              f"p={m.pvalues['cash']:.3f}  (POSITIVE = high cash precedes strong equity -> a timing cost; "
+              f"negative would mean cash rose before weak markets -> protective)")
 
     # [2] whipsaw: round trips into/out of cash within a short window
     print("\n[2] WHIPSAW COST (round trips into cash)")
@@ -102,7 +103,9 @@ def main():
         iu = np.triu_indices_from(c, k=1)
         return np.nanmean(c[iu])
     roll_corr = pd.Series({d: avg_pairwise_corr(aret.loc[:d].tail(12))
-                           for d in aret.index[11::1]}).reindex(rp.index)
+                           for d in aret.index[11::1]}).shift(1).reindex(rp.index)
+    # .shift(1): month t is classified by correlation measured through t-1 only,
+    # so a crash month cannot label its own regime (ex-ante classification)
     hi_corr = roll_corr >= roll_corr.median()
     for lab, msk in [("low correlation regime (bottom half)", ~hi_corr),
                      ("high correlation regime (top half)", hi_corr)]:
