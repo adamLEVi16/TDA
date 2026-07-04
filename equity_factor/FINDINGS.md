@@ -316,3 +316,32 @@ Nothing broke the core claim; several new numbers *sharpen* it (40yr t=3.08,
 now on the record (2017-24 alpha ≈ 0, 69% 3-year-window underperformance,
 66% whipsaw rate). That combination — real edge, honestly bounded — is the
 final, complete answer this project can give with free data alone.
+
+## Round 12 — pre-registered optimization gauntlet (`ROUND12_PREREGISTRATION.md`, `round12.py`)
+
+Specs were committed (ef85c7f) BEFORE any variant code existed. Engine parity
+verified first: gauntlet V0 reproduces multi_asset.run() with max diff 0.0.
+
+| Variant | SEL 87-05 | HOLD 06-24 | FULL | 8-ETF | Verdict |
+|---|---|---|---|---|---|
+| V0 baseline | 1.33 | 0.99 | 1.16 | 0.86 | control |
+| V1 continuous ramp | 1.30 | 1.09 | 1.20 | 0.89 | **REJECT** (failed pre-registered selection criterion by 0.03 — despite better holdout/full/8-ETF and lower turnover; the criterion is the criterion) |
+| **V2 lookback ensemble {3,6,9,12}m** | **1.34** | **1.08** | **1.21** | **0.93** | **ACCEPT → v2-candidate** |
+| V3 ERC weights | 1.20 | 0.87 | 1.03 | 0.91 | REJECT (worse on long history) |
+
+V2 torture checks: 40bps costs → 1.07; rebalance shift ±10d → 1.16–1.24;
+drop-one-asset → 1.01–1.37 (all ≥ equity's 0.74). ΔSharpe vs V0 = +0.05,
+p=0.113 — exactly the modest, not-individually-significant improvement the
+prereg predicted (+0.05–0.15 via whipsaw reduction; V2 replaces the binary
+gate with quarter-step position scaling across 4 lookbacks).
+
+V4 exploratory (8-ETF era only, no long-history confirmation possible):
++TIP Sharpe +0.06 and better DD (flagged for future validation);
++IWM flat; +BWX negative.
+
+**Status per prereg §6: V0 remains the validated, live strategy. V2 is a
+v2-candidate — a full migration of torture_test.py + extended_tests.py to the
+ensemble spec is required before it replaces anything.** Honest note: with 13
+cumulative project trials, a +0.05 full-sample improvement at p=0.113 is
+suggestive, not proven; its best property is that it was predicted in
+direction and size before being run.
