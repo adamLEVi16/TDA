@@ -70,8 +70,16 @@ def get_rf_monthly(index):
             return pd.Series(0.0, index=index)
     return _RF_CACHE.reindex(index).fillna(0.0)
 
+# V2 ensemble lookbacks (Round 12, ROUND12_PREREGISTRATION.md): trend scaler =
+# mean of binary votes P>SMA_k over these windows, so a position scales in
+# quarter-steps instead of flipping all-or-nothing. Only used when
+# trend_mode="ensemble"; the default ("binary") path is byte-identical to V0.
+ENSEMBLE_LOOKBACKS = (3, 6, 9, 12)
+
+
 def run(sma_months=SMA_MONTHS, vol_win=VOL_WIN, cost_bps=COST_BPS,
-        assets=None, shift_days=0, bench=("SPY", "IEF"), start="2005-01-01"):
+        assets=None, shift_days=0, bench=("SPY", "IEF"), start="2005-01-01",
+        trend_mode="binary"):
     assets = list(assets) if assets is not None else list(ASSETS)
     mpx = load_prices(assets=assets, shift_days=shift_days, start=start)
     # Benchmark equity + bond use full data regardless of the strategy universe,
@@ -83,6 +91,8 @@ def run(sma_months=SMA_MONTHS, vol_win=VOL_WIN, cost_bps=COST_BPS,
     mret = mpx.pct_change()
     bret = bench.pct_change()
     sma = mpx.rolling(sma_months).mean()
+    ens = {k: mpx.rolling(k).mean() for k in ENSEMBLE_LOOKBACKS} \
+        if trend_mode == "ensemble" else None
     vol = mret.rolling(vol_win).std()
     rf = get_rf_monthly(mpx.index)
     dates = mpx.index
@@ -97,9 +107,16 @@ def run(sma_months=SMA_MONTHS, vol_win=VOL_WIN, cost_bps=COST_BPS,
         v = vol.loc[m]; tr = mpx.loc[m] > sma.loc[m]
         if v.isna().any() or sma.loc[m].isna().any():
             continue
+        if ens is not None and ens[max(ENSEMBLE_LOOKBACKS)].loc[m].isna().any():
+            continue                                   # ensemble needs 12m history
         inv = 1.0 / v
         rp_full = inv / inv.sum()                      # static risk parity (no trend)
-        w_rp = rp_full.where(tr, 0.0)                  # trend-to-cash
+        if ens is None:
+            w_rp = rp_full.where(tr, 0.0)              # V0: binary trend-to-cash
+        else:                                          # V2: quarter-step ensemble
+            scaler = sum((mpx.loc[m] > ens[k].loc[m]).astype(float)
+                         for k in ENSEMBLE_LOOKBACKS) / len(ENSEMBLE_LOOKBACKS)
+            w_rp = rp_full * scaler
         on = tr[tr].index
         w_ew = pd.Series(0.0, index=assets)
         if len(on) > 0:

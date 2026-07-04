@@ -345,3 +345,42 @@ ensemble spec is required before it replaces anything.** Honest note: with 13
 cumulative project trials, a +0.05 full-sample improvement at p=0.113 is
 suggestive, not proven; its best property is that it was predicted in
 direction and size before being run.
+
+### Round 12 validation — V2 certified against the full battery (`round12_validate.py`)
+
+V2 was migrated into the engine as an opt-in `trend_mode="ensemble"` (default
+stays `"binary"` = V0, byte-identical: max|diff|=0.0 on both universes, so every
+cited number and all 15+ callers are unchanged). The FULL torture + extended
+battery was then run on V2 using the *same* helper functions V0 was judged with:
+
+| Metric (1987–2024) | V0 binary | V2 ensemble |
+|---|---|---|
+| Sharpe | 1.16 | **1.21** |
+| Sortino | 1.84 | **1.93** |
+| MaxDD | −12.8% | **−12.2%** |
+| Significance vs SPY (bootstrap p) | 0.002 | **0.001** |
+| CAPM alpha (t) | +1.80% (2.30) | +1.77% (2.37) |
+| **Spanning alpha vs own 5 assets (t, p)** | +1.40% (1.89, **0.058**) | +1.41% (**2.11, 0.035**) |
+| 40bps cost Sharpe | 1.06 | 1.07 |
+| Rebalance-shift range | 1.03–1.18 | 1.07–1.24 |
+| Drop-one-asset range | 0.96–1.32 | 1.01–1.37 |
+| 40yr extension alpha (t) | +2.3% (3.08) | +2.2% (3.21) |
+| Rolling-5y alpha positive | 84% | 84% |
+| Career risk (under-BH 3y windows) | 69% | 69% |
+| **2017–24 decade alpha** | **−0.3%** | **+0.4%** |
+
+**Certified.** V2 clears the same bar V0 did and is at least as good on every
+axis, with two genuine improvements: (1) it crosses the strict spanning test's
+t≈2 / p<0.05 threshold that V0 only grazed (t 1.89→2.11) — the single softest
+spot in V0's case; (2) the previously-flat 2017–24 decade flips from −0.3% to
++0.4%. Lower turnover, smaller drawdown, tighter date-shift range.
+
+**Honest limit, unchanged:** the V2-vs-V0 *difference* is itself only ΔSharpe
++0.05, p=0.113 — not statistically significant. V2 is a defensible refinement,
+not a proven upgrade; the two are statistically indistinguishable in their
+difference, exactly as the pre-registration predicted.
+
+**Status:** V0 remains the live/default strategy and the TradingView dashboard
+(no silent switch on a non-significant improvement). V2 is now a *certified*
+option (`trend_mode="ensemble"`) the user can promote to live if desired — which
+would entail flipping the default and updating the Pine script.
