@@ -65,7 +65,7 @@ t7 = c7 > m7
 t8 = c8 > m8
 
 // inverse-vol weights normalized over ALL assets, zeroed where trend is off
-iv(v) => (na(v) or v <= 0) ? na : 1.0 / v
+iv(v) => (na(v) or v <= 0) ? float(na) : 1.0 / v
 i1 = iv(v1)
 i2 = iv(v2)
 i3 = iv(v3)
@@ -75,7 +75,7 @@ i6 = iv(v6)
 i7 = iv(v7)
 i8 = iv(v8)
 ivSum = nz(i1) + nz(i2) + nz(i3) + nz(i4) + nz(i5) + nz(i6) + nz(i7) + nz(i8)
-w(iw, t) => ivSum > 0 ? (t ? nz(iw) / ivSum : 0.0) : na
+w(iw, t) => ivSum > 0 ? (t ? nz(iw) / ivSum : 0.0) : float(na)
 w1 = w(i1, t1)
 w2 = w(i2, t2)
 w3 = w(i3, t3)
