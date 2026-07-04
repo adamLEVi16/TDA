@@ -1,0 +1,134 @@
+//@version=5
+// ============================================================================
+// RP+TREND — MONTHLY REBALANCE DASHBOARD (live forward-test companion)
+//
+// Exact port of equity_factor/multi_asset.py's signal logic:
+//   - For each of 8 asset-class ETFs, at MONTH CLOSE:
+//       trend ON  = monthly close > 10-month SMA of monthly closes
+//   - Position size = inverse of 12-month volatility, normalized across ALL
+//     8 assets (so trend-OFF sleeves go to cash rather than being
+//     redistributed) — identical to rp_full.where(trend, 0) in the engine.
+//   - Cash = 1 - sum(weights), parked in T-bills in the backtest.
+//
+// HOW TO USE (forward test):
+//   1. Open a MONTHLY chart (any symbol, SPY is natural).
+//   2. Pine Editor -> paste this -> Add to chart.
+//   3. The table shows live target weights. Values CONFIRM at month close —
+//      the mid-month reading moves with prices and is only a preview.
+//   4. Rebalance on/near the last trading day of each month. Timing is not
+//      delicate: the backtest survives executing up to 21 sessions late.
+//   5. Optional: create an alert on this indicator, condition "Any alert()
+//      function call", so TradingView notifies you when the month-close
+//      allocation actually changes.
+//
+// This is an INDICATOR, not a Strategy, on purpose: TradingView strategies
+// are single-instrument, and the single-asset version of this rule (SPY-only
+// trend) tested as a NULL in our research — the validated edge requires the
+// diversified basket. Track your fills in a spreadsheet or broker paper
+// account; this dashboard is the signal source.
+// ============================================================================
+indicator("RP+Trend — Monthly Rebalance Dashboard", overlay = false)
+
+smaLen = input.int(10, "Trend filter (months)", minval = 2)
+volLen = input.int(12, "Volatility window (months)", minval = 3)
+
+s1 = input.symbol("AMEX:SPY",    "US equity")
+s2 = input.symbol("AMEX:EFA",    "Intl developed equity")
+s3 = input.symbol("AMEX:EEM",    "Emerging markets")
+s4 = input.symbol("NASDAQ:TLT",  "20+yr Treasuries")
+s5 = input.symbol("NASDAQ:IEF",  "7-10yr Treasuries")
+s6 = input.symbol("AMEX:GLD",    "Gold")
+s7 = input.symbol("AMEX:DBC",    "Commodities")
+s8 = input.symbol("AMEX:VNQ",    "REITs")
+
+f(sym) =>
+    request.security(sym, "M",
+         [close, ta.sma(close, smaLen), ta.stdev(close / close[1] - 1, volLen)],
+         lookahead = barmerge.lookahead_off)
+
+[c1, m1, v1] = f(s1)
+[c2, m2, v2] = f(s2)
+[c3, m3, v3] = f(s3)
+[c4, m4, v4] = f(s4)
+[c5, m5, v5] = f(s5)
+[c6, m6, v6] = f(s6)
+[c7, m7, v7] = f(s7)
+[c8, m8, v8] = f(s8)
+
+t1 = c1 > m1
+t2 = c2 > m2
+t3 = c3 > m3
+t4 = c4 > m4
+t5 = c5 > m5
+t6 = c6 > m6
+t7 = c7 > m7
+t8 = c8 > m8
+
+// inverse-vol weights normalized over ALL assets, zeroed where trend is off
+iv(v) => (na(v) or v <= 0) ? na : 1.0 / v
+i1 = iv(v1)
+i2 = iv(v2)
+i3 = iv(v3)
+i4 = iv(v4)
+i5 = iv(v5)
+i6 = iv(v6)
+i7 = iv(v7)
+i8 = iv(v8)
+ivSum = nz(i1) + nz(i2) + nz(i3) + nz(i4) + nz(i5) + nz(i6) + nz(i7) + nz(i8)
+w(iw, t) => ivSum > 0 ? (t ? nz(iw) / ivSum : 0.0) : na
+w1 = w(i1, t1)
+w2 = w(i2, t2)
+w3 = w(i3, t3)
+w4 = w(i4, t4)
+w5 = w(i5, t5)
+w6 = w(i6, t6)
+w7 = w(i7, t7)
+w8 = w(i8, t8)
+invested = w1 + w2 + w3 + w4 + w5 + w6 + w7 + w8
+cashW    = math.max(0.0, 1.0 - invested)
+
+// cash% history for context (the "risk-off gauge")
+plot(cashW * 100, "Cash %", color = color.new(#898781, 0), linewidth = 2)
+hline(0)
+hline(100)
+
+// ---------------------------------------------------------------- dashboard
+var table tb = table.new(position.top_right, 5, 10, border_width = 1)
+hdr(col, txt) => table.cell(tb, col, 0, txt, text_size = size.small,
+     bgcolor = #f4f4f1, text_color = #52514e)
+row(r, name, px, sma, tr, wt) =>
+    onCol  = tr ? #e8f6ee : #fdeaea
+    table.cell(tb, 0, r, name, text_size = size.small, text_halign = text.align_left)
+    table.cell(tb, 1, r, str.tostring(px,  "#.##"), text_size = size.small)
+    table.cell(tb, 2, r, str.tostring(sma, "#.##"), text_size = size.small)
+    table.cell(tb, 3, r, tr ? "HOLD" : "CASH", text_size = size.small, bgcolor = onCol)
+    table.cell(tb, 4, r, str.tostring(wt * 100, "#.#") + "%", text_size = size.small)
+
+if barstate.islast
+    hdr(0, "Asset")
+    hdr(1, "Price")
+    hdr(2, str.tostring(smaLen) + "M SMA")
+    hdr(3, "Trend")
+    hdr(4, "Target wt")
+    row(1, "SPY",  c1, m1, t1, w1)
+    row(2, "EFA",  c2, m2, t2, w2)
+    row(3, "EEM",  c3, m3, t3, w3)
+    row(4, "TLT",  c4, m4, t4, w4)
+    row(5, "IEF",  c5, m5, t5, w5)
+    row(6, "GLD",  c6, m6, t6, w6)
+    row(7, "DBC",  c7, m7, t7, w7)
+    row(8, "VNQ",  c8, m8, t8, w8)
+    table.cell(tb, 0, 9, "CASH (T-bills)", text_size = size.small,
+         text_halign = text.align_left, bgcolor = #f4f4f1)
+    table.cell(tb, 3, 9, "", bgcolor = #f4f4f1)
+    table.cell(tb, 4, 9, str.tostring(cashW * 100, "#.#") + "%",
+         text_size = size.small, bgcolor = #f4f4f1)
+
+// ------------------------------------------------------------------- alerts
+// fires at bar close when any sleeve flips trend state (use a MONTHLY chart
+// so "bar close" = month close, matching the backtest's decision point)
+flipped = t1 != t1[1] or t2 != t2[1] or t3 != t3[1] or t4 != t4[1] or
+     t5 != t5[1] or t6 != t6[1] or t7 != t7[1] or t8 != t8[1]
+if flipped and barstate.isconfirmed
+    alert("RP+Trend: month-close allocation changed — open the dashboard and rebalance.",
+         alert.freq_once_per_bar_close)
