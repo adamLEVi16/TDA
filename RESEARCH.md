@@ -74,6 +74,22 @@ incl. a rising-rate regime)**.
   catch a real bear market. It is a **modest, real diversifying sleeve** — not a
   return engine, and not for 100% of a book.
 
+**Why it should work (economic rationale):** trend persistence is documented across
+a century of markets (Moskowitz–Ooi–Pedersen 2012; Hurst–Ooi–Pedersen back to
+1880), usually attributed to slow information diffusion and underreaction. The
+premium plausibly survives *because* it is behaviorally expensive to harvest —
+our own career-risk numbers are the mechanism (lags buy-and-hold in 69% of
+rolling 3-year windows, once for 159 straight months; institutions on 3-year
+evaluation horizons structurally cannot hold through that), consistent with the
+alpha not decaying after publication. Honest counter-hypothesis, stated: part
+of the premium may be the 1982–2021 falling-rate regime (decade alpha ≈ 0 in
+2017–24); one sample cannot fully separate the two, so both are presented.
+
+**Data integrity:** the underlying price series was verified against an
+independent public record — VFINX calendar-year returns match published S&P 500
+total returns within 0.0–0.3% in every year checked across 1988–2023 (the gap
+equals the fund's expense ratio, confirming dividends are correctly included).
+
 **Takeaway:** I can find a genuine edge *and* subject it to the validation that
 most backtests skip — and classify it honestly: a defensive sleeve whose modest timing alpha formally clears the significance bar, with every limitation stated next to it.
 

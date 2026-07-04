@@ -233,6 +233,24 @@ Each month-end, for 8 liquid index ETFs: hold those above their 10-month moving 
 (sized by inverse volatility); move the rest to cash (T-bills). No options, leverage, shorting, or
 forecasting. Universe: <b>SPY, EFA, EEM, TLT, IEF, GLD, DBC, VNQ</b>. ~110%/yr turnover, ~10 bps cost.
 
+<h2>Why should this work? (economic rationale, with our own evidence)</h2>
+<ul>
+<li><b>Trend persistence is a documented cross-century phenomenon</b> (time-series momentum:
+Moskowitz–Ooi–Pedersen 2012 across 58 markets; Hurst–Ooi–Pedersen back to 1880) — usually attributed
+to slow diffusion of macro information and investor underreaction, then herding.</li>
+<li><b>The premium survives because it is behaviorally hard to harvest.</b> Our own career-risk numbers
+are the mechanism: this strategy lags buy-and-hold in <b>69% of rolling 3-year windows</b>, once for
+159 straight months. Institutions judged on 3-year horizons structurally cannot sit through that —
+which is why publication (Faber 2007 and earlier) did not arbitrage it away, consistent with our
+finding that alpha did <i>not</i> decay in the second half of the sample.</li>
+<li><b>What the return is NOT:</b> not market beta (β = {beta:.2f}); not replicable by any static mix
+of its own assets (spanning test); not dependent on calm cross-asset correlations (it did <i>better</i>
+in high-correlation regimes).</li>
+<li><b>Honest counter-hypothesis, stated:</b> part of the premium may be the 1982–2021 falling-rate
+regime rather than behavior — decade-level alpha was ≈0 in 2017–24, and one 40-year sample cannot
+fully separate the two explanations. We present both.</li>
+</ul>
+
 <h2>Performance (fund-proxy validation, {lhrange}, {lhn} months)</h2>
 <img src="data:image/png;base64,{g}"><img src="data:image/png;base64,{dd}">
 <div class="two">
