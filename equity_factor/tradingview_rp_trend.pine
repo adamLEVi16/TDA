@@ -93,16 +93,31 @@ hline(0)
 hline(100)
 
 // ---------------------------------------------------------------- dashboard
-var table tb = table.new(position.top_right, 5, 10, border_width = 1)
+// dark-panel palette, explicit text color on every cell -- readable in both
+// light and dark TradingView themes regardless of chart background
+BG_HDR  = color.new(#1a1a1a, 0)
+BG_ROW  = color.new(#0d0d0d, 0)
+BG_HOLD = color.new(#0e5c38, 0)   // dark green fill
+BG_CASH = color.new(#3a1414, 0)   // dark red fill
+TXT     = color.new(#ffffff, 0)
+TXT_MUT = color.new(#bbbbbb, 0)
+
+var table tb = table.new(position.top_right, 5, 10, border_width = 1,
+     border_color = color.new(#555555, 0), bgcolor = BG_ROW)
 hdr(col, txt) => table.cell(tb, col, 0, txt, text_size = size.small,
-     bgcolor = #f4f4f1, text_color = #52514e)
+     bgcolor = BG_HDR, text_color = TXT)
 row(r, name, px, sma, tr, wt) =>
-    onCol  = tr ? #e8f6ee : #fdeaea
-    table.cell(tb, 0, r, name, text_size = size.small, text_halign = text.align_left)
-    table.cell(tb, 1, r, str.tostring(px,  "#.##"), text_size = size.small)
-    table.cell(tb, 2, r, str.tostring(sma, "#.##"), text_size = size.small)
-    table.cell(tb, 3, r, tr ? "HOLD" : "CASH", text_size = size.small, bgcolor = onCol)
-    table.cell(tb, 4, r, str.tostring(wt * 100, "#.#") + "%", text_size = size.small)
+    onCol = tr ? BG_HOLD : BG_CASH
+    table.cell(tb, 0, r, name, text_size = size.small, text_halign = text.align_left,
+         bgcolor = BG_ROW, text_color = TXT)
+    table.cell(tb, 1, r, str.tostring(px,  "#.##"), text_size = size.small,
+         bgcolor = BG_ROW, text_color = TXT_MUT)
+    table.cell(tb, 2, r, str.tostring(sma, "#.##"), text_size = size.small,
+         bgcolor = BG_ROW, text_color = TXT_MUT)
+    table.cell(tb, 3, r, tr ? "HOLD" : "CASH", text_size = size.small,
+         bgcolor = onCol, text_color = TXT)
+    table.cell(tb, 4, r, str.tostring(wt * 100, "#.#") + "%", text_size = size.small,
+         bgcolor = BG_ROW, text_color = TXT)
 
 if barstate.islast
     hdr(0, "Asset")
@@ -119,10 +134,10 @@ if barstate.islast
     row(7, "DBC",  c7, m7, t7, w7)
     row(8, "VNQ",  c8, m8, t8, w8)
     table.cell(tb, 0, 9, "CASH (T-bills)", text_size = size.small,
-         text_halign = text.align_left, bgcolor = #f4f4f1)
-    table.cell(tb, 3, 9, "", bgcolor = #f4f4f1)
+         text_halign = text.align_left, bgcolor = BG_HDR, text_color = TXT)
+    table.cell(tb, 3, 9, "", bgcolor = BG_HDR)
     table.cell(tb, 4, 9, str.tostring(cashW * 100, "#.#") + "%",
-         text_size = size.small, bgcolor = #f4f4f1)
+         text_size = size.small, bgcolor = BG_HDR, text_color = TXT)
 
 // ------------------------------------------------------------------- alerts
 // fires at bar close when any sleeve flips trend state (use a MONTHLY chart
