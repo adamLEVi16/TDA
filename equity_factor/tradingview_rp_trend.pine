@@ -1,6 +1,6 @@
 //@version=5
 // ============================================================================
-// RP+TREND — MONTHLY REBALANCE DASHBOARD (live forward-test companion)
+// RP+TREND — MONTHLY REBALANCE DASHBOARD + EQUITY-CURVE REPLAY
 //
 // Exact port of equity_factor/multi_asset.py's signal logic:
 //   - For each of 8 asset-class ETFs, at MONTH CLOSE:
@@ -10,16 +10,26 @@
 //     redistributed) — identical to rp_full.where(trend, 0) in the engine.
 //   - Cash = 1 - sum(weights), parked in T-bills in the backtest.
 //
-// HOW TO USE (forward test):
-//   1. Open a MONTHLY chart (any symbol, SPY is natural).
+// WHAT THIS PLOTS: a synthetic equity curve for the whole 8-ETF portfolio
+// (Strategy NAV) next to 100%-SPY buy & hold, both starting at "Start capital".
+// It compounds the realized monthly portfolio return =
+//   sum_i( last-month target weight_i * this-month return_i ) + cash*T-bill.
+// TradingView Strategies are single-instrument, so a multi-asset book cannot
+// run in the Strategy tester — this indicator reconstructs the same P&L path
+// the Python engine and replay.html produce, so you can watch it in TV.
+//
+// HOW TO USE (forward test + replay):
+//   1. Open a MONTHLY chart (any symbol; SPY is natural).
 //   2. Pine Editor -> paste this -> Add to chart.
-//   3. The table shows live target weights. Values CONFIRM at month close —
-//      the mid-month reading moves with prices and is only a preview.
-//   4. Rebalance on/near the last trading day of each month. Timing is not
+//   3. LIVE: the tables show target weights + running stats. Values CONFIRM at
+//      month close; mid-month is a moving preview.
+//   4. REPLAY the history: click TradingView's "Replay" (bar-replay) button,
+//      pick a start month, and step forward — the two NAV lines and the stats
+//      table build month by month, the same play-through as replay.html.
+//   5. Rebalance on/near the last trading day of each month. Timing is not
 //      delicate: the backtest survives executing up to 21 sessions late.
-//   5. Optional: create an alert on this indicator, condition "Any alert()
-//      function call", so TradingView notifies you when the month-close
-//      allocation actually changes.
+//   6. Optional alert: "Any alert() function call" -> notified when the
+//      month-close allocation actually changes.
 //
 // PYTHON<->PINE PARITY NOTES (for reviewers checking implementation match):
 //   - stdev convention: ta.stdev is POPULATION std; the Python engine uses
@@ -29,22 +39,28 @@
 //   - ADJUSTED DATA REQUIRED: the Python engine uses dividend+split adjusted
 //     closes. On TradingView, enable "Adj" (adjusted data) AND dividend
 //     adjustment in chart settings; without it, high-yield sleeves
-//     (TLT/IEF/VNQ) can show different trend states than the engine.
-//   - Warm-up: na guards make early bars inert; irrelevant for live use.
-//   - Execution: signals confirm at month close (barstate.isconfirmed on a
-//     monthly chart), matching the backtest's decide-at-close-of-m,
-//     hold-month-m+1 convention; +-21-session execution lag tested robust.
+//     (TLT/IEF/VNQ) can show different trend states AND the NAV curve drifts
+//     low (missing dividends).
+//   - CASH RETURN is APPROXIMATE: the Python engine credits idle cash with the
+//     realized 1-month T-bill each month; Pine has no T-bill feed, so cash
+//     earns the flat "Cash yield" input (default 0%). At 0% the NAV curve is a
+//     slight UNDERSTATEMENT in high-cash periods — set it to a representative
+//     rate (e.g. 2) if you want a closer match; the signal/weights are
+//     unaffected either way.
+//   - NAV compounds only on CONFIRMED month closes (no intramonth repaint of
+//     the equity value), matching decide-at-close-of-m, hold-month-m+1.
+//   - Warm-up: NAV starts once all 8 assets have full history (common-history,
+//     like the engine's dropna); early bars are inert.
 //
-// This is an INDICATOR, not a Strategy, on purpose: TradingView strategies
-// are single-instrument, and the single-asset version of this rule (SPY-only
-// trend) tested as a NULL in our research — the validated edge requires the
-// diversified basket. Track your fills in a spreadsheet or broker paper
-// account; this dashboard is the signal source.
+// Track your actual fills in a spreadsheet or broker paper account; this is
+// the signal + expected-path source, not an order-execution engine.
 // ============================================================================
-indicator("RP+Trend — Monthly Rebalance Dashboard", overlay = false)
+indicator("RP+Trend — Dashboard + Equity Replay", overlay = false)
 
-smaLen = input.int(10, "Trend filter (months)", minval = 2)
-volLen = input.int(12, "Volatility window (months)", minval = 3)
+smaLen   = input.int(10,     "Trend filter (months)",   minval = 2)
+volLen   = input.int(12,     "Volatility window (months)", minval = 3)
+startCap = input.float(100000, "Start capital ($)",      minval = 1)
+cashAPR  = input.float(0.0,  "Cash yield (annual %, T-bill proxy)", minval = 0) / 100.0
 
 s1 = input.symbol("AMEX:SPY",    "US equity")
 s2 = input.symbol("AMEX:EFA",    "Intl developed equity")
@@ -101,10 +117,55 @@ w8 = w(i8, t8)
 invested = w1 + w2 + w3 + w4 + w5 + w6 + w7 + w8
 cashW    = math.max(0.0, 1.0 - invested)
 
-// cash% history for context (the "risk-off gauge")
-plot(cashW * 100, "Cash %", color = color.new(#898781, 0), linewidth = 2)
-hline(0)
-hline(100)
+// ------------------------------------------------ synthetic portfolio equity
+// realized return THIS month uses LAST month's target weights (hold-m+1),
+// matching the engine's decide-at-m / hold-m+1 timing.
+r1 = nz(c1 / c1[1] - 1)
+r2 = nz(c2 / c2[1] - 1)
+r3 = nz(c3 / c3[1] - 1)
+r4 = nz(c4 / c4[1] - 1)
+r5 = nz(c5 / c5[1] - 1)
+r6 = nz(c6 / c6[1] - 1)
+r7 = nz(c7 / c7[1] - 1)
+r8 = nz(c8 / c8[1] - 1)
+monthlyCash = cashAPR / 12.0
+portRet = nz(w1[1]) * r1 + nz(w2[1]) * r2 + nz(w3[1]) * r3 + nz(w4[1]) * r4 +
+     nz(w5[1]) * r5 + nz(w6[1]) * r6 + nz(w7[1]) * r7 + nz(w8[1]) * r8 +
+     nz(cashW[1]) * monthlyCash
+
+// common-history gate: all 8 assets must have full trend+vol history (like the
+// engine's dropna) before the NAV starts compounding
+ready = not na(v1) and not na(v2) and not na(v3) and not na(v4) and
+     not na(v5) and not na(v6) and not na(v7) and not na(v8) and
+     not na(m1) and not na(m2) and not na(m3) and not na(m4) and
+     not na(m5) and not na(m6) and not na(m7) and not na(m8)
+valid = ready and ready[1]
+
+var float nav    = startCap
+var float spyNav = startCap
+var float peak   = startCap
+var int   nMonth = 0
+if barstate.isconfirmed and valid
+    nav    := nav * (1.0 + portRet)
+    spyNav := spyNav * (1.0 + r1)
+    peak   := math.max(peak, nav)
+    nMonth := nMonth + 1
+
+years  = nMonth / 12.0
+cagr   = years > 0 ? math.pow(nav / startCap, 1.0 / years) - 1.0 : float(na)
+ddNow  = peak > 0 ? nav / peak - 1.0 : float(na)
+totRet = nav / startCap - 1.0
+spyTot = spyNav / startCap - 1.0
+
+// only show the curves once compounding has begun (avoid a flat pre-start line)
+navPlot = nMonth > 0 ? nav : float(na)
+spyPlot = nMonth > 0 ? spyNav : float(na)
+plot(navPlot, "Strategy NAV",   color = color.new(#3987e5, 0), linewidth = 2)
+plot(spyPlot, "SPY buy & hold", color = color.new(#898781, 0), linewidth = 2)
+
+// risk-off gauge as a faint background tint (>50% cash = defensive), so the
+// pane keeps ONE axis (dollars) instead of competing scales
+bgcolor(nMonth > 0 and invested < 0.5 ? color.new(#3a1414, 88) : na)
 
 // ---------------------------------------------------------------- dashboard
 // dark-panel palette, explicit text color on every cell -- readable in both
@@ -115,7 +176,10 @@ BG_HOLD = color.new(#0e5c38, 0)   // dark green fill
 BG_CASH = color.new(#3a1414, 0)   // dark red fill
 TXT     = color.new(#ffffff, 0)
 TXT_MUT = color.new(#bbbbbb, 0)
+POS     = color.new(#0ca30c, 0)
+NEG     = color.new(#e66767, 0)
 
+// ---- allocation table (target weights) ----
 var table tb = table.new(position.top_right, 5, 10, border_width = 1,
      border_color = color.new(#555555, 0), bgcolor = BG_ROW)
 hdr(col, txt) => table.cell(tb, col, 0, txt, text_size = size.small,
@@ -132,6 +196,15 @@ row(r, name, px, sma, tr, wt) =>
          bgcolor = onCol, text_color = TXT)
     table.cell(tb, 4, r, str.tostring(wt * 100, "#.#") + "%", text_size = size.small,
          bgcolor = BG_ROW, text_color = TXT)
+
+// ---- running-stats table (the "P&L so far" panel) ----
+var table st = table.new(position.top_left, 2, 6, border_width = 1,
+     border_color = color.new(#555555, 0), bgcolor = BG_ROW)
+stat(r, k, v, c) =>
+    table.cell(st, 0, r, k, text_size = size.small, text_halign = text.align_left,
+         bgcolor = BG_ROW, text_color = TXT_MUT)
+    table.cell(st, 1, r, v, text_size = size.small, text_halign = text.align_right,
+         bgcolor = BG_ROW, text_color = c)
 
 if barstate.islast
     hdr(0, "Asset")
@@ -152,6 +225,16 @@ if barstate.islast
     table.cell(tb, 3, 9, "", bgcolor = BG_HDR)
     table.cell(tb, 4, 9, str.tostring(cashW * 100, "#.#") + "%",
          text_size = size.small, bgcolor = BG_HDR, text_color = TXT)
+
+    table.cell(st, 0, 0, "SINCE START", text_size = size.small,
+         text_halign = text.align_left, bgcolor = BG_HDR, text_color = TXT)
+    table.cell(st, 1, 0, str.tostring(nMonth) + " mo", text_size = size.small,
+         text_halign = text.align_right, bgcolor = BG_HDR, text_color = TXT)
+    stat(1, "Strategy $", str.tostring(math.round(nav)),    TXT)
+    stat(2, "SPY $",      str.tostring(math.round(spyNav)), TXT_MUT)
+    stat(3, "Total ret",  str.tostring(totRet * 100, "#.#") + "%", totRet >= 0 ? POS : NEG)
+    stat(4, "CAGR",       str.tostring(cagr * 100, "#.#") + "%",   cagr   >= 0 ? POS : NEG)
+    stat(5, "Max DD",     str.tostring(ddNow * 100, "#.#") + "%",  NEG)
 
 // ------------------------------------------------------------------- alerts
 // fires at bar close when any sleeve flips trend state (use a MONTHLY chart
