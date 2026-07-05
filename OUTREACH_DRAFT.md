@@ -70,3 +70,46 @@ which costs him little and shows your seriousness.
   Message 1 can't go out this week — it's low-risk, genuinely useful, and asks
   nothing of him. Messages 2 and 3 should wait for his actual response, not a
   fixed calendar.
+
+---
+
+## PM Q&A crib sheet — the five questions a professional will actually ask
+
+(A reviewer correctly predicted the conversation won't be about the code — it
+will be these. Every answer below is backed by a specific documented result;
+no improvising needed.)
+
+**"Why 10 months?"** — It isn't a tuned number. Sharpe is flat at 1.15–1.17
+across every window from 6 to 14 months, and the certified refinement (V2)
+removes the single-window dependence entirely by averaging {3,6,9,12}-month
+signals. The parameter genuinely doesn't matter — that's the answer, and it's
+the strongest possible one.
+
+**"Why these eight assets?"** — One liquid proxy per major return driver
+(US/intl/EM equity, long/mid Treasuries, gold, commodities, REITs), chosen for
+economic role, not backtest fit. Evidence it's the mechanism and not the
+tickers: the identical engine on a *different* instrument set (5 mutual funds,
+1987+) produces the same result, and dropping any single asset keeps Sharpe
+at 0.96–1.37 — all above equity's 0.74.
+
+**"Why inverse volatility?"** — It's the risk-shaping layer, not the return
+engine, and we proved which is which: the same weights *without* the trend
+filter earn Sharpe 0.58; adding trend timing takes it to 1.16. A spanning
+regression rejects any static mix of the same assets as an explanation
+(p=0.035 in the V2 spec). The timing is the product.
+
+**"Why should this keep working?"** — Trend persistence is documented across a
+century of markets; the premium survives because it's behaviorally brutal to
+hold: it lags buy-and-hold in 69% of rolling 3-year windows, once for 13
+straight years. Institutions judged on 3-year numbers structurally can't
+harvest it — which is consistent with the alpha *not* decaying in the decades
+after Faber published the rule. Honest counter-hypothesis, stated on the
+tearsheet: part of the premium may have been the 1982–2021 falling-rate era.
+
+**"What would break it?"** — Three known failure modes, all quantified: fast
+crashes (Oct-1987 type; monthly signals can't dodge a one-week collapse),
+V-shaped recoveries (2020 — it re-enters late), and whipsaw markets (66% of
+its cash-flights are false alarms costing ~4.5pts each; the edge lives in the
+one-third that catch real bears). It is crash *insurance* with a measurable
+premium, not a market-timing oracle — and saying exactly that is what keeps
+this credible.

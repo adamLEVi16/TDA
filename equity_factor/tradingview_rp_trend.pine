@@ -21,6 +21,20 @@
 //      function call", so TradingView notifies you when the month-close
 //      allocation actually changes.
 //
+// PYTHON<->PINE PARITY NOTES (for reviewers checking implementation match):
+//   - stdev convention: ta.stdev is POPULATION std; the Python engine uses
+//     SAMPLE std (pandas ddof=1). This scales every asset's vol by the same
+//     sqrt(11/12), which cancels exactly in the inverse-vol normalization --
+//     verified numerically: max weight difference 5.6e-17. Not a divergence.
+//   - ADJUSTED DATA REQUIRED: the Python engine uses dividend+split adjusted
+//     closes. On TradingView, enable "Adj" (adjusted data) AND dividend
+//     adjustment in chart settings; without it, high-yield sleeves
+//     (TLT/IEF/VNQ) can show different trend states than the engine.
+//   - Warm-up: na guards make early bars inert; irrelevant for live use.
+//   - Execution: signals confirm at month close (barstate.isconfirmed on a
+//     monthly chart), matching the backtest's decide-at-close-of-m,
+//     hold-month-m+1 convention; +-21-session execution lag tested robust.
+//
 // This is an INDICATOR, not a Strategy, on purpose: TradingView strategies
 // are single-instrument, and the single-asset version of this rule (SPY-only
 // trend) tested as a NULL in our research — the validated edge requires the
