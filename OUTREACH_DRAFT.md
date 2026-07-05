@@ -73,6 +73,22 @@ which costs him little and shows your seriousness.
 
 ---
 
+## The one-sentence framing (if he asks "so what did you actually do?")
+
+Don't say "I found alpha." Say:
+
+> "I tried to answer a narrow empirical question — does a simple trend-following
+> overlay on a diversified portfolio add value beyond the equivalent static
+> allocation? — and I spent most of my time trying to invalidate the result
+> rather than maximize it."
+
+That framing invites a technical conversation instead of skepticism, and every
+word of it is literally true: seven of the nine hypotheses tested in this
+project were reported as nulls, and the one positive result survived a
+pre-registered attempt to break it.
+
+---
+
 ## PM Q&A crib sheet — the five questions a professional will actually ask
 
 (A reviewer correctly predicted the conversation won't be about the code — it
