@@ -21,8 +21,14 @@
 // HOW TO USE (forward test + replay):
 //   1. Open a MONTHLY chart (any symbol; SPY is natural).
 //   2. Pine Editor -> paste this -> Add to chart.
-//   3. LIVE: the tables show target weights + running stats. Values CONFIRM at
-//      month close; mid-month is a moving preview.
+//   3. LIVE: the right table shows target weights; the left "SINCE START"
+//      table shows running P&L + risk stats (total return, CAGR, max DD, and
+//      beta / correlation / annualized vol / Sharpe vs SPY, all measured on
+//      the realized monthly returns since inception). Values CONFIRM at month
+//      close; mid-month is a moving preview. Beta here is a SIMPLE raw-return
+//      beta (rf = the cash-yield input); expect ~0.1-0.2, the same low-market-
+//      sensitivity story as the tearsheet's 0.24 excess-return CAPM beta. All
+//      risk stats are noisy for the first ~12 months and stabilize after.
 //   4. REPLAY the history: click TradingView's "Replay" (bar-replay) button,
 //      pick a start month, and step forward — the two NAV lines and the stats
 //      table build month by month, the same play-through as replay.html.
@@ -145,17 +151,43 @@ var float nav    = startCap
 var float spyNav = startCap
 var float peak   = startCap
 var int   nMonth = 0
+// running sums for beta / correlation / vol / Sharpe on monthly returns
+// (x = strategy monthly return, y = SPY monthly return)
+var float sx  = 0.0
+var float sy  = 0.0
+var float sxx = 0.0
+var float syy = 0.0
+var float sxy = 0.0
 if barstate.isconfirmed and valid
     nav    := nav * (1.0 + portRet)
     spyNav := spyNav * (1.0 + r1)
     peak   := math.max(peak, nav)
     nMonth := nMonth + 1
+    sx  := sx  + portRet
+    sy  := sy  + r1
+    sxx := sxx + portRet * portRet
+    syy := syy + r1 * r1
+    sxy := sxy + portRet * r1
 
 years  = nMonth / 12.0
 cagr   = years > 0 ? math.pow(nav / startCap, 1.0 / years) - 1.0 : float(na)
 ddNow  = peak > 0 ? nav / peak - 1.0 : float(na)
 totRet = nav / startCap - 1.0
 spyTot = spyNav / startCap - 1.0
+
+// ---- risk metrics vs SPY (since inception; stabilize as months accumulate) ----
+nF     = math.max(nMonth, 1)
+mX     = sx / nF
+mY     = sy / nF
+varX   = sxx / nF - mX * mX                     // strategy return variance
+varY   = syy / nF - mY * mY                     // SPY return variance
+covXY  = sxy / nF - mX * mY
+betaV  = varY > 0 ? covXY / varY : float(na)    // beta = cov(strat,mkt)/var(mkt)
+corrV  = (varX > 0 and varY > 0) ? covXY / math.sqrt(varX * varY) : float(na)
+volAnn = varX > 0 ? math.sqrt(varX * 12.0) : float(na)   // annualized strategy vol
+rfM    = monthlyCash                             // risk-free proxy = cash-yield input
+sharpe = varX > 0 ? (mX - rfM) / math.sqrt(varX) * math.sqrt(12.0) : float(na)
+enoughN = nMonth >= 3                            // metrics too noisy below ~3 months
 
 // only show the curves once compounding has begun (avoid a flat pre-start line)
 navPlot = nMonth > 0 ? nav : float(na)
@@ -198,7 +230,7 @@ row(r, name, px, sma, tr, wt) =>
          bgcolor = BG_ROW, text_color = TXT)
 
 // ---- running-stats table (the "P&L so far" panel) ----
-var table st = table.new(position.top_left, 2, 6, border_width = 1,
+var table st = table.new(position.top_left, 2, 10, border_width = 1,
      border_color = color.new(#555555, 0), bgcolor = BG_ROW)
 stat(r, k, v, c) =>
     table.cell(st, 0, r, k, text_size = size.small, text_halign = text.align_left,
@@ -235,6 +267,10 @@ if barstate.islast
     stat(3, "Total ret",  str.tostring(totRet * 100, "#.#") + "%", totRet >= 0 ? POS : NEG)
     stat(4, "CAGR",       str.tostring(cagr * 100, "#.#") + "%",   cagr   >= 0 ? POS : NEG)
     stat(5, "Max DD",     str.tostring(ddNow * 100, "#.#") + "%",  NEG)
+    stat(6, "Beta vs SPY", enoughN and not na(betaV)  ? str.tostring(betaV, "#.##") : "—", TXT)
+    stat(7, "Corr SPY",    enoughN and not na(corrV)  ? str.tostring(corrV, "#.##") : "—", TXT_MUT)
+    stat(8, "Vol (ann)",   enoughN and not na(volAnn) ? str.tostring(volAnn * 100, "#.#") + "%" : "—", TXT_MUT)
+    stat(9, "Sharpe",      enoughN and not na(sharpe) ? str.tostring(sharpe, "#.##") : "—", sharpe >= 0 ? POS : NEG)
 
 // ------------------------------------------------------------------- alerts
 // fires at bar close when any sleeve flips trend state (use a MONTHLY chart
