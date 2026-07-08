@@ -89,6 +89,13 @@ log a row each month-end, rerun <code>forward_track.py</code></div>
 <div class="note">Beta and vol appear after 4+ logged rows. This log — not the backtest —
 is the evidence that accumulates: every row is an out-of-sample month following the
 pre-committed rule.</div></div>
+<div class="card"><b>What normal looks like (from 214 backtest months / 5,000+ days)</b>
+<div class="note" style="font-size:13px;color:var(--ink2)">
+44% of all days are red; a typical red day is −0.28% and a −0.25%-or-worse day happens
+~4x per month. 38% of months are red (average −1.1%, worst −3.45%), and the longest
+historical run was 6 red months in a row. On days SPY falls, the strategy captures only
+~18% of the drop on average — so "down, but much less than SPY" is the strategy working,
+not failing. None of these are stop conditions; the rule only acts at month-end.</div></div>
 <script>
 const D=__DATA__,S=__STATS__;
 const css=v=>getComputedStyle(document.documentElement).getPropertyValue(v).trim();
