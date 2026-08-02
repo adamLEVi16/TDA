@@ -208,9 +208,34 @@
         should be: <strong>up while the market was down</strong>, with 53% of the book
         sitting in T-bills.</p>
     </div>
+    <p class="tight">Measured from <strong>your inception date</strong>, not a rolling
+      window. A quote app showing SPY “up 0.7% past month” is measuring from ~2 July, and
+      SPY rallied 0.87% between 2 and 6 July — before this account owned anything. Over the
+      same 2 July start the index returned +0.30%; over yours it returned −0.57%. Same index,
+      different start line.</p>
     <p class="tight">One month is not evidence of anything. It is one row in a log that
       only becomes meaningful at 12+. Recorded here because a pre-committed rule followed
       honestly — including the months it loses — is the point of the exercise.</p>
+  </section>
+
+  <!-- ============ READING THE BROKER SCREEN ============ -->
+  <section class="card">
+    <h2>Why the broker's number differs</h2>
+    <p>IBKR's headline reads <strong>+$11,840.87 (0.93%) past three months</strong>. That is
+      not the strategy's return — most of it was earned before a single trade was placed,
+      while the account sat in cash collecting interest:</p>
+    <div class="rows">
+      <div class="row"><span class="k">Account 3 months ago</span><span class="v">$1,269,041</span></div>
+      <div class="row"><span class="k">Cash interest, before inception</span><span class="v" style="color:var(--cash)">+$8,284</span></div>
+      <div class="row"><span class="k">Account at inception, 6 Jul</span><span class="v">$1,277,325</span></div>
+      <div class="row"><span class="k">The strategy, 6 Jul → 31 Jul</span><span class="v" style="color:var(--accent)">+$3,557</span></div>
+      <div class="row"><span class="k">Account now</span><span class="v">$1,280,882</span></div>
+    </div>
+    <p class="tight"><strong>The kink in the broker's equity curve is the inception date.</strong>
+      Before 6 July the line is smooth and straight — a cash balance accruing interest has no
+      daily wiggle. After 6 July it is jagged, because the account finally owns things whose
+      prices move. Everything to the left of that kink belongs to the old account, not to this
+      experiment.</p>
   </section>
 
   <!-- ============ THE ORDER TICKET ============ -->
