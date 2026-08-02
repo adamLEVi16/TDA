@@ -1,0 +1,408 @@
+<title>RP+Trend — Strategy Status, August 2026</title>
+<style>
+  :root{
+    --ground:#f6f7fa;
+    --card:#ffffff;
+    --ink:#131a22;
+    --ink-2:#4a545f;
+    --ink-3:#858d98;
+    --rule:#dfe3ea;
+    --rule-2:#eceef3;
+    --accent:#2f6fd0;
+    --accent-soft:#e7eefa;
+    --bench:#878e99;
+    --hold:#0f7350;
+    --hold-soft:#e2f2ec;
+    --cash:#a1731a;
+    --cash-soft:#f7efdd;
+    --neg:#bd3a2f;
+  }
+  @media (prefers-color-scheme: dark){
+    :root{
+      --ground:#0e1318;
+      --card:#161d25;
+      --ink:#e7eaf0;
+      --ink-2:#a9b2be;
+      --ink-3:#7b8593;
+      --rule:#28313c;
+      --rule-2:#1e262f;
+      --accent:#5c9bec;
+      --accent-soft:#1b2a3f;
+      --bench:#8790a0;
+      --hold:#2fa57e;
+      --hold-soft:#14312a;
+      --cash:#d09a3a;
+      --cash-soft:#33280f;
+      --neg:#e2695e;
+    }
+  }
+  :root[data-theme="dark"]{
+    --ground:#0e1318; --card:#161d25; --ink:#e7eaf0; --ink-2:#a9b2be; --ink-3:#7b8593;
+    --rule:#28313c; --rule-2:#1e262f; --accent:#5c9bec; --accent-soft:#1b2a3f;
+    --bench:#8790a0; --hold:#2fa57e; --hold-soft:#14312a; --cash:#d09a3a;
+    --cash-soft:#33280f; --neg:#e2695e;
+  }
+  :root[data-theme="light"]{
+    --ground:#f6f7fa; --card:#ffffff; --ink:#131a22; --ink-2:#4a545f; --ink-3:#858d98;
+    --rule:#dfe3ea; --rule-2:#eceef3; --accent:#2f6fd0; --accent-soft:#e7eefa;
+    --bench:#878e99; --hold:#0f7350; --hold-soft:#e2f2ec; --cash:#a1731a;
+    --cash-soft:#f7efdd; --neg:#bd3a2f;
+  }
+
+  *{box-sizing:border-box}
+  body{
+    background:var(--ground); color:var(--ink);
+    font:400 16px/1.55 system-ui,-apple-system,"Segoe UI",sans-serif;
+    margin:0; padding:28px 18px 64px;
+    -webkit-text-size-adjust:100%;
+  }
+  .wrap{max-width:790px;margin:0 auto;display:flex;flex-direction:column;gap:20px}
+
+  .mono{font-family:ui-monospace,SFMono-Regular,"SF Mono",Menlo,Consolas,monospace;
+        font-variant-numeric:tabular-nums}
+
+  /* ---- masthead ---- */
+  .mast{display:flex;flex-direction:column;gap:8px;padding-bottom:4px}
+  .eyebrow{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:11.5px;
+    letter-spacing:.13em;text-transform:uppercase;color:var(--ink-3)}
+  h1{font-size:clamp(27px,5.4vw,36px);line-height:1.1;letter-spacing:-.022em;
+     font-weight:700;margin:0;text-wrap:balance}
+  .dek{color:var(--ink-2);font-size:15.5px;max-width:60ch;margin:0}
+  .livechip{display:inline-flex;align-items:center;gap:7px;align-self:flex-start;
+    background:var(--hold-soft);color:var(--hold);border-radius:999px;
+    padding:4px 12px 4px 9px;font-size:12.5px;font-weight:600;
+    font-family:ui-monospace,SFMono-Regular,Menlo,monospace;letter-spacing:.02em}
+  .dot{width:7px;height:7px;border-radius:50%;background:var(--hold);flex:none}
+
+  /* ---- cards ---- */
+  .card{background:var(--card);border:1px solid var(--rule);border-radius:12px;
+        padding:20px 22px;display:flex;flex-direction:column;gap:14px}
+  .card.loud{border-color:var(--accent);box-shadow:0 0 0 1px var(--accent) inset}
+  h2{font-size:12px;letter-spacing:.13em;text-transform:uppercase;color:var(--ink-3);
+     font-weight:600;margin:0;font-family:ui-monospace,SFMono-Regular,Menlo,monospace}
+  h3{font-size:17px;font-weight:650;letter-spacing:-.012em;margin:0;text-wrap:balance}
+  p{margin:0;color:var(--ink-2);font-size:14.5px}
+  p.tight{font-size:13.5px;color:var(--ink-3)}
+  strong{color:var(--ink);font-weight:650}
+
+  /* ---- month result ---- */
+  .duo{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+  .fig{border:1px solid var(--rule-2);border-radius:10px;padding:14px 16px;
+       display:flex;flex-direction:column;gap:3px;background:var(--ground)}
+  .fig .lab{font-size:11.5px;letter-spacing:.1em;text-transform:uppercase;
+            color:var(--ink-3);font-family:ui-monospace,Menlo,monospace}
+  .fig .num{font-size:clamp(25px,5.6vw,32px);font-weight:700;letter-spacing:-.028em;
+     font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-variant-numeric:tabular-nums;
+     line-height:1.05}
+  .fig .sub{font-size:12.5px;color:var(--ink-3);font-family:ui-monospace,Menlo,monospace}
+  .fig.strat{border-color:var(--accent);background:var(--accent-soft)}
+  .fig.strat .num{color:var(--accent)}
+  .fig.bench .num{color:var(--bench)}
+  .spread{display:flex;align-items:baseline;gap:10px;flex-wrap:wrap;
+          padding-top:2px}
+  .spread .big{font-family:ui-monospace,Menlo,monospace;font-size:19px;font-weight:700;
+               color:var(--hold);font-variant-numeric:tabular-nums}
+
+  /* ---- tables ---- */
+  .scroll{overflow-x:auto;margin:0 -4px;padding:0 4px}
+  table{width:100%;border-collapse:collapse;font-size:14px}
+  th{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:10.5px;
+     letter-spacing:.1em;text-transform:uppercase;color:var(--ink-3);font-weight:600;
+     text-align:right;padding:0 9px 8px;border-bottom:1px solid var(--rule);white-space:nowrap}
+  th:first-child{text-align:left;padding-left:2px}
+  td{padding:9px;text-align:right;border-bottom:1px solid var(--rule-2);
+     font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-variant-numeric:tabular-nums;
+     white-space:nowrap}
+  td:first-child{text-align:left;padding-left:2px}
+  tr:last-child td{border-bottom:none}
+  tbody tr.total td{border-top:1px solid var(--rule);font-weight:700;padding-top:11px}
+  .tk{font-weight:700;letter-spacing:.01em}
+  .role{font-family:system-ui,sans-serif;color:var(--ink-3);font-size:12.5px;
+        font-weight:400;letter-spacing:0}
+  .buy{color:var(--hold)} .sell{color:var(--neg)} .flat{color:var(--ink-3)}
+  .pill{display:inline-block;padding:1.5px 8px;border-radius:999px;font-size:11px;
+        font-weight:700;letter-spacing:.06em}
+  .pill.hold{background:var(--hold-soft);color:var(--hold)}
+  .pill.cash{background:var(--cash-soft);color:var(--cash)}
+
+  /* ---- gate strip: distance from the 10-month trend gate ---- */
+  .gate{width:132px;height:9px;position:relative;background:var(--rule-2);
+        border-radius:2px;display:inline-block;vertical-align:middle}
+  .gate::after{content:"";position:absolute;left:50%;top:-3px;bottom:-3px;width:1px;
+        background:var(--ink-3);opacity:.55}
+  .gate i{position:absolute;top:0;bottom:0;border-radius:2px;display:block}
+  .gate i.up{background:var(--hold)}
+  .gate i.dn{background:var(--cash)}
+
+  /* ---- evidence rows ---- */
+  .rows{display:flex;flex-direction:column;gap:0}
+  .row{display:flex;justify-content:space-between;align-items:baseline;gap:16px;
+       padding:9px 0;border-bottom:1px solid var(--rule-2)}
+  .row:last-child{border-bottom:none}
+  .row .k{font-size:14px;color:var(--ink-2)}
+  .row .v{font-family:ui-monospace,Menlo,monospace;font-size:14px;font-weight:650;
+          white-space:nowrap;font-variant-numeric:tabular-nums}
+  ul{margin:0;padding-left:19px;display:flex;flex-direction:column;gap:7px}
+  li{color:var(--ink-2);font-size:14.5px}
+  li::marker{color:var(--ink-3)}
+
+  .steps{display:flex;flex-direction:column;gap:10px}
+  .step{display:grid;grid-template-columns:auto 1fr;gap:12px;align-items:baseline}
+  .step .n{font-family:ui-monospace,Menlo,monospace;font-size:12px;font-weight:700;
+     color:var(--accent);border:1px solid var(--rule);border-radius:6px;
+     padding:2px 7px;min-width:26px;text-align:center}
+
+  footer{color:var(--ink-3);font-size:12.5px;text-align:center;padding-top:6px;
+         font-family:ui-monospace,Menlo,monospace}
+
+  @media (max-width:560px){
+    body{padding:22px 14px 52px}
+    .card{padding:17px 15px;border-radius:11px}
+    .duo{grid-template-columns:1fr}
+    .gate{width:72px}
+    /* the dollar columns are the point of this page on a phone: buy back their
+       width by dropping the prose descriptions and the SMA (the % says it) */
+    .role{display:none}
+    td,th{padding-left:6px;padding-right:6px;font-size:13px}
+    #tbl-gate th:nth-child(3),#tbl-gate td:nth-child(3){display:none}
+  }
+  @media (prefers-reduced-motion:no-preference){
+    .card,.mast{animation:rise .5s cubic-bezier(.2,.7,.3,1) backwards}
+    .mast{animation-delay:.02s}
+    .card:nth-of-type(1){animation-delay:.06s}
+    .card:nth-of-type(2){animation-delay:.1s}
+    .card:nth-of-type(3){animation-delay:.14s}
+    @keyframes rise{from{opacity:0;transform:translateY(7px)}to{opacity:1;transform:none}}
+  }
+</style>
+
+<div class="wrap">
+
+  <header class="mast">
+    <div class="eyebrow">Multi-asset trend + risk parity &middot; V0 live spec</div>
+    <h1>RP+Trend — status as of 2&nbsp;August&nbsp;2026</h1>
+    <p class="dek">The live version of the strategy: month&nbsp;1 of the out-of-sample
+      forward test is complete, and the August book is set. Signals confirmed at the
+      31&nbsp;July month close.</p>
+    <span class="livechip"><span class="dot"></span>LIVE &middot; MONTH 1 OF 6 LOGGED</span>
+  </header>
+
+  <!-- ============ MONTH 1 RESULT ============ -->
+  <section class="card">
+    <h2>Month 1 — 6 Jul → 31 Jul 2026</h2>
+    <div class="duo">
+      <div class="fig strat">
+        <span class="lab">Strategy</span>
+        <span class="num">+0.28%</span>
+        <span class="sub">$1,277,325 → $1,280,882</span>
+      </div>
+      <div class="fig bench">
+        <span class="lab">SPY buy &amp; hold</span>
+        <span class="num">−0.57%</span>
+        <span class="sub">751.28 → 747.03</span>
+      </div>
+    </div>
+    <div class="spread">
+      <span class="big">+0.84 pts</span>
+      <p>ahead of the market in the first live month — earned the way the model says it
+        should be: <strong>up while the market was down</strong>, with 53% of the book
+        sitting in T-bills.</p>
+    </div>
+    <p class="tight">One month is not evidence of anything. It is one row in a log that
+      only becomes meaningful at 12+. Recorded here because a pre-committed rule followed
+      honestly — including the months it loses — is the point of the exercise.</p>
+  </section>
+
+  <!-- ============ THE ORDER TICKET ============ -->
+  <section class="card loud">
+    <h2>August book — what to hold now</h2>
+    <h3>No trend flips this month. TLT, IEF and GLD stay in cash; the five on-trend
+      sleeves get a small tune-up.</h3>
+    <div class="scroll">
+      <table>
+        <thead>
+          <tr><th>Ticker</th><th>Trend</th><th>Weight</th><th>Target&nbsp;$</th><th>Adjust&nbsp;by</th></tr>
+        </thead>
+        <tbody>
+          <tr><td><span class="tk">SPY</span> <span class="role">US equity</span></td>
+              <td><span class="pill hold">HOLD</span></td><td>11.1%</td><td>141,617</td>
+              <td class="buy">+8,700</td></tr>
+          <tr><td><span class="tk">EFA</span> <span class="role">Intl developed</span></td>
+              <td><span class="pill hold">HOLD</span></td><td>12.1%</td><td>154,635</td>
+              <td class="buy">+8,700</td></tr>
+          <tr><td><span class="tk">EEM</span> <span class="role">Emerging mkts</span></td>
+              <td><span class="pill hold">HOLD</span></td><td>6.7%</td><td>86,453</td>
+              <td class="buy">+4,000</td></tr>
+          <tr><td><span class="tk">DBC</span> <span class="role">Commodities</span></td>
+              <td><span class="pill hold">HOLD</span></td><td>6.1%</td><td>78,130</td>
+              <td class="sell">−7,100</td></tr>
+          <tr><td><span class="tk">VNQ</span> <span class="role">US REITs</span></td>
+              <td><span class="pill hold">HOLD</span></td><td>10.7%</td><td>137,540</td>
+              <td class="buy">+13,000</td></tr>
+          <tr><td><span class="tk">TLT</span> <span class="role">20+yr Treasuries</span></td>
+              <td><span class="pill cash">CASH</span></td><td>0%</td><td class="flat">—</td>
+              <td class="flat">no position</td></tr>
+          <tr><td><span class="tk">IEF</span> <span class="role">7–10yr Treasuries</span></td>
+              <td><span class="pill cash">CASH</span></td><td>0%</td><td class="flat">—</td>
+              <td class="flat">no position</td></tr>
+          <tr><td><span class="tk">GLD</span> <span class="role">Gold</span></td>
+              <td><span class="pill cash">CASH</span></td><td>0%</td><td class="flat">—</td>
+              <td class="flat">no position</td></tr>
+          <tr><td><span class="tk">SGOV</span> <span class="role">cash sleeve, 0–3mo T-bills</span></td>
+              <td><span class="pill cash">CASH</span></td><td>53.3%</td><td>682,507</td>
+              <td class="sell">−23,500</td></tr>
+          <tr class="total"><td>Total</td><td></td><td>100%</td><td>1,280,882</td><td></td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="tight">Weights are inverse-12-month-volatility, normalised across all eight
+      assets, computed from the 31&nbsp;July closes. Set each position to its target dollar
+      value using IBKR cash-quantity orders; the “adjust by” column is approximate — your
+      live position values are authoritative. Off-trend sleeves go to <em>cash</em>, never
+      redistributed to the survivors.</p>
+  </section>
+
+  <!-- ============ THE GATE ============ -->
+  <section class="card">
+    <h2>The trend gate — 31 July closes</h2>
+    <p>Each sleeve is in only while its monthly close sits above its own 10-month average.
+      Distance from that gate is the entire decision:</p>
+    <div class="scroll">
+      <table id="tbl-gate">
+        <thead>
+          <tr><th>Ticker</th><th>Close</th><th>10m&nbsp;SMA</th><th>vs&nbsp;gate</th><th style="text-align:center">Position of price</th></tr>
+        </thead>
+        <tbody>
+          <tr><td><span class="tk">DBC</span></td><td>29.45</td><td>26.20</td>
+            <td style="color:var(--hold)">+12.4%</td>
+            <td style="text-align:center"><span class="gate"><i class="up" style="left:50%;width:41.3%"></i></span></td></tr>
+          <tr><td><span class="tk">VNQ</span></td><td>98.95</td><td>91.88</td>
+            <td style="color:var(--hold)">+7.7%</td>
+            <td style="text-align:center"><span class="gate"><i class="up" style="left:50%;width:25.6%"></i></span></td></tr>
+          <tr><td><span class="tk">EFA</span></td><td>105.58</td><td>98.98</td>
+            <td style="color:var(--hold)">+6.7%</td>
+            <td style="text-align:center"><span class="gate"><i class="up" style="left:50%;width:22.2%"></i></span></td></tr>
+          <tr><td><span class="tk">SPY</span></td><td>747.03</td><td>701.70</td>
+            <td style="color:var(--hold)">+6.5%</td>
+            <td style="text-align:center"><span class="gate"><i class="up" style="left:50%;width:21.5%"></i></span></td></tr>
+          <tr><td><span class="tk">EEM</span></td><td>64.09</td><td>60.39</td>
+            <td style="color:var(--hold)">+6.1%</td>
+            <td style="text-align:center"><span class="gate"><i class="up" style="left:50%;width:20.4%"></i></span></td></tr>
+          <tr><td><span class="tk">IEF</span></td><td>92.95</td><td>94.34</td>
+            <td style="color:var(--cash)">−1.5%</td>
+            <td style="text-align:center"><span class="gate"><i class="dn" style="left:45.1%;width:4.9%"></i></span></td></tr>
+          <tr><td><span class="tk">TLT</span></td><td>82.25</td><td>85.79</td>
+            <td style="color:var(--cash)">−4.1%</td>
+            <td style="text-align:center"><span class="gate"><i class="dn" style="left:36.2%;width:13.8%"></i></span></td></tr>
+          <tr><td><span class="tk">GLD</span></td><td>371.54</td><td>409.20</td>
+            <td style="color:var(--cash)">−9.2%</td>
+            <td style="text-align:center"><span class="gate"><i class="dn" style="left:19.3%;width:30.7%"></i></span></td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="tight">Centre tick = the gate. Bars are scaled to ±15%. Gold is the notable
+      one: it ran hard, then rolled over 9% below its own trend — so the rule holds it in
+      cash regardless of the story around it. That indifference is the feature.</p>
+  </section>
+
+  <!-- ============ THE RULE ============ -->
+  <section class="card">
+    <h2>The rule, in full</h2>
+    <div class="steps">
+      <div class="step"><span class="n">1</span>
+        <p>At each <strong>month-end close</strong>, take the eight asset-class ETFs and
+          keep only those trading above their own 10-month simple moving average.</p></div>
+      <div class="step"><span class="n">2</span>
+        <p>Size every position at <strong>1/(trailing 12-month volatility)</strong>,
+          normalised across <em>all eight</em> assets — so a sleeve that fails the trend
+          test releases its weight to cash rather than to its neighbours.</p></div>
+      <div class="step"><span class="n">3</span>
+        <p>Park the remainder in <strong>T-bills</strong> (SGOV in the live account), and
+          hold everything unchanged for the following month.</p></div>
+      <div class="step"><span class="n">4</span>
+        <p>Repeat. No discretion, no intra-month decisions, no exceptions — that is what
+          makes the forward test worth anything.</p></div>
+    </div>
+    <p class="tight">Costs modelled at 10bps per side on turnover. Execution timing is not
+      delicate: the backtest survives rebalancing up to 21 sessions late.</p>
+  </section>
+
+  <!-- ============ EVIDENCE ============ -->
+  <section class="card">
+    <h2>What the history says</h2>
+    <p>Five funds, 1987–2024 (451 months), net of costs — the long-history instrument set
+      that the eight-ETF version cross-confirms:</p>
+    <div class="rows">
+      <div class="row"><span class="k">Sharpe ratio</span><span class="v">1.16</span></div>
+      <div class="row"><span class="k">CAPM alpha vs the market</span><span class="v">+1.80%/yr &nbsp;(t&nbsp;=&nbsp;2.30)</span></div>
+      <div class="row"><span class="k">Spanning alpha vs its own five assets</span><span class="v">+1.40% &nbsp;(p&nbsp;=&nbsp;0.058)</span></div>
+      <div class="row"><span class="k">Extended to 1980, incl. Volcker era</span><span class="v">+2.3%/yr &nbsp;(t&nbsp;=&nbsp;3.08)</span></div>
+      <div class="row"><span class="k">Rolling 5-year windows with positive alpha</span><span class="v">84%</span></div>
+      <div class="row"><span class="k">Beta to equities</span><span class="v">0.14–0.24</span></div>
+      <div class="row"><span class="k">Max drawdown, 8-ETF era (daily-sampled)</span><span class="v">−7.2%</span></div>
+      <div class="row"><span class="k">…the same window for SPY</span><span class="v" style="color:var(--bench)">−50.8%</span></div>
+    </div>
+    <p class="tight">The alpha is <strong>stronger in the second half than the first</strong>,
+      which is the opposite of what a decayed, over-published anomaly looks like. Thirteen
+      cumulative hypotheses were tested across this project and the Sharpe is deflated
+      accordingly; seven of nine studies were reported as nulls.</p>
+  </section>
+
+  <!-- ============ CALIBRATION ============ -->
+  <section class="card">
+    <h2>What normal looks like</h2>
+    <p>Pre-stated from 214 backtest months, so live red days get judged against
+      expectations instead of nerves:</p>
+    <div class="rows">
+      <div class="row"><span class="k">Share of days that are red</span><span class="v">44%</span></div>
+      <div class="row"><span class="k">A typical red day</span><span class="v">−0.28%</span></div>
+      <div class="row"><span class="k">Share of months that are red</span><span class="v">38%</span></div>
+      <div class="row"><span class="k">Average red month / worst ever</span><span class="v">−1.1% / −3.45%</span></div>
+      <div class="row"><span class="k">Longest run of red months</span><span class="v">6</span></div>
+      <div class="row"><span class="k">Of SPY's fall captured on down days</span><span class="v">18%</span></div>
+    </div>
+    <p class="tight">None of these are stop conditions. The rule speaks once a month.</p>
+  </section>
+
+  <!-- ============ LIMITS ============ -->
+  <section class="card">
+    <h2>What would break it — and what it isn't</h2>
+    <ul>
+      <li><strong>It does not beat SPY in dollars.</strong> Over the 8-ETF era $100k became
+        $222k here versus $587k in the index. The case is risk-adjusted return and crash
+        resistance, not wealth maximisation.</li>
+      <li><strong>It is behaviourally brutal.</strong> It lags buy-and-hold in 69% of rolling
+        three-year windows, once for thirteen straight years. That discomfort is most likely
+        <em>why</em> the premium survives publication.</li>
+      <li><strong>Two-thirds of its retreats to cash are false alarms</strong>, costing about
+        4.5 points each. The edge lives in the third that catch real bears.</li>
+      <li><strong>Fast crashes and V-shaped recoveries are its blind spots</strong> — monthly
+        signals cannot dodge a one-week collapse, and it re-enters late (2020).</li>
+      <li><strong>The honest counter-hypothesis:</strong> part of the 1982–2021 premium may
+        simply have been a forty-year bond bull market. The 2017–24 decade alpha was
+        roughly flat.</li>
+      <li><strong>Levering it is not free money.</strong> At 2.5× with financing at T-bill
+        +100bps, CAGR reaches ~7.5% but Sharpe <em>falls</em> from 0.86 to 0.61 and drawdown
+        triples. Matching SPY's dollars would take ~4.4× and a −39% drawdown.</li>
+    </ul>
+  </section>
+
+  <!-- ============ CADENCE ============ -->
+  <section class="card">
+    <h2>Operating cadence</h2>
+    <div class="steps">
+      <div class="step"><span class="n">1×</span>
+        <p><strong>Month-end.</strong> Read the TradingView dashboard, set each position to
+          target, log one row (date, NAV, SPY close) and regenerate the tracker.</p></div>
+      <div class="step"><span class="n">0×</span>
+        <p><strong>Everything in between.</strong> Nothing. Mid-month prices are not an
+          input to the rule, and acting on them converts a clean experiment into
+          discretionary trading.</p></div>
+    </div>
+    <p class="tight">Next decision point: month-end August 2026. Six logged months is the
+      threshold at which the forward record starts carrying real weight — and the point at
+      which parked research candidates may be revisited.</p>
+  </section>
+
+  <footer>V0 live · V2 ensemble certified, opt-in · pre-registered 2026 · paper account DU5881331</footer>
+</div>

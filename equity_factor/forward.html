@@ -40,7 +40,7 @@ historical run was 6 red months in a row. On days SPY falls, the strategy captur
 ~18% of the drop on average — so "down, but much less than SPY" is the strategy working,
 not failing. None of these are stop conditions; the rule only acts at month-end.</div></div>
 <script>
-const D=[{"date": "2026-07-06", "nav": 1277324.57, "spy": 751.56, "note": "inception - 6 fills per dashboard (44.5% invested / 55.5% SGOV)"}],S={"n": 1, "strat_ret": 0.0, "spy_ret": 0.0, "dd": 0.0};
+const D=[{"date": "2026-07-06", "nav": 1277324.57, "spy": 751.28, "note": "inception - 6 fills per dashboard (44.5% invested / 55.5% SGOV)"}, {"date": "2026-07-31", "nav": 1280882.0, "spy": 747.03, "note": "month 1 - no trend flips; TLT/IEF/GLD still CASH. SPY closes are dividend-adjusted (Yahoo) for both rows so the benchmark is one consistent source."}],S={"n": 2, "strat_ret": 0.0027850634705945954, "spy_ret": -0.005657012032797337, "dd": 0.0};
 const css=v=>getComputedStyle(document.documentElement).getPropertyValue(v).trim();
 const pct=(x,d=1)=>(x>=0?'+':'')+(100*x).toFixed(d)+'%';
 const t=[['Months logged',S.n,''],['Strategy',pct(S.strat_ret),S.strat_ret],
