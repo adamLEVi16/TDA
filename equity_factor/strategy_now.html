@@ -218,6 +218,35 @@
       honestly — including the months it loses — is the point of the exercise.</p>
   </section>
 
+  <!-- ============ MONTH 1 RISK READ ============ -->
+  <section class="card">
+    <h2>Month 1 — beta, and what one month can and cannot prove</h2>
+    <p>Beta <em>is</em> measurable this early, because it can be read from daily moves and
+      from the holdings themselves. Two independent estimates, and they agree:</p>
+    <div class="rows">
+      <div class="row"><span class="k">Realised beta, 19 daily observations in July</span><span class="v">0.25</span></div>
+      <div class="row"><span class="k">Ex-ante beta of the book (weights × sleeve betas)</span><span class="v">0.27</span></div>
+      <div class="row"><span class="k">Backtest expectation, 1987–2024</span><span class="v">0.14–0.24</span></div>
+      <div class="row"><span class="k">Daily volatility vs SPY</span><span class="v">0.24% vs 0.80%</span></div>
+      <div class="row"><span class="k">Correlation with SPY, daily</span><span class="v">0.83</span></div>
+    </div>
+    <p>The live book carries roughly <strong>a quarter of the market's directional risk</strong>
+      and a third of its daily volatility — which is what the model said it would do before any
+      money moved. That is the first real out-of-sample confirmation of anything here.</p>
+    <p><strong>Alpha, however, is not measurable yet — and no broker screen will change that.</strong>
+      Alpha is the intercept of a regression; a regression needs a cloud of points to fit a line
+      through. One month is one point. The month's arithmetic reads: beta 0.27 × SPY's −0.57%
+      predicts −0.15%, the book delivered +0.28%, so the residual is <span class="mono">+0.43%</span>.
+      Encouraging sign, correct direction, <em>zero</em> statistical weight — the daily residual's
+      t-statistic is 1.01, comfortably inside noise. Roughly 24–36 months is where that number
+      starts to mean something.</p>
+    <p class="tight">Reconstructed from the exact share counts of the 6 July fills; the
+      reconstruction lands about $2,200 above the broker's reported value, which is the SGOV
+      monthly dividend accruing in adjusted prices before it is paid into the account. Real
+      return either way — so <span class="mono">+0.28%</span> is, if anything, a slight
+      understatement.</p>
+  </section>
+
   <!-- ============ READING THE BROKER SCREEN ============ -->
   <section class="card">
     <h2>Why the broker's number differs</h2>
