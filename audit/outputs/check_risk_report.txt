@@ -1,0 +1,21 @@
+[1/5] Downloading 19 tickers from Yahoo Finance …
+    Downloaded 1509 trading days, 18 sector tickers, 1509 SPY days.
+
+== 1. Fiedler value vs. market state (Spearman)
+Financials  rho(Fiedler, avg corr)=+0.81  rho(Fiedler, SPY vol)=+0.29  SPY vol on 'stressed' (low-Fiedler) days 13.2% vs other days 17.6%
+Energy      rho(Fiedler, avg corr)=+0.89  rho(Fiedler, SPY vol)=+0.27  SPY vol on 'stressed' (low-Fiedler) days 12.2% vs other days 19.9%
+Technology  rho(Fiedler, avg corr)=+0.85  rho(Fiedler, SPY vol)=+0.55  SPY vol on 'stressed' (low-Fiedler) days 12.0% vs other days 18.3%
+
+== 2. Strategy D, 2022-2024
+as coded                                       Sharpe -0.77
+regime label flipped                           Sharpe +0.41
+no regime (always short the high-beta spread)  Sharpe +0.22
+(post-hoc variants: shown to test the label, not as a strategy; none is significant over 3 years)
+
+== 3. FF5+UMD alpha, 2022-2024 (mean RF 3.79%/yr)
+    gross SR  net SR   net alpha, as coded (y - RF)  net alpha, no RF        gross alpha, no RF
+A      -0.57   -2.57   -35.0% (t=-5.13)              -31.2% (t=-4.56)        -7.2% (t=-1.05)
+B      -0.01   -2.42   -31.5% (t=-5.23)              -27.7% (t=-4.60)        -0.9% (t=-0.15)
+C      -0.38   -2.75   -42.2% (t=-5.66)              -38.4% (t=-5.14)        -5.7% (t=-0.75)
+D      -0.67   -0.77   -14.0% (t=-1.87)              -10.2% (t=-1.37)        -8.9% (t=-1.21)
+exit 0

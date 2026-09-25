@@ -1,0 +1,38 @@
+data 2019-01-03..2024-12-09: 1494 days x 20 stocks
+
+== Walk-forward folds (notebook reported fold Sharpes -0.42 and -1.24, combined -0.56)
+fold 1 2022-03-30..2023-03-30: topology flags 0.0% of days, realised-vol flags 51.2% | net SR -0.42, gross SR +0.81, CAGR -15.24%, avg daily cost 0.1433%
+fold 2 2023-03-31..2024-04-02: topology flags 59.9% of days, realised-vol flags 0.0% | net SR -1.24, gross SR +0.26, CAGR -11.82%, avg daily cost 0.0582%
+
+== Combined out-of-sample, 5 bp costs, identical dates for every row
+                                             strategy  gross SR  net SR     SE         95% CI      p  net CAGR  max DD  turnover/day  cost drag/yr
+ORIGINAL: long +resid / short -resid, topology filter    +0.601  -0.558 +0.760 [-2.05, +0.93] +0.430    -0.135  -0.347        +2.015        +0.254
+                               same signal, no filter    +0.937  -0.597 +0.767 [-2.10, +0.91] +0.399    -0.154  -0.379        +2.865        +0.361
+same signal, realised-vol filter (SPY 20d, train q75)    +0.857  -0.585 +0.765 [-2.08, +0.91] +0.409    -0.119  -0.310        +2.151        +0.271
+   direction flipped (true reversal), topology filter    -0.601  -1.759 +1.129 [-3.97, +0.45] +0.013    -0.335  -0.618        +2.015        +0.254
+         direction flipped (true reversal), no filter    -0.937  -2.474 +1.425 [-5.27, +0.32] +0.001    -0.455  -0.742        +2.865        +0.361
+
+== Graph at tau=0.3 is connected on 75.1% of days (paper v12 says '>95%')
+
+== What the topology filter selects (Phase-3 rule, full-sample 75th percentile)
+                  SPY vol 20d  SPY vol next 20d  avg corr
+flagged unstable                                         
+False                   0.180             0.179     0.354
+True                    0.128             0.133     0.240
+share of days flagged, by year: {2019: 0.25, 2020: 0.01, 2021: 0.3, 2022: 0.15, 2023: 0.27, 2024: 0.5}
+COVID crash 2020-02-15..2020-04-30: 0 of 52 days flagged unstable
+
+== Spearman correlations: the H1 statistics mostly track (inverse) average correlation
+                h1_loops  h1_persistence  topo_vol  avg_corr  spy_vol20  fwd_vol20
+h1_loops            1.00            0.85      0.50     -0.64      -0.46      -0.35
+h1_persistence      0.85            1.00      0.48     -0.70      -0.46      -0.36
+topo_vol            0.50            0.48      1.00     -0.49      -0.32      -0.23
+avg_corr           -0.64           -0.70     -0.49      1.00       0.64       0.42
+spy_vol20          -0.46           -0.46     -0.32      0.64       1.00       0.52
+fwd_vol20          -0.35           -0.36     -0.23      0.42       0.52       1.00
+
+== Does topo_vol help forecast next-20d SPY vol once trailing vol is known? (non-overlapping, HC1)
+log fwd vol ~ log trailing vol              R2=0.339  t(spy_vol20)=+6.41
+log fwd vol ~ log trailing vol + topo_vol   R2=0.341  t(spy_vol20)=+5.90  t(topo_vol)=-0.57
+log fwd vol ~ log trailing vol + avg_corr   R2=0.343  t(spy_vol20)=+3.47  t(avg_corr)=+0.69
+exit 0
