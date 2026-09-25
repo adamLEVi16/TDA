@@ -1,0 +1,26 @@
+Regulatory fact checks (WebFetch/WebSearch, 2026-09-25). V = verified on regulator page; U = not verified at regulator level.
+V  PDT rule replaced: FINRA Regulatory Notice 26-10 (https://www.finra.org/rules-guidance/notices/26-10): SEC approved 2026-04-14;
+   effective 2026-06-04; "replace in their entirety ... the day trade count requirements for designating a customer as a
+   'pattern day trader' and the $25,000 pattern day trader minimum equity requirement"; firms may phase in until 2027-10-20.
+   Also Federal Register 2026-07485 (2026-04-17). NOTE: until a broker implements, the old PDT (4+ day trades in 5 business days,
+   $25k) may still be applied by that broker.
+V  Margin: Reg T lets brokers lend up to 50% of purchase price; maintenance equity >= 25%; minimum equity $2,000
+   (FINRA margin pages https://www.finra.org/investors/investing/investment-accounts/brokerage-accounts/margin-accounts,
+   https://www.finra.org/rules-guidance/rulebooks/finra-rules/4210; FINRA day-trading page mentions $2,000 minimum margin equity).
+V  Options approval: FINRA Rule 2360(b)(16) (https://www.finra.org/rules-guidance/rulebooks/finra-rules/2360): due diligence on
+   customer finances/objectives/age/experience; written approval by a principal; firms need specific written criteria and minimum
+   equity for uncovered short options. The "levels" 1-4/5 are broker practice, not rule text (U for the level numbering).
+V  Leveraged/inverse ETPs: FINRA Regulatory Notice 09-31 (https://www.finra.org/rules-guidance/notices/09-31): daily-reset funds
+   "typically are unsuitable for retail investors who plan to hold them for longer than one trading session".
+V  Custodial UGMA/UTMA: FINRA (https://www.finra.org/investors/insights/investing-children): an adult invests on behalf of the minor;
+   assets transfer at the state age of majority; funds for the minor's benefit.
+U  Custodial accounts generally cash-only (no margin, no short sales, limited options): seen only on broker/secondary pages
+   (Fidelity, IBKR, M1), not in regulator text. Broker policy, varies.
+U  Minors cannot open a brokerage account in their own name (contract capacity): not verified on a regulator page.
+V  Taxes: IRS Topic 409 (https://www.irs.gov/taxtopics/tc409): held one year or less = short-term; "Net short-term capital gains are
+   subject to taxation as ordinary income at graduated tax rates"; net capital loss deduction limited to $3,000/yr.
+V  Kiddie tax: IRS Topic 553 (https://www.irs.gov/taxtopics/tc553): child's unearned income above $2,700 (2025 tax year) may be taxed
+   at parent's rate; applies to under-18s, 18s without earned income >1/2 support, full-time students 19-23.
+U  Section 1256 60/40 treatment of broad-based index options (SPX, VIX options): IRS Pub 550 lists "nonequity options" as section 1256
+   contracts, but the 60/40 sentence was not retrieved in my fetch -> treated as UNVERIFIED.
+U  Wash-sale 30-day rule: not retrieved verbatim from IRS in this session -> UNVERIFIED here.

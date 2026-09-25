@@ -1,0 +1,131 @@
+frozen params: {'k': 5, 'corr_window': 252, 'min_obs': 240, 'alpha': 0.5, 'T': 3, 'quantile': 0.2, 'etf_top_n': 5, 'cost_industry': 0.001, 'cost_etf': 0.0003, 'cost_spy': 0.0002, 'selection_rule': 'argmax_k mean(net Sharpe NET1 L/S, net Sharpe NET12 L/S), design 1927-07..1989-12', 'score': {'3': 0.050911422403518654, '5': 0.13019245771473037, '10': 0.09765380447607817}}
+
+=== L/S quintile portfolios, 10 bp one-way, self-financing (no RF) ===
+L/S OWN1                           1990-01..2024-12 n= 420 | gross +3.93% SR +0.29 t=+1.78 | net +0.21% [-4.2%,+4.6%] SR +0.02 [-0.31,+0.33] t=+0.10 vol 13.6% | TO 3.10/mo BE    11bp MDD -61%
+     sub 1990-2007                    1990-01..2007-12 n= 216 | gross +4.35% SR +0.33 t=+1.57 | net +0.67% [-4.8%,+6.2%] SR +0.05 [+nan,+nan] t=+0.24 vol 13.3% | TO 3.07/mo BE    12bp MDD -57%
+     sub 2008-2024                    2008-01..2024-12 n= 204 | gross +3.49% SR +0.25 t=+0.99 | net -0.27% [-7.3%,+6.7%] SR -0.02 [+nan,+nan] t=-0.08 vol 14.0% | TO 3.14/mo BE     9bp MDD -53%
+L/S OWN12                          1990-01..2024-12 n= 420 | gross +6.40% SR +0.39 t=+2.22 | net +5.21% [-0.5%,+10.9%] SR +0.31 [-0.02,+0.69] t=+1.80 vol 16.6% | TO 0.99/mo BE    54bp MDD -56%
+     sub 1990-2007                    1990-01..2007-12 n= 216 | gross +9.59% SR +0.60 t=+2.56 | net +8.41% [+1.1%,+15.8%] SR +0.53 [+nan,+nan] t=+2.24 vol 16.0% | TO 0.97/mo BE    82bp MDD -39%
+     sub 2008-2024                    2008-01..2024-12 n= 204 | gross +3.02% SR +0.18 t=+0.70 | net +1.81% [-6.7%,+10.3%] SR +0.11 [+nan,+nan] t=+0.42 vol 17.2% | TO 1.01/mo BE    25bp MDD -56%
+L/S NET1(k=5)                      1990-01..2024-12 n= 420 | gross +2.61% SR +0.18 t=+1.18 | net -1.05% [-5.4%,+3.3%] SR -0.07 [-0.36,+0.20] t=-0.47 vol 14.8% | TO 3.05/mo BE     7bp MDD -67%
+     sub 1990-2007                    1990-01..2007-12 n= 216 | gross +4.52% SR +0.31 t=+1.57 | net +0.92% [-4.8%,+6.6%] SR +0.06 [+nan,+nan] t=+0.32 vol 14.8% | TO 3.00/mo BE    13bp MDD -37%
+     sub 2008-2024                    2008-01..2024-12 n= 204 | gross +0.59% SR +0.04 t=+0.18 | net -3.13% [-9.7%,+3.5%] SR -0.21 [+nan,+nan] t=-0.93 vol 14.8% | TO 3.10/mo BE     2bp MDD -67%
+L/S NET12(k=5)                     1990-01..2024-12 n= 420 | gross +4.48% SR +0.28 t=+1.60 | net +2.96% [-2.6%,+8.5%] SR +0.18 [-0.13,+0.52] t=+1.05 vol 16.1% | TO 1.26/mo BE    30bp MDD -51%
+     sub 1990-2007                    1990-01..2007-12 n= 216 | gross +5.00% SR +0.30 t=+1.16 | net +3.42% [-5.1%,+11.9%] SR +0.20 [+nan,+nan] t=+0.79 vol 16.9% | TO 1.32/mo BE    32bp MDD -51%
+     sub 2008-2024                    2008-01..2024-12 n= 204 | gross +3.92% SR +0.26 t=+1.13 | net +2.48% [-4.3%,+9.3%] SR +0.16 [+nan,+nan] t=+0.71 vol 15.3% | TO 1.21/mo BE    27bp MDD -45%
+L/S LAPGAP1(k=5)                   1990-01..2024-12 n= 420 | gross -1.77% SR -0.17 t=-1.05 | net -5.51% [-8.8%,-2.2%] SR -0.53 [-0.86,-0.22] t=-3.29 vol 10.4% | TO 3.12/mo BE    -5bp MDD -89%
+     sub 1990-2007                    1990-01..2007-12 n= 216 | gross -3.47% SR -0.32 t=-1.48 | net -7.17% [-11.7%,-2.6%] SR -0.67 [+nan,+nan] t=-3.09 vol 10.7% | TO 3.09/mo BE    -9bp MDD -75%
+     sub 2008-2024                    2008-01..2024-12 n= 204 | gross +0.02% SR +0.00 t=+0.01 | net -3.75% [-8.7%,+1.2%] SR -0.37 [+nan,+nan] t=-1.47 vol 10.1% | TO 3.15/mo BE     0bp MDD -64%
+L/S NET1_PURE(k=5)                 1990-01..2024-12 n= 420 | gross +1.71% SR +0.17 t=+1.03 | net -2.00% [-5.3%,+1.3%] SR -0.20 [-0.52,+0.10] t=-1.19 vol 10.1% | TO 3.10/mo BE     5bp MDD -70%
+     sub 1990-2007                    1990-01..2007-12 n= 216 | gross +2.44% SR +0.25 t=+1.11 | net -1.23% [-5.6%,+3.1%] SR -0.13 [+nan,+nan] t=-0.56 vol 9.7% | TO 3.06/mo BE     7bp MDD -38%
+     sub 2008-2024                    2008-01..2024-12 n= 204 | gross +0.94% SR +0.09 t=+0.37 | net -2.82% [-7.8%,+2.2%] SR -0.27 [+nan,+nan] t=-1.10 vol 10.5% | TO 3.13/mo BE     3bp MDD -60%
+missing held returns (earn 0): {'OWN1': 0, 'OWN12': 0, 'NET1(k=5)': 0, 'NET12(k=5)': 0, 'LAPGAP1(k=5)': 0, 'NET1_PURE(k=5)': 0}
+
+=== Long-only top quintile vs EW all industries (excess of RF), 10 bp ===
+EW all industries                  1990-01..2024-12 n= 420 | gross +9.09% SR +0.56 t=+3.41 | net +9.05% [+3.8%,+14.3%] SR +0.56 [+0.22,+0.92] t=+3.40 vol 16.1% | TO 0.03/mo BE  2247bp MDD -53%
+Market (FF Mkt-RF, no cost)        ann excess +8.75% SR +0.57
+LO OWN1                            1990-01..2024-12 n= 420 | gross +10.22% SR +0.63 t=+3.74 | net +8.37% [+3.0%,+13.7%] SR +0.51 [+0.19,+0.86] t=+3.06 vol 16.3% | TO 1.54/mo BE    55bp MDD -49%
+LO OWN12                           1990-01..2024-12 n= 420 | gross +12.74% SR +0.72 t=+4.43 | net +12.16% [+6.5%,+17.8%] SR +0.69 [+0.34,+1.06] t=+4.23 vol 17.6% | TO 0.48/mo BE   222bp MDD -53%
+LO NET1(k=5)                       1990-01..2024-12 n= 420 | gross +8.64% SR +0.51 t=+3.26 | net +6.80% [+1.6%,+12.0%] SR +0.40 [+0.10,+0.73] t=+2.57 vol 16.8% | TO 1.53/mo BE    47bp MDD -52%
+LO NET12(k=5)                      1990-01..2024-12 n= 420 | gross +10.26% SR +0.60 t=+3.39 | net +9.54% [+3.6%,+15.5%] SR +0.55 [+0.20,+0.94] t=+3.15 vol 17.2% | TO 0.61/mo BE   141bp MDD -55%
+LO LAPGAP1(k=5)                    1990-01..2024-12 n= 420 | gross +7.71% SR +0.40 t=+2.52 | net +5.84% [-0.2%,+11.8%] SR +0.30 [-0.02,+0.63] t=+1.91 vol 19.4% | TO 1.56/mo BE    41bp MDD -61%
+LO NET1_PURE(k=5)                  1990-01..2024-12 n= 420 | gross +8.95% SR +0.54 t=+3.24 | net +7.10% [+1.7%,+12.5%] SR +0.43 [+0.09,+0.78] t=+2.57 vol 16.5% | TO 1.54/mo BE    48bp MDD -53%
+
+Sharpe differences (net, excess of RF), paired stationary bootstrap:
+  LO NET1(k=5)      - EW    : dSR -0.16 CI [-0.30,-0.02] p=0.020
+  LO NET12(k=5)     - EW    : dSR -0.01 CI [-0.19,+0.19] p=0.970
+  LO NET1(k=5)      - OWN12 : dSR -0.29 CI [-0.49,-0.10] p=0.001
+  LO NET12(k=5)     - OWN12 : dSR -0.14 CI [-0.27,+0.01] p=0.064
+  LO OWN12          - EW    : dSR +0.13 CI [-0.03,+0.29] p=0.122
+
+=== Fama-MacBeth (test period), z-scored, mean slope %/month, NW(6) t ===
+  1990-01..2024-12 n=420: OWN1=+0.062(t=+0.93)  OWN12=+0.135(t=+1.51)  ('NET1', 5)=+0.072(t=+1.20)  ('NET12', 5)=+0.074(t=+1.06)
+  1990-01..2007-12 n=216: OWN1=+0.030(t=+0.30)  OWN12=+0.221(t=+2.53)  ('NET1', 5)=+0.193(t=+2.52)  ('NET12', 5)=+0.003(t=+0.03)
+  2008-01..2024-12 n=204: OWN1=+0.097(t=+1.04)  OWN12=+0.044(t=+0.28)  ('NET1', 5)=-0.056(t=-0.63)  ('NET12', 5)=+0.149(t=+1.49)
+
+=== Spanning regressions of NET L/S (net of cost) ===
+  NET1(k=5)        net   on own-mom L/S      1990-2024: alpha -0.60% [-3.7%,+2.5%] t=-0.38 R2=0.58
+  NET1(k=5)        gross on own-mom L/S      1990-2024: alpha +3.06% [-0.0%,+6.2%] t=+1.94 R2=0.58
+  NET1(k=5)        net   on own-mom L/S      1990-2007: alpha +0.91% [-3.9%,+5.7%] t=+0.37 R2=0.55
+  NET1(k=5)        gross on own-mom L/S      1990-2007: alpha +4.51% [-0.3%,+9.3%] t=+1.83 R2=0.55
+  NET1(k=5)        net   on own-mom L/S      2008-2024: alpha -2.59% [-6.2%,+1.1%] t=-1.39 R2=0.63
+  NET1(k=5)        gross on own-mom L/S      2008-2024: alpha +1.13% [-2.5%,+4.7%] t=+0.61 R2=0.63
+  NET1(k=5)        net   on FF5+UMD          1990-2024: alpha +0.01% [-4.8%,+4.8%] t=+0.00 R2=0.04
+  NET1(k=5)        gross on FF5+UMD          1990-2024: alpha +3.64% [-1.1%,+8.4%] t=+1.50 R2=0.04
+  NET1(k=5)        net   on FF5+UMD          1990-2007: alpha +2.57% [-3.3%,+8.5%] t=+0.85 R2=0.03
+  NET1(k=5)        gross on FF5+UMD          1990-2007: alpha +6.10% [+0.2%,+11.9%] t=+2.04 R2=0.03
+  NET1(k=5)        net   on FF5+UMD          2008-2024: alpha -2.43% [-8.8%,+3.9%] t=-0.75 R2=0.12
+  NET1(k=5)        gross on FF5+UMD          2008-2024: alpha +1.27% [-5.0%,+7.5%] t=+0.40 R2=0.12
+  NET1(k=5)        net   on FF5+UMD+own-mom  1990-2024: alpha -1.02% [-4.5%,+2.5%] t=-0.57 R2=0.59
+  NET1(k=5)        gross on FF5+UMD+own-mom  1990-2024: alpha +2.61% [-0.9%,+6.1%] t=+1.46 R2=0.59
+  NET1(k=5)        net   on FF5+UMD+own-mom  1990-2007: alpha +1.79% [-4.2%,+7.8%] t=+0.59 R2=0.57
+  NET1(k=5)        gross on FF5+UMD+own-mom  1990-2007: alpha +5.32% [-0.6%,+11.3%] t=+1.75 R2=0.57
+  NET1(k=5)        net   on FF5+UMD+own-mom  2008-2024: alpha -3.52% [-7.3%,+0.3%] t=-1.82 R2=0.64
+  NET1(k=5)        gross on FF5+UMD+own-mom  2008-2024: alpha +0.19% [-3.6%,+3.9%] t=+0.10 R2=0.64
+     loadings (full test, FF5+UMD+own): Mkt-RF=+0.02(t=+0.4) SMB=-0.02(t=-0.4) HML=-0.06(t=-0.9) RMW=+0.11(t=+1.4) CMA=-0.01(t=-0.1) UMD=-0.06(t=-1.0) OWN12_LS=-0.08(t=-1.3) OWN1_LS=+0.84(t=+24.0)
+  NET12(k=5)       net   on own-mom L/S      1990-2024: alpha -1.01% [-4.8%,+2.8%] t=-0.52 R2=0.62
+  NET12(k=5)       gross on own-mom L/S      1990-2024: alpha +0.51% [-3.3%,+4.3%] t=+0.26 R2=0.62
+  NET12(k=5)       net   on own-mom L/S      1990-2007: alpha -4.04% [-8.9%,+0.8%] t=-1.63 R2=0.70
+  NET12(k=5)       gross on own-mom L/S      1990-2007: alpha -2.45% [-7.3%,+2.4%] t=-0.99 R2=0.70
+  NET12(k=5)       net   on own-mom L/S      2008-2024: alpha +1.32% [-3.6%,+6.3%] t=+0.52 R2=0.56
+  NET12(k=5)       gross on own-mom L/S      2008-2024: alpha +2.77% [-2.2%,+7.7%] t=+1.10 R2=0.56
+  NET12(k=5)       net   on FF5+UMD          1990-2024: alpha -1.42% [-6.0%,+3.1%] t=-0.61 R2=0.51
+  NET12(k=5)       gross on FF5+UMD          1990-2024: alpha +0.10% [-4.4%,+4.6%] t=+0.04 R2=0.51
+  NET12(k=5)       net   on FF5+UMD          1990-2007: alpha -4.46% [-9.5%,+0.6%] t=-1.73 R2=0.57
+  NET12(k=5)       gross on FF5+UMD          1990-2007: alpha -2.86% [-7.9%,+2.2%] t=-1.12 R2=0.57
+  NET12(k=5)       net   on FF5+UMD          2008-2024: alpha +2.35% [-4.3%,+9.0%] t=+0.70 R2=0.46
+  NET12(k=5)       gross on FF5+UMD          2008-2024: alpha +3.79% [-2.8%,+10.4%] t=+1.12 R2=0.46
+  NET12(k=5)       net   on FF5+UMD+own-mom  1990-2024: alpha -1.39% [-4.9%,+2.2%] t=-0.77 R2=0.64
+  NET12(k=5)       gross on FF5+UMD+own-mom  1990-2024: alpha +0.13% [-3.4%,+3.7%] t=+0.07 R2=0.64
+  NET12(k=5)       net   on FF5+UMD+own-mom  1990-2007: alpha -4.00% [-7.9%,-0.0%] t=-1.98 R2=0.72
+  NET12(k=5)       gross on FF5+UMD+own-mom  1990-2007: alpha -2.40% [-6.3%,+1.5%] t=-1.19 R2=0.72
+  NET12(k=5)       net   on FF5+UMD+own-mom  2008-2024: alpha +1.89% [-3.5%,+7.3%] t=+0.68 R2=0.58
+  NET12(k=5)       gross on FF5+UMD+own-mom  2008-2024: alpha +3.32% [-2.1%,+8.7%] t=+1.20 R2=0.58
+     loadings (full test, FF5+UMD+own): Mkt-RF=+0.02(t=+0.3) SMB=+0.11(t=+1.8) HML=-0.01(t=-0.1) RMW=-0.02(t=-0.2) CMA=-0.01(t=-0.1) UMD=+0.16(t=+2.5) OWN12_LS=+0.64(t=+8.8) OWN1_LS=+0.04(t=+0.7)
+  LAPGAP1(k=5)     net   on own-mom L/S      1990-2024: alpha -5.18% [-6.9%,-3.4%] t=-5.75 R2=0.75
+  LAPGAP1(k=5)     gross on own-mom L/S      1990-2024: alpha -1.45% [-3.2%,+0.3%] t=-1.59 R2=0.75
+  LAPGAP1(k=5)     net   on own-mom L/S      1990-2007: alpha -6.32% [-8.6%,-4.0%] t=-5.37 R2=0.77
+  LAPGAP1(k=5)     gross on own-mom L/S      1990-2007: alpha -2.63% [-5.0%,-0.3%] t=-2.21 R2=0.77
+  LAPGAP1(k=5)     net   on own-mom L/S      2008-2024: alpha -3.87% [-6.6%,-1.2%] t=-2.82 R2=0.73
+  LAPGAP1(k=5)     gross on own-mom L/S      2008-2024: alpha -0.10% [-2.8%,+2.6%] t=-0.07 R2=0.73
+  LAPGAP1(k=5)     net   on FF5+UMD          1990-2024: alpha -5.89% [-9.3%,-2.5%] t=-3.36 R2=0.11
+  LAPGAP1(k=5)     gross on FF5+UMD          1990-2024: alpha -2.15% [-5.6%,+1.3%] t=-1.22 R2=0.11
+  LAPGAP1(k=5)     net   on FF5+UMD          1990-2007: alpha -6.89% [-11.9%,-1.8%] t=-2.67 R2=0.09
+  LAPGAP1(k=5)     gross on FF5+UMD          1990-2007: alpha -3.21% [-8.3%,+1.9%] t=-1.23 R2=0.09
+  LAPGAP1(k=5)     net   on FF5+UMD          2008-2024: alpha -4.82% [-9.7%,+0.0%] t=-1.95 R2=0.16
+  LAPGAP1(k=5)     gross on FF5+UMD          2008-2024: alpha -1.02% [-5.9%,+3.9%] t=-0.41 R2=0.16
+  LAPGAP1(k=5)     net   on FF5+UMD+own-mom  1990-2024: alpha -5.10% [-6.9%,-3.3%] t=-5.67 R2=0.75
+  LAPGAP1(k=5)     gross on FF5+UMD+own-mom  1990-2024: alpha -1.36% [-3.1%,+0.4%] t=-1.50 R2=0.75
+  LAPGAP1(k=5)     net   on FF5+UMD+own-mom  1990-2007: alpha -6.24% [-8.6%,-3.9%] t=-5.20 R2=0.78
+  LAPGAP1(k=5)     gross on FF5+UMD+own-mom  1990-2007: alpha -2.55% [-4.9%,-0.2%] t=-2.11 R2=0.78
+  LAPGAP1(k=5)     net   on FF5+UMD+own-mom  2008-2024: alpha -3.95% [-6.5%,-1.4%] t=-3.04 R2=0.74
+  LAPGAP1(k=5)     gross on FF5+UMD+own-mom  2008-2024: alpha -0.15% [-2.7%,+2.4%] t=-0.12 R2=0.74
+     loadings (full test, FF5+UMD+own): Mkt-RF=-0.01(t=-0.7) SMB=+0.06(t=+1.9) HML=-0.01(t=-0.2) RMW=+0.04(t=+1.0) CMA=-0.06(t=-1.0) UMD=-0.06(t=-1.6) OWN12_LS=+0.01(t=+0.3) OWN1_LS=-0.65(t=-22.4)
+  NET1_PURE(k=5)   net   on own-mom L/S      1990-2024: alpha -1.78% [-5.0%,+1.4%] t=-1.09 R2=0.16
+  NET1_PURE(k=5)   gross on own-mom L/S      1990-2024: alpha +1.93% [-1.3%,+5.1%] t=+1.18 R2=0.16
+  NET1_PURE(k=5)   net   on own-mom L/S      1990-2007: alpha -1.03% [-5.3%,+3.3%] t=-0.47 R2=0.20
+  NET1_PURE(k=5)   gross on own-mom L/S      1990-2007: alpha +2.64% [-1.7%,+7.0%] t=+1.20 R2=0.20
+  NET1_PURE(k=5)   net   on own-mom L/S      2008-2024: alpha -2.64% [-7.4%,+2.1%] t=-1.09 R2=0.13
+  NET1_PURE(k=5)   gross on own-mom L/S      2008-2024: alpha +1.12% [-3.6%,+5.8%] t=+0.47 R2=0.13
+  NET1_PURE(k=5)   net   on FF5+UMD          1990-2024: alpha -1.34% [-5.1%,+2.4%] t=-0.71 R2=0.01
+  NET1_PURE(k=5)   gross on FF5+UMD          1990-2024: alpha +2.35% [-1.4%,+6.1%] t=+1.24 R2=0.01
+  NET1_PURE(k=5)   net   on FF5+UMD          1990-2007: alpha +0.54% [-4.2%,+5.3%] t=+0.22 R2=0.03
+  NET1_PURE(k=5)   gross on FF5+UMD          1990-2007: alpha +4.15% [-0.6%,+8.9%] t=+1.71 R2=0.03
+  NET1_PURE(k=5)   net   on FF5+UMD          2008-2024: alpha -2.60% [-8.0%,+2.8%] t=-0.94 R2=0.03
+  NET1_PURE(k=5)   gross on FF5+UMD          2008-2024: alpha +1.14% [-4.2%,+6.5%] t=+0.41 R2=0.03
+  NET1_PURE(k=5)   net   on FF5+UMD+own-mom  1990-2024: alpha -1.72% [-5.2%,+1.8%] t=-0.96 R2=0.17
+  NET1_PURE(k=5)   gross on FF5+UMD+own-mom  1990-2024: alpha +1.98% [-1.5%,+5.5%] t=+1.11 R2=0.17
+  NET1_PURE(k=5)   net   on FF5+UMD+own-mom  1990-2007: alpha +0.22% [-4.6%,+5.1%] t=+0.09 R2=0.24
+  NET1_PURE(k=5)   gross on FF5+UMD+own-mom  1990-2007: alpha +3.84% [-1.0%,+8.7%] t=+1.55 R2=0.24
+  NET1_PURE(k=5)   net   on FF5+UMD+own-mom  2008-2024: alpha -2.88% [-7.8%,+2.0%] t=-1.15 R2=0.14
+  NET1_PURE(k=5)   gross on FF5+UMD+own-mom  2008-2024: alpha +0.87% [-4.0%,+5.7%] t=+0.35 R2=0.14
+     loadings (full test, FF5+UMD+own): Mkt-RF=-0.00(t=-0.1) SMB=-0.02(t=-0.4) HML=+0.01(t=+0.1) RMW=+0.05(t=+0.8) CMA=-0.13(t=-1.1) UMD=+0.01(t=+0.1) OWN12_LS=-0.06(t=-1.1) OWN1_LS=+0.30(t=+6.7)
+
+correlation of net L/S returns (test):
+                OWN1  OWN12  NET1(k=5)  NET12(k=5)  LAPGAP1(k=5)  NET1_PURE(k=5)
+OWN1            1.00   0.11       0.75        0.13         -0.86            0.39
+OWN12           0.11   1.00      -0.05        0.79         -0.16           -0.04
+NET1(k=5)       0.75  -0.05       1.00        0.03         -0.53            0.75
+NET12(k=5)      0.13   0.79       0.03        1.00         -0.13            0.01
+LAPGAP1(k=5)   -0.86  -0.16      -0.53       -0.13          1.00           -0.21
+NET1_PURE(k=5)  0.39  -0.04       0.75        0.01         -0.21            1.00

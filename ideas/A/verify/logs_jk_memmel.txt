@@ -1,0 +1,16 @@
+Industries 1990-2024, LO top quintile, net excess, JK-Memmel:
+  ('NET1', 5)  - EW    : dSR -0.16 z=-1.86 p=0.063
+  ('NET12', 5) - EW    : dSR -0.01 z=-0.08 p=0.938
+  ('NET1', 5)  - OWN12 : dSR -0.29 z=-2.40 p=0.017
+  ('NET12', 5) - OWN12 : dSR -0.14 z=-2.26 p=0.024
+  OWN12        - EW    : dSR +0.13 z=+1.44 p=0.149
+ETFs 2007-2024, LO top5, net excess, JK-Memmel:
+  ('NET1', 5)  - EW    : dSR +0.24 z=+1.35 p=0.177
+  ('NET1', 5)  - SPY   : dSR +0.01 z=+0.06 p=0.953
+  ('NET1', 5)  - OWN12 : dSR +0.23 z=+1.02 p=0.309
+  ('NET12', 5) - EW    : dSR +0.20 z=+1.23 p=0.219
+  ('NET12', 5) - SPY   : dSR -0.03 z=-0.18 p=0.857
+  ('NET12', 5) - OWN12 : dSR +0.19 z=+1.69 p=0.090
+  NET12 top5 SR excl. 2008: +0.71; cum. total return 2019-2024: +82.2%
+  SPY        SR excl. 2008: +0.87; cum. total return 2019-2024: +157.7%
+  EW         SR excl. 2008: +0.62; cum. total return 2019-2024: +62.6%

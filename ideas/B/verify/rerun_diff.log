@@ -1,0 +1,15 @@
+== diff builder/data_load.log verify/data_load.log
+IDENTICAL
+== diff builder/design.log verify/design.log
+IDENTICAL
+== diff builder/test.log verify/test.log
+2c2
+< max |full-sample signal - design-truncated signal| on design dates, all 14 signals: 0.00e+00
+---
+> max |full-sample signal - design-truncated signal| on design dates, all 14 signals: 3.97e-15
+== diff builder/robust.log verify/robust.log
+IDENTICAL
+== diff builder/crossref_check.log verify/crossref_check.log
+IDENTICAL
+== frozen_signs
+IDENTICAL

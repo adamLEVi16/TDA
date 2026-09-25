@@ -1,0 +1,25 @@
+OK  10.1111/jofi.12513
+    MOREIRA, ALAN; MUIR, TYLER (2017). Volatility‐Managed Portfolios. The Journal of Finance 72(4):1611-1644
+OK  10.1016/j.jfineco.2009.11.003
+    George, Thomas J.; Hwang, Chuan-Yang (2010). A resolution of the distress risk and leverage puzzles in the cross section of stock returns. Journal of Financial Economics 96(1):56-79
+OK  10.1093/rfs/hhm055
+    Campbell, John Y.; Thompson, Samuel B. (2008). Predicting Excess Stock Returns Out of Sample: Can Anything Beat the Historical Average?. Review of Financial Studies 21(4):1509-1531
+OK  10.1016/j.jeconom.2006.05.023
+    Clark, Todd E.; West, Kenneth D. (2007). Approximately normal tests for equal predictive accuracy in nested models. Journal of Econometrics 138(1):291-311
+OK  10.3905/jpm.2011.37.4.112
+    Kritzman, Mark; Li, Yuanzhen; Page, Sébastien; Rigobon, Roberto (2011). Principal Components as a Measure of Systemic Risk. The Journal of Portfolio Management 37(4):112-126
+OK  10.3905/jwm.2007.674809
+    Faber, Mebane T. (2007). A Quantitative Approach to Tactical Asset Allocation. The Journal of Wealth Management 9(4):69-79
+OK  10.1016/j.jfineco.2020.04.015
+    Cederburg, Scott; O’Doherty, Michael S.; Wang, Feifei; Yan, Xuemin (Sterling) (2020). On the performance of volatility-managed portfolios. Journal of Financial Economics 138(1):95-117
+OK  10.1016/j.physa.2017.09.028
+    Gidea, Marian; Katz, Yuri (2018). Topological data analysis of financial time series: Landscapes of crashes. Physica A: Statistical Mechanics and its Applications 491():820-834
+OK  10.1111/j.1540-6261.1981.tb04891.x
+    JOBSON, J. D.; KORKIE, BOB M. (1981). Performance Hypothesis Testing with the Sharpe and Treynor Measures. The Journal of Finance 36(4):889-908
+OK  10.1093/rfs/hhm014
+    Welch, Ivo; Goyal, Amit (2008). A Comprehensive Look at The Empirical Performance of Equity Premium Prediction. Review of Financial Studies 21(4):1455-1508
+OK  10.2469/faj.v58.n4.2453
+    Lo, Andrew W. (2002). The Statistics of Sharpe Ratios. Financial Analysts Journal 58(4):36-52
+OK  10.1093/jjfinec/nbp001
+    Corsi, F. (2008). A Simple Approximate Long-Memory Model of Realized Volatility. Journal of Financial Econometrics 7(2):174-196
+Memmel search: [(['The Sharpe ratio of estimated efficient portfolios'], '10.1016/j.frl.2016.01.009', ['Finance Research Letters']), (['Moments of the estimated Sharpe ratio when the observations are not IID'], '10.1016/j.frl.2005.11.001', ['Finance Research Letters']), (['Sharpe Ratio'], '10.1007/0-387-26336-5_1843', ['Encyclopedia of Finance'])]

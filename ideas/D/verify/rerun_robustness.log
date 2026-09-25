@@ -1,0 +1,134 @@
+== OOS R2 / Clark-West by predictor, horizon, sub-period, restriction (origins; test period only)
+  VRP   h=1 full 1999-12..                   unres n=319 R2=-10.01% CW t=+0.18 p=0.429
+  VRP   h=1 full 1999-12..                   restr n=319 R2= +0.69% CW t=+0.87 p=0.192
+  VRP   h=1 R1a 1999-12..2012-11             unres n=156 R2= +8.14% CW t=+1.99 p=0.024
+  VRP   h=1 R1a 1999-12..2012-11             restr n=156 R2= +5.03% CW t=+2.29 p=0.011
+  VRP   h=1 R1b 2012-12..                    unres n=163 R2=-31.93% CW t=-1.11 p=0.867
+  VRP   h=1 R1b 2012-12..                    restr n=163 R2= -4.55% CW t=-1.04 p=0.851
+  VRP   h=1 R4 ex 2008-08..2009-05 origins   unres n=309 R2=-13.50% CW t=-0.51 p=0.696
+  VRP   h=1 R4 ex 2008-08..2009-05 origins   restr n=309 R2= +0.09% CW t=+0.55 p=0.290
+  VRP   h=3 full 1999-12..                   unres n=317 R2=-14.08% CW t=+0.77 p=0.219
+  VRP   h=3 full 1999-12..                   restr n=317 R2= +6.23% CW t=+3.14 p=0.001
+  VRP   h=3 R1a 1999-12..2012-11             unres n=156 R2=+12.72% CW t=+2.04 p=0.021
+  VRP   h=3 R1a 1999-12..2012-11             restr n=156 R2=+11.55% CW t=+3.80 p=0.000
+  VRP   h=3 R1b 2012-12..                    unres n=161 R2=-66.09% CW t=-1.09 p=0.861
+  VRP   h=3 R1b 2012-12..                    restr n=161 R2= -4.10% CW t=-0.92 p=0.820
+  VRP   h=3 R4 ex 2008-08..2009-05 origins   unres n=307 R2=-24.15% CW t=-0.25 p=0.598
+  VRP   h=3 R4 ex 2008-08..2009-05 origins   restr n=307 R2= +3.69% CW t=+3.22 p=0.001
+  VRP21 h=1 full 1999-12..                   unres n=319 R2= -6.06% CW t=+0.18 p=0.427
+  VRP21 h=1 full 1999-12..                   restr n=319 R2= -0.05% CW t=+0.28 p=0.389
+  VRP21 h=1 R1a 1999-12..2012-11             unres n=156 R2= +2.46% CW t=+1.41 p=0.080
+  VRP21 h=1 R1a 1999-12..2012-11             restr n=156 R2= +2.45% CW t=+1.62 p=0.052
+  VRP21 h=1 R1b 2012-12..                    unres n=163 R2=-16.37% CW t=-1.11 p=0.866
+  VRP21 h=1 R1b 2012-12..                    restr n=163 R2= -3.09% CW t=-1.11 p=0.867
+  VRP21 h=1 R4 ex 2008-08..2009-05 origins   unres n=309 R2= -6.78% CW t=-0.68 p=0.753
+  VRP21 h=1 R4 ex 2008-08..2009-05 origins   restr n=309 R2= -0.26% CW t=+0.14 p=0.444
+  VRP21 h=3 full 1999-12..                   unres n=317 R2= -5.82% CW t=+0.76 p=0.224
+  VRP21 h=3 full 1999-12..                   restr n=317 R2= +3.82% CW t=+3.01 p=0.001
+  VRP21 h=3 R1a 1999-12..2012-11             unres n=156 R2= +8.50% CW t=+1.75 p=0.040
+  VRP21 h=3 R1a 1999-12..2012-11             restr n=156 R2= +7.03% CW t=+3.87 p=0.000
+  VRP21 h=3 R1b 2012-12..                    unres n=161 R2=-33.78% CW t=-1.05 p=0.854
+  VRP21 h=3 R1b 2012-12..                    restr n=161 R2= -2.45% CW t=-0.64 p=0.740
+  VRP21 h=3 R4 ex 2008-08..2009-05 origins   unres n=307 R2=-10.89% CW t=-0.36 p=0.639
+  VRP21 h=3 R4 ex 2008-08..2009-05 origins   restr n=307 R2= +2.64% CW t=+2.65 p=0.004
+  IV    h=1 full 1999-12..                   unres n=319 R2= -2.22% CW t=-1.18 p=0.882
+  IV    h=1 full 1999-12..                   restr n=319 R2= -1.70% CW t=-1.05 p=0.853
+  IV    h=1 R1a 1999-12..2012-11             unres n=156 R2= -4.32% CW t=-1.35 p=0.911
+  IV    h=1 R1a 1999-12..2012-11             restr n=156 R2= -3.37% CW t=-1.24 p=0.892
+  IV    h=1 R1b 2012-12..                    unres n=163 R2= +0.32% CW t=+0.61 p=0.270
+  IV    h=1 R1b 2012-12..                    restr n=163 R2= +0.32% CW t=+0.61 p=0.270
+  IV    h=1 R4 ex 2008-08..2009-05 origins   unres n=309 R2= -0.65% CW t=-0.30 p=0.617
+  IV    h=1 R4 ex 2008-08..2009-05 origins   restr n=309 R2= -0.65% CW t=-0.30 p=0.617
+  IV    h=3 full 1999-12..                   unres n=317 R2= -9.02% CW t=-1.07 p=0.857
+  IV    h=3 full 1999-12..                   restr n=317 R2= -8.45% CW t=-0.99 p=0.838
+  IV    h=3 R1a 1999-12..2012-11             unres n=156 R2=-15.20% CW t=-1.34 p=0.910
+  IV    h=3 R1a 1999-12..2012-11             restr n=156 R2=-14.34% CW t=-1.26 p=0.897
+  IV    h=3 R1b 2012-12..                    unres n=161 R2= +2.96% CW t=+1.26 p=0.104
+  IV    h=3 R1b 2012-12..                    restr n=161 R2= +2.96% CW t=+1.26 p=0.104
+  IV    h=3 R4 ex 2008-08..2009-05 origins   unres n=307 R2= -0.74% CW t=+0.60 p=0.273
+  IV    h=3 R4 ex 2008-08..2009-05 origins   restr n=307 R2= -0.74% CW t=+0.60 p=0.273
+
+== Strategy robustness (bootstrap 5000 reps, block 6, seed 20260925)
+
+-- R1a sub-period: cost 2 bp, returns 2000-01..2012-12
+  S1 Sharpe +0.257 (B1 +0.047) dSR=+0.209 CI[-0.113,+0.500] p=0.101 | dMean=+2.28%/yr p=0.176 | maxDD -0.346 vs -0.508
+  S2 Sharpe +0.285 (B1 +0.047) dSR=+0.238 CI[-0.065,+0.509] p=0.056 | dMean=+2.95%/yr p=0.092 | maxDD -0.349 vs -0.508
+  B2 Sharpe +0.511 (B1 +0.047) dSR=+0.464 CI[-0.050,+1.004] p=0.042 | dMean=+3.92%/yr p=0.152 | maxDD -0.167 vs -0.508
+  B3 Sharpe +0.136 (B1 +0.047) dSR=+0.088 CI[-0.088,+0.274] p=0.189 | dMean=+0.78%/yr p=0.342 | maxDD -0.357 vs -0.508
+  S0 Sharpe -0.144 (B1 +0.047) dSR=-0.191 CI[-0.283,-0.074] p=0.999 | dMean=-2.64%/yr p=0.991 | maxDD -0.492 vs -0.508
+  S1-S0 dSR=+0.401 CI[+0.041,+0.717] p=0.016
+
+-- R1b sub-period: cost 2 bp, returns 2013-01..2026-07
+  S1 Sharpe +0.818 (B1 +0.936) dSR=-0.119 CI[-0.315,+0.069] p=0.884 | dMean=-3.44%/yr p=0.997 | maxDD -0.217 vs -0.239
+  S2 Sharpe +0.930 (B1 +0.936) dSR=-0.006 CI[-0.280,+0.300] p=0.544 | dMean=-1.89%/yr p=0.854 | maxDD -0.195 vs -0.239
+  B2 Sharpe +0.729 (B1 +0.936) dSR=-0.207 CI[-0.504,+0.070] p=0.926 | dMean=-5.22%/yr p=0.999 | maxDD -0.220 vs -0.239
+  B3 Sharpe +0.975 (B1 +0.936) dSR=+0.039 CI[-0.098,+0.174] p=0.342 | dMean=-2.02%/yr p=0.979 | maxDD -0.167 vs -0.239
+  S0 Sharpe +0.898 (B1 +0.936) dSR=-0.038 CI[-0.099,+0.012] p=0.921 | dMean=-1.23%/yr p=0.998 | maxDD -0.230 vs -0.239
+  S1-S0 dSR=-0.080 CI[-0.265,+0.099] p=0.803
+
+-- R3 cost 10bp: cost 10 bp, returns 2000-01..2026-07
+  S1 Sharpe +0.521 (B1 +0.472) dSR=+0.050 CI[-0.157,+0.249] p=0.340 | dMean=-0.91%/yr p=0.740 | maxDD -0.351 vs -0.508
+  S2 Sharpe +0.585 (B1 +0.472) dSR=+0.113 CI[-0.109,+0.322] p=0.169 | dMean=+0.26%/yr p=0.435 | maxDD -0.353 vs -0.508
+  B2 Sharpe +0.617 (B1 +0.472) dSR=+0.146 CI[-0.210,+0.519] p=0.235 | dMean=-0.87%/yr p=0.668 | maxDD -0.223 vs -0.508
+  B3 Sharpe +0.556 (B1 +0.472) dSR=+0.084 CI[-0.047,+0.225] p=0.116 | dMean=-0.74%/yr p=0.756 | maxDD -0.359 vs -0.508
+  S0 Sharpe +0.390 (B1 +0.472) dSR=-0.082 CI[-0.154,-0.007] p=0.983 | dMean=-1.93%/yr p=0.999 | maxDD -0.492 vs -0.508
+  S1-S0 dSR=+0.132 CI[-0.088,+0.353] p=0.139
+
+-- R4 ex-GFC months: cost 2 bp, returns 2000-01..2026-07, excluding ('2008-09', '2009-06')
+  S1 Sharpe +0.598 (B1 +0.590) dSR=+0.008 CI[-0.181,+0.197] p=0.486 | dMean=-1.48%/yr p=0.882 | maxDD -0.248 vs -0.447
+  S2 Sharpe +0.657 (B1 +0.590) dSR=+0.067 CI[-0.137,+0.271] p=0.271 | dMean=-0.31%/yr p=0.603 | maxDD -0.294 vs -0.447
+  B2 Sharpe +0.640 (B1 +0.590) dSR=+0.050 CI[-0.236,+0.356] p=0.399 | dMean=-1.83%/yr p=0.858 | maxDD -0.220 vs -0.447
+  B3 Sharpe +0.621 (B1 +0.590) dSR=+0.031 CI[-0.067,+0.124] p=0.276 | dMean=-1.32%/yr p=0.965 | maxDD -0.357 vs -0.447
+  S0 Sharpe +0.529 (B1 +0.590) dSR=-0.061 CI[-0.130,+0.005] p=0.961 | dMean=-1.76%/yr p=1.000 | maxDD -0.398 vs -0.447
+  S1-S0 dSR=+0.069 CI[-0.115,+0.252] p=0.249
+
+-- R2 VRP with SPY 21d RV (S1,S2 use VRP21): cost 2 bp, returns 2000-01..2026-07
+  S1 Sharpe +0.428 (B1 +0.472) dSR=-0.044 CI[-0.206,+0.121] p=0.710 | dMean=-1.68%/yr p=0.911 | maxDD -0.396 vs -0.508
+  S2 Sharpe +0.515 (B1 +0.472) dSR=+0.043 CI[-0.145,+0.227] p=0.348 | dMean=-0.35%/yr p=0.604 | maxDD -0.392 vs -0.508
+  B2 Sharpe +0.629 (B1 +0.472) dSR=+0.157 CI[-0.196,+0.529] p=0.216 | dMean=-0.75%/yr p=0.652 | maxDD -0.220 vs -0.508
+  B3 Sharpe +0.564 (B1 +0.472) dSR=+0.092 CI[-0.039,+0.233] p=0.091 | dMean=-0.65%/yr p=0.729 | maxDD -0.357 vs -0.508
+  S0 Sharpe +0.381 (B1 +0.472) dSR=-0.091 CI[-0.178,+0.000] p=0.975 | dMean=-2.21%/yr p=0.999 | maxDD -0.466 vs -0.508
+  S1-S0 dSR=+0.047 CI[-0.127,+0.234] p=0.340
+
+== POST-HOC diagnostic (not pre-registered): where does the h=3 CT-restricted OOS gain come from?
+Contribution to OOS R2 (percentage points) by origin year:
+origin
+1999   -0.06
+2000    0.88
+2001    0.26
+2002    0.28
+2003    0.56
+2004   -0.07
+2005   -0.15
+2006   -0.08
+2007    0.20
+2008    1.86
+2009    2.40
+2010    0.98
+2011    0.53
+2012    0.09
+2013   -0.17
+2014   -0.01
+2015    0.11
+2016   -0.27
+2017   -0.19
+2018   -0.22
+2019   -0.35
+2020   -0.40
+2021    0.12
+2022    0.18
+2023   -0.01
+2024   -0.01
+2025   -0.27
+2026    0.05
+Top 8 origin months by contribution (pp):
+origin
+2009-02-28    1.58
+2011-09-30    0.51
+2003-02-28    0.50
+2000-12-31    0.44
+2008-08-31    0.41
+2008-09-30    0.39
+2008-07-31    0.36
+2002-05-31    0.33
+OOS R2 without top 8 origins: +2.14%

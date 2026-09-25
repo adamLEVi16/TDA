@@ -1,0 +1,11 @@
+                                             SR  SR_lo  SR_hi   t_NW    CAGR    vol     MDD Calmar avg_w turn_yr cost_drag BE0_bp BE_BH_bp dSR_vs_BH dSR_lo dSR_hi p_boot
+rule                                                                                                                                                                     
+FF market 1990-2024 TOPOVOL high q=0.75  +0.579  +0.16  +1.02  +3.12   9.80%  16.3%  -53.1%  0.184  0.75    3.26    0.065%    236        5    +0.008  -0.15  +0.20  0.923
+FF market 1990-2024 TOPOVOL low q=0.5    +0.207  -0.10  +0.53  +1.40   4.49%  13.8%  -41.9%  0.107  0.58    3.89    0.078%     67      nan    -0.364  -0.61  -0.12  0.005
+FF market 1990-2024 BH                   +0.571  +0.20  +0.96  +3.39  10.68%  18.1%  -54.6%  0.196  1.00    0.00    0.000%    nan      nan       nan    nan    nan    nan
+SPY 1994-2024 TOPOVOL high q=0.75        +0.603  +0.16  +1.09  +2.98   9.87%  16.9%  -53.9%  0.183  0.76    3.13    0.063%    256        9    +0.018  -0.13  +0.20  0.827
+SPY 1994-2024 TOPOVOL low q=0.5          +0.163  -0.14  +0.48  +1.07   3.63%  14.3%  -39.7%  0.092  0.56    3.91    0.078%     51      nan    -0.423  -0.69  -0.16  0.002
+SPY 1994-2024 BH                         +0.585  +0.18  +1.01  +3.20  10.49%  18.8%  -55.2%  0.190  1.00    0.00    0.000%    nan      nan       nan    nan    nan    nan
+student rule (high,0.75) share of month-ends in cash 2008-09-01..2009-03-31: 0.00
+student rule (high,0.75) share of month-ends in cash 2020-02-20..2020-04-30: 0.00
+student rule (high,0.75) share of month-ends in cash 2022-01-01..2022-10-31: 0.10

@@ -1,0 +1,12 @@
+OK  10.1111/0022-1082.00146 | Moskowitz, Tobias J.; Grinblatt, Mark | Do Industries Explain Momentum? | The Journal of Finance | 1999 | vol 54 issue 4 pp 1249-1290 | type journal-article
+OK  10.1111/j.1540-6261.2008.01379.x | COHEN, LAUREN; FRAZZINI, ANDREA | Economic Links and Predictable Returns | The Journal of Finance | 2008 | vol 63 issue 4 pp 1977-2011 | type journal-article
+OK  10.1111/j.1540-6261.2010.01578.x | MENZLY, LIOR; OZBAS, OGUZHAN | Market Segmentation and Cross‐predictability of Returns | The Journal of Finance | 2010 | vol 65 issue 4 pp 1555-1580 | type journal-article
+OK  10.1093/revfin/hhm003 | Hou, Kewei | Industry Information Diffusion and the Lead-lag Effect in Stock Returns | Review of Financial Studies | 2007 | vol 20 issue 4 pp 1113-1138 | type journal-article
+OK  10.1016/j.jfineco.2019.10.007 | Ali, Usman; Hirshleifer, David | Shared analyst coverage: Unifying momentum spillover effects | Journal of Financial Economics | 2020 | vol 136 issue 3 pp 649-675 | type journal-article
+OK  10.2139/ssrn.4540651 | Pu, Xingyue (Stacy); Roberts, Stephen; Dong, Xiaowen; Zohren, Stefan | Network Momentum across Asset Classes |  | 2023 | vol None issue None pp None | type posted-content
+OK  10.1086/260061 | Fama, Eugene F.; MacBeth, James D. | Risk, Return, and Equilibrium: Empirical Tests | Journal of Political Economy | 1973 | vol 81 issue 3 pp 607-636 | type journal-article
+OK  10.2307/1913610 | Newey, Whitney K.; West, Kenneth D. | A Simple, Positive Semi-Definite, Heteroskedasticity and Autocorrelation Consistent Covariance Matrix | Econometrica | 1987 | vol 55 issue 3 pp 703 | type journal-article
+OK  10.1080/01621459.1994.10476870 | Politis, Dimitris N.; Romano, Joseph P. | The Stationary Bootstrap | Journal of the American Statistical Association | 1994 | vol 89 issue 428 pp 1303-1313 | type journal-article
+OK  10.1016/j.jfineco.2014.10.010 | Fama, Eugene F.; French, Kenneth R. | A five-factor asset pricing model | Journal of Financial Economics | 2015 | vol 116 issue 1 pp 1-22 | type journal-article
+OK  10.1111/j.1540-6261.1997.tb03808.x | Carhart, Mark M. | On Persistence in Mutual Fund Performance | The Journal of Finance | 1997 | vol 52 issue 1 pp 57-82 | type journal-article
+OK  10.1093/rfs/hhv059 | Harvey, Campbell R.; Liu, Yan; Zhu, Heqing | … and the Cross-Section of Expected Returns | Review of Financial Studies | 2016 | vol 29 issue 1 pp 5-68 | type journal-article

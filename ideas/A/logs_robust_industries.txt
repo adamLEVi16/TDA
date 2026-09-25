@@ -1,0 +1,37 @@
+=== 1. all k, test period 1990-2024, quintile L/S, 10 bp ===
+L/S NET1(k=3)                      1990-01..2024-12 n= 420 | gross +3.88% SR +0.27 t=+1.76 | net +0.21% [-4.1%,+4.6%] SR +0.01 [+nan,+nan] t=+0.10 vol 14.3% | TO 3.06/mo BE    11bp MDD -57%
+L/S NET12(k=3)                     1990-01..2024-12 n= 420 | gross +5.19% SR +0.34 t=+2.01 | net +3.65% [-1.4%,+8.7%] SR +0.24 [+nan,+nan] t=+1.41 vol 15.4% | TO 1.28/mo BE    34bp MDD -41%
+L/S LAPGAP1(k=3)                   1990-01..2024-12 n= 420 | gross -2.28% SR -0.23 t=-1.49 | net -6.01% [-9.0%,-3.0%] SR -0.61 [+nan,+nan] t=-3.95 vol 9.9% | TO 3.10/mo BE    -6bp MDD -91%
+L/S NET1_PURE(k=3)                 1990-01..2024-12 n= 420 | gross +1.32% SR +0.14 t=+0.89 | net -2.45% [-5.4%,+0.5%] SR -0.26 [+nan,+nan] t=-1.65 vol 9.5% | TO 3.14/mo BE     3bp MDD -70%
+L/S NET1(k=5)                      1990-01..2024-12 n= 420 | gross +2.61% SR +0.18 t=+1.18 | net -1.05% [-5.4%,+3.3%] SR -0.07 [+nan,+nan] t=-0.47 vol 14.8% | TO 3.05/mo BE     7bp MDD -67%
+L/S NET12(k=5)                     1990-01..2024-12 n= 420 | gross +4.48% SR +0.28 t=+1.60 | net +2.96% [-2.6%,+8.5%] SR +0.18 [+nan,+nan] t=+1.05 vol 16.1% | TO 1.26/mo BE    30bp MDD -51%
+L/S LAPGAP1(k=5)                   1990-01..2024-12 n= 420 | gross -1.77% SR -0.17 t=-1.05 | net -5.51% [-8.8%,-2.2%] SR -0.53 [+nan,+nan] t=-3.29 vol 10.4% | TO 3.12/mo BE    -5bp MDD -89%
+L/S NET1_PURE(k=5)                 1990-01..2024-12 n= 420 | gross +1.71% SR +0.17 t=+1.03 | net -2.00% [-5.3%,+1.3%] SR -0.20 [+nan,+nan] t=-1.19 vol 10.1% | TO 3.10/mo BE     5bp MDD -70%
+L/S NET1(k=10)                     1990-01..2024-12 n= 420 | gross +3.42% SR +0.22 t=+1.45 | net -0.17% [-4.8%,+4.5%] SR -0.01 [+nan,+nan] t=-0.07 vol 15.3% | TO 3.00/mo BE    10bp MDD -66%
+L/S NET12(k=10)                    1990-01..2024-12 n= 420 | gross +5.30% SR +0.32 t=+1.84 | net +3.79% [-1.9%,+9.4%] SR +0.23 [+nan,+nan] t=+1.31 vol 16.4% | TO 1.26/mo BE    35bp MDD -50%
+L/S LAPGAP1(k=10)                  1990-01..2024-12 n= 420 | gross -2.38% SR -0.21 t=-1.36 | net -6.13% [-9.5%,-2.7%] SR -0.54 [+nan,+nan] t=-3.52 vol 11.3% | TO 3.13/mo BE    -6bp MDD -92%
+L/S NET1_PURE(k=10)                1990-01..2024-12 n= 420 | gross +2.24% SR +0.22 t=+1.35 | net -1.47% [-4.8%,+1.8%] SR -0.14 [+nan,+nan] t=-0.87 vol 10.4% | TO 3.09/mo BE     6bp MDD -64%
+  FM with each k (test, NW t):
+   k=3: OWN1=+0.076(t=+1.11)  OWN12=+0.143(t=+1.56)  ('NET1', 3)=+0.010(t=+0.18)  ('NET12', 3)=+0.066(t=+1.00)
+   k=5: OWN1=+0.062(t=+0.93)  OWN12=+0.135(t=+1.51)  ('NET1', 5)=+0.072(t=+1.20)  ('NET12', 5)=+0.074(t=+1.06)
+   k=10: OWN1=+0.049(t=+0.74)  OWN12=+0.164(t=+1.85)  ('NET1', 10)=+0.108(t=+1.53)  ('NET12', 10)=+0.079(t=+0.99)
+
+=== 2. terciles (1/3) instead of quintiles, test, 10 bp ===
+L/S tercile OWN1                   1990-01..2024-12 n= 420 | gross +1.94% SR +0.19 t=+1.19 | net -1.30% [-4.5%,+1.9%] SR -0.12 [+nan,+nan] t=-0.79 vol 10.5% | TO 2.70/mo BE     6bp MDD -63%
+L/S tercile OWN12                  1990-01..2024-12 n= 420 | gross +4.81% SR +0.39 t=+2.26 | net +3.81% [-0.4%,+8.0%] SR +0.31 [+nan,+nan] t=+1.79 vol 12.4% | TO 0.83/mo BE    48bp MDD -43%
+L/S tercile NET1(k=5)              1990-01..2024-12 n= 420 | gross +1.94% SR +0.17 t=+1.11 | net -1.28% [-4.8%,+2.2%] SR -0.11 [+nan,+nan] t=-0.72 vol 11.2% | TO 2.69/mo BE     6bp MDD -68%
+L/S tercile NET12(k=5)             1990-01..2024-12 n= 420 | gross +3.38% SR +0.28 t=+1.60 | net +2.08% [-2.1%,+6.2%] SR +0.17 [+nan,+nan] t=+0.98 vol 12.3% | TO 1.07/mo BE    26bp MDD -44%
+L/S tercile NET1_PURE(k=5)         1990-01..2024-12 n= 420 | gross +1.24% SR +0.16 t=+1.07 | net -2.00% [-4.3%,+0.3%] SR -0.26 [+nan,+nan] t=-1.69 vol 7.7% | TO 2.70/mo BE     4bp MDD -61%
+
+=== 3. cost sensitivity, test, quintile L/S: net ann. mean (Sharpe) ===
+  OWN12            0bp: +6.40% (+0.39) | 5bp: +5.80% (+0.35) | 10bp: +5.21% (+0.31) | 20bp: +4.01% (+0.24)
+  NET1(k=5)        0bp: +2.61% (+0.18) | 5bp: +0.78% (+0.05) | 10bp: -1.05% (-0.07) | 20bp: -4.71% (-0.32)
+  NET12(k=5)       0bp: +4.48% (+0.28) | 5bp: +3.72% (+0.23) | 10bp: +2.96% (+0.18) | 20bp: +1.45% (+0.09)
+  NET1_PURE(k=5)   0bp: +1.71% (+0.17) | 5bp: -0.14% (-0.01) | 10bp: -2.00% (-0.20) | 20bp: -5.71% (-0.57)
+
+=== 4. placebo: k=5 random neighbours, 200 draws (seeds 0..199), gross L/S Sharpe ===
+  (1092s, 4 cpus)
+  NET1   design: real-graph gross SR +0.48 | random-neighbour SR mean -0.01 sd 0.12 95th pct +0.17 | share of placebos >= real 0.000
+  NET1   test  : real-graph gross SR +0.18 | random-neighbour SR mean +0.06 sd 0.14 95th pct +0.30 | share of placebos >= real 0.255
+  NET12  design: real-graph gross SR +0.32 | random-neighbour SR mean -0.04 sd 0.12 95th pct +0.15 | share of placebos >= real 0.005
+  NET12  test  : real-graph gross SR +0.28 | random-neighbour SR mean -0.01 sd 0.17 95th pct +0.24 | share of placebos >= real 0.035

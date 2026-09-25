@@ -1,0 +1,83 @@
+== 1. Industry universe
+industries whose data END before 2024-12-31: []
+industries with interior gaps: ['Toys', 'Books', 'MedEq', 'Rubbr', 'PerSv', 'Softw', 'LabEq', 'Paper']
+   Toys   first 1926-07-01  interior-missing days     2  from 1930-08-22 to 1941-07-12
+   Books  first 1926-07-01  interior-missing days     1  from 1927-05-17 to 1927-05-17
+   MedEq  first 1926-07-01  interior-missing days     1  from 1933-08-04 to 1933-08-04
+   Rubbr  first 1930-07-01  interior-missing days   310  from 1932-11-15 to 1945-09-14
+   PerSv  first 1927-07-01  interior-missing days    16  from 1927-07-11 to 1931-04-20
+   Softw  first 1965-07-01  interior-missing days     1  from 1971-03-11 to 1971-03-11
+   LabEq  first 1926-07-01  interior-missing days     1  from 1945-06-29 to 1945-06-29
+   Paper  first 1929-07-01  interior-missing days    34  from 1931-07-20 to 1935-11-18
+dropped industries' first valid dates: {'Soda': '1963-07-01', 'Hlth': '1969-07-01', 'Rubbr': '1930-07-01', 'FabPr': '1963-07-01', 'Guns': '1963-07-01', 'Gold': '1963-07-01', 'PerSv': '1927-07-01', 'Softw': '1965-07-01', 'Paper': '1929-07-01'}
+latest interior gap of any industry: 1971-03-11; no industry ends early: True
+=> the 'complete 1926-2024' universe is fully determined by data up to 1971-03-11: uses future info only WITHIN the design period (drops e.g. Rubbr/Paper/Toys for pre-1946 gaps); no test-period look-ahead
+
+== 2. Recompute AC60 / H1N / H1P / FIED on 8 random dates (seed 1) with independent code
+1930-03-24  builder [0.2461 9.     0.1614 0.7202]  verifier [0.2461 9.     0.1614 0.7202]
+1939-08-15  builder [0.6005 1.     0.0184 0.9189]  verifier [0.6005 1.     0.0184 0.9189]
+1971-04-26  builder [0.4293 6.     0.1946 0.8203]  verifier [0.4293 6.     0.1946 0.8203]
+1975-04-02  builder [0.6107 5.     0.0363 0.9474]  verifier [0.6107 5.     0.0363 0.9474]
+1999-12-23  builder [ 0.2884 11.      0.2321  0.581 ]  verifier [ 0.2884 11.      0.2321  0.581 ]
+2006-12-01  builder [0.3809 7.     0.1255 0.4078]  verifier [0.3809 7.     0.1255 0.4078]
+2019-10-03  builder [0.6082 6.     0.0996 0.8263]  verifier [0.6082 6.     0.0996 0.8263]
+2019-12-04  builder [0.4228 5.     0.2286 0.5286]  verifier [0.4228 5.     0.2286 0.5286]
+max abs discrepancy 1.44e-15
+
+== 3. Independent monthly-algebra backtest (test 1990-01..2024-12, 2 bp)
+BH                           verifier SR +0.571  turnover/yr 0.00   builder SR +0.571
+TREND10                      verifier SR +0.663  turnover/yr 1.49   builder SR +0.663
+B-RV                         verifier SR +0.521  turnover/yr 3.29   builder SR +0.521
+B-AC60                       verifier SR +0.622  turnover/yr 0.57   builder SR +0.622
+B-AR60                       verifier SR +0.528  turnover/yr 0.86   builder SR +0.527
+B-H1N                        verifier SR +0.667  turnover/yr 1.31   builder SR +0.667
+B-H1P                        verifier SR +0.446  turnover/yr 3.40   builder SR +0.446
+B-TOPOVOL                    verifier SR +0.207  turnover/yr 3.86   builder SR +0.207
+B-FIED                       verifier SR +0.608  turnover/yr 1.29   builder SR +0.608
+STUDENT TOPOVOL high|0.75    verifier SR +0.580  turnover/yr 3.26   builder SR +nan
+(BH from the French MONTHLY file directly: SR +0.572)
+
+== 4. Reality-check style family-wise p for 'best rule beats BH' (7 frozen binary rules + TREND10), test period
+block  6: best = B-H1N dSR +0.096; family-wise p (max-stat) = 0.657
+block 12: best = B-H1N dSR +0.096; family-wise p (max-stat) = 0.659
+block 24: best = B-H1N dSR +0.096; family-wise p (max-stat) = 0.668
+
+== 5. B-H1N attribution: months in cash in the test period and the market excess return in those months
+months in cash: 48 of 420; mean market excess return in those months -0.688% (all test months +0.729%)
+by year (months out, cumulative mkt excess return in those months):
+      n_out  mkt_ex_when_out
+1990      1          -0.0615
+1993      7           0.0385
+1994      2           0.0023
+1995      4           0.1074
+1996      4          -0.0054
+1997      1          -0.0050
+1998      1          -0.0307
+1999      7           0.0249
+2000      9          -0.1096
+2001      4          -0.1170
+2004      1          -0.0184
+2005      1           0.0058
+2017      1           0.0106
+2018      3          -0.1099
+2020      1          -0.0210
+2023      1          -0.0522
+leave-one-year-out dSR(B-H1N - BH): min +0.069 (drop 2000), max +0.115 (drop 1995)
+excluding 2000-2002: dSR +0.046
+
+== 6. Ranking at 2 bp vs 10 bp (from the builder's own logs, re-run by the verifier)
+2 bp : ['VT-RV x TREND10', 'B-H1N', 'TREND10', 'VT-naive', 'VT-RV+FIED', 'VT-RV+AC60', 'VT-RV+H1N', 'VT-RV+H1P', 'VT-RV+AR60', 'VT-RV', 'VT-RV+TOPOVOL', 'B-AC60', 'B-FIED', 'BH', 'B-AR60', 'B-RV', 'B-H1P', 'B-TOPOVOL']
+10 bp: ['VT-RV x TREND10', 'B-H1N', 'TREND10', 'VT-RV+FIED', 'VT-naive', 'VT-RV+AC60', 'VT-RV+H1N', 'VT-RV+H1P', 'VT-RV+AR60', 'VT-RV', 'VT-RV+TOPOVOL', 'B-AC60', 'B-FIED', 'BH', 'B-AR60', 'B-RV', 'B-H1P', 'B-TOPOVOL']
+identical ranking: False
+moved: [('VT-naive', 4, 5), ('VT-RV+FIED', 5, 4)]
+
+== 7. Calendar-year comparison TREND10 (2 bp) vs BH, 1990-2024 (total returns incl. T-bill leg)
+years TREND10 < BH: 19 of 35; exactly equal (fully invested all year): 12; TREND10 > BH: 4
+median annual shortfall in lagging years -5.58%; median gain in leading years +15.58%
+
+== 8. Paired Sharpe-difference bootstrap p vs BH for different block lengths (verifier's own bootstrap, seed 7)
+B-TOPOVOL                  dSR -0.364  L= 1: p 0.001  L= 6: p 0.003  L=12: p 0.006  L=24: p 0.007
+B-H1N                      dSR +0.096  L= 1: p 0.105  L= 6: p 0.136  L=12: p 0.147  L=24: p 0.111
+TREND10                    dSR +0.092  L= 1: p 0.497  L= 6: p 0.544  L=12: p 0.538  L=24: p 0.551
+STUDENT TOPOVOL high|0.75  dSR +0.008  L= 1: p 0.932  L= 6: p 0.928  L=12: p 0.926  L=24: p 0.924
+Holm on JK-Memmel p (13 rules), smallest three: {'B-TOPOVOL': np.float64(0.012), 'B-H1N': np.float64(0.953), 'VT-RV+FIED': np.float64(1.0)}

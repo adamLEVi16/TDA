@@ -1,0 +1,49 @@
+=== DESIGN PERIOD (industries, 10 bp one-way) ===
+L/S OWN1                           1927-07..1989-12 n= 750 | gross +6.34% SR +0.49 t=+3.59 | net +2.68% [-0.8%,+6.2%] SR +0.21 [+nan,+nan] t=+1.50 vol 13.0% | TO 3.06/mo BE    17bp MDD -87%
+L/S OWN12                          1927-07..1989-12 n= 750 | gross +9.39% SR +0.60 t=+5.06 | net +8.24% [+4.6%,+11.9%] SR +0.53 [+nan,+nan] t=+4.41 vol 15.7% | TO 0.96/mo BE    81bp MDD -70%
+L/S NET1 k=3                       1927-07..1989-12 n= 750 | gross +4.71% SR +0.46 t=+3.44 | net +1.10% [-1.6%,+3.8%] SR +0.11 [+nan,+nan] t=+0.80 vol 10.3% | TO 3.01/mo BE    13bp MDD -58%
+L/S NET12 k=3                      1927-07..1989-12 n= 750 | gross +1.93% SR +0.19 t=+1.48 | net -0.06% [-2.6%,+2.5%] SR -0.01 [+nan,+nan] t=-0.04 vol 10.3% | TO 1.66/mo BE    10bp MDD -70%
+L/S LAPGAP1 k=3                    1927-07..1989-12 n= 750 | gross -7.48% SR -0.66 t=-5.21 | net -11.11% [-13.9%,-8.3%] SR -0.98 [+nan,+nan] t=-7.79 vol 11.3% | TO 3.02/mo BE   -21bp MDD -100%
+L/S NET1_PURE k=3                  1927-07..1989-12 n= 750 | gross +2.47% SR +0.29 t=+2.34 | net -1.18% [-3.3%,+0.9%] SR -0.14 [+nan,+nan] t=-1.11 vol 8.6% | TO 3.04/mo BE     7bp MDD -63%
+L/S NET1 k=5                       1927-07..1989-12 n= 750 | gross +4.86% SR +0.48 t=+3.34 | net +1.25% [-1.6%,+4.1%] SR +0.12 [+nan,+nan] t=+0.85 vol 10.1% | TO 3.01/mo BE    13bp MDD -70%
+L/S NET12 k=5                      1927-07..1989-12 n= 750 | gross +3.47% SR +0.32 t=+2.61 | net +1.49% [-1.1%,+4.1%] SR +0.14 [+nan,+nan] t=+1.12 vol 11.0% | TO 1.65/mo BE    18bp MDD -75%
+L/S LAPGAP1 k=5                    1927-07..1989-12 n= 750 | gross -7.76% SR -0.67 t=-5.24 | net -11.38% [-14.3%,-8.5%] SR -0.98 [+nan,+nan] t=-7.75 vol 11.6% | TO 3.02/mo BE   -21bp MDD -100%
+L/S NET1_PURE k=5                  1927-07..1989-12 n= 750 | gross +2.51% SR +0.28 t=+2.22 | net -1.14% [-3.4%,+1.1%] SR -0.13 [+nan,+nan] t=-1.00 vol 8.8% | TO 3.04/mo BE     7bp MDD -68%
+L/S NET1 k=10                      1927-07..1989-12 n= 750 | gross +3.89% SR +0.37 t=+2.76 | net +0.30% [-2.5%,+3.1%] SR +0.03 [+nan,+nan] t=+0.21 vol 10.4% | TO 2.99/mo BE    11bp MDD -76%
+L/S NET12 k=10                     1927-07..1989-12 n= 750 | gross +3.81% SR +0.34 t=+2.88 | net +1.85% [-0.8%,+4.5%] SR +0.17 [+nan,+nan] t=+1.39 vol 11.1% | TO 1.63/mo BE    19bp MDD -68%
+L/S LAPGAP1 k=10                   1927-07..1989-12 n= 750 | gross -7.90% SR -0.65 t=-4.92 | net -11.57% [-14.7%,-8.4%] SR -0.95 [+nan,+nan] t=-7.26 vol 12.2% | TO 3.06/mo BE   -22bp MDD -100%
+L/S NET1_PURE k=10                 1927-07..1989-12 n= 750 | gross +2.51% SR +0.26 t=+2.04 | net -1.13% [-3.6%,+1.3%] SR -0.12 [+nan,+nan] t=-0.91 vol 9.7% | TO 3.03/mo BE     7bp MDD -73%
+
+k-selection score (avg net Sharpe of NET1, NET12 L/S): {3: np.float64(0.051), 5: np.float64(0.13), 10: np.float64(0.098)}
+FROZEN k = 5
+
+--- long-only top quintile vs EW (excess of RF), design, k*=5
+EW all industries                  1927-07..1989-12 n= 750 | gross +9.27% SR +0.42 t=+3.10 | net +9.23% [+3.4%,+15.1%] SR +0.41 [+nan,+nan] t=+3.08 vol 22.3% | TO 0.03/mo BE  2326bp MDD -85%
+LO OWN1                            1927-07..1989-12 n= 750 | gross +12.46% SR +0.53 t=+3.92 | net +10.66% [+4.4%,+16.9%] SR +0.45 [+nan,+nan] t=+3.35 vol 23.4% | TO 1.50/mo BE    69bp MDD -85%
+LO OWN12                           1927-07..1989-12 n= 750 | gross +13.75% SR +0.62 t=+4.56 | net +13.20% [+7.3%,+19.1%] SR +0.59 [+nan,+nan] t=+4.38 vol 22.3% | TO 0.46/mo BE   248bp MDD -76%
+LO ('NET1', 5)                     1927-07..1989-12 n= 750 | gross +11.66% SR +0.50 t=+3.62 | net +9.87% [+3.5%,+16.2%] SR +0.42 [+nan,+nan] t=+3.06 vol 23.3% | TO 1.49/mo BE    65bp MDD -87%
+LO ('NET12', 5)                    1927-07..1989-12 n= 750 | gross +11.03% SR +0.48 t=+3.65 | net +10.04% [+4.1%,+16.0%] SR +0.44 [+nan,+nan] t=+3.32 vol 23.1% | TO 0.83/mo BE   111bp MDD -83%
+LO ('LAPGAP1', 5)                  1927-07..1989-12 n= 750 | gross +5.03% SR +0.20 t=+1.58 | net +3.25% [-3.0%,+9.5%] SR +0.13 [+nan,+nan] t=+1.02 vol 24.6% | TO 1.49/mo BE    28bp MDD -88%
+LO ('NET1_PURE', 5)                1927-07..1989-12 n= 750 | gross +10.45% SR +0.45 t=+3.33 | net +8.64% [+2.5%,+14.8%] SR +0.37 [+nan,+nan] t=+2.76 vol 23.1% | TO 1.51/mo BE    58bp MDD -88%
+
+--- Fama-MacBeth, design period, z-scored regressors, k*=5 (mean slope in %/month, NW t)
+  OWN1           +0.045  t=+0.90  n=750
+  OWN12          +0.311  t=+5.40  n=750
+  ('NET1', 5)    +0.127  t=+2.98  n=750
+  ('NET12', 5)   -0.021  t=-0.52  n=750
+
+--- spanning on own-momentum L/S (design), k*=5; alpha %/yr, NW t
+  ('NET1', 5)        alpha +0.50% t=+0.36  b(OWN12)=-0.01 b(OWN1)=+0.32 R2=0.17
+  ('NET12', 5)       alpha -1.72% t=-1.35  b(OWN12)=+0.39 b(OWN1)=-0.00 R2=0.31
+  ('LAPGAP1', 5)     alpha -9.28% t=-12.23  b(OWN12)=+0.01 b(OWN1)=-0.81 R2=0.82
+  ('NET1_PURE', 5)   alpha -1.33% t=-1.10  b(OWN12)=+0.03 b(OWN1)=-0.01 R2=0.00
+
+correlation of net L/S returns (design):
+                  OWN1  OWN12  ('NET1', 5)  ('NET12', 5)  ('LAPGAP1', 5)  ('NET1_PURE', 5)
+OWN1              1.00   0.16         0.41          0.08           -0.90             -0.00
+OWN12             0.16   1.00         0.04          0.56           -0.13              0.04
+('NET1', 5)       0.41   0.04         1.00          0.10           -0.36              0.68
+('NET12', 5)      0.08   0.56         0.10          1.00           -0.06              0.11
+('LAPGAP1', 5)   -0.90  -0.13        -0.36         -0.06            1.00              0.04
+('NET1_PURE', 5) -0.00   0.04         0.68          0.11            0.04              1.00
+wrote frozen_params.json

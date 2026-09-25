@@ -1,0 +1,47 @@
+{
+  "RV": {
+    "direction": "high",
+    "q": 0.5,
+    "design_SR": 0.5182668008604556
+  },
+  "AC60": {
+    "direction": "low",
+    "q": 0.9,
+    "design_SR": 0.3616856028173044
+  },
+  "AR60": {
+    "direction": "high",
+    "q": 0.9,
+    "design_SR": 0.3337553151401772
+  },
+  "H1N": {
+    "direction": "high",
+    "q": 0.9,
+    "design_SR": 0.3356981655516924
+  },
+  "H1P": {
+    "direction": "low",
+    "q": 0.5,
+    "design_SR": 0.37239634697381396
+  },
+  "TOPOVOL": {
+    "direction": "low",
+    "q": 0.5,
+    "design_SR": 0.40583015769851954
+  },
+  "FIED": {
+    "direction": "low",
+    "q": 0.9,
+    "design_SR": 0.36094451358327073
+  },
+  "_meta": {
+    "sigma_star": 0.16611367212560887,
+    "cap": 1.0,
+    "cost_bp": 2.0,
+    "rebalance": "monthly",
+    "design": [
+      "1929-01-01",
+      "1989-12-31"
+    ]
+  }
+}

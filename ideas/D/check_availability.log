@@ -1,0 +1,34 @@
+^VIX       n=  9251 first=1990-01-02 00:00:00 last=2026-09-24 00:00:00
+^VIX3M     n=  5079 first=2006-07-17 00:00:00 last=2026-09-24 00:00:00
+SPY        n=  8471 first=1993-01-29 00:00:00 last=2026-09-24 00:00:00
+SVXY       n=  3764 first=2011-10-04 00:00:00 last=2026-09-24 00:00:00
+$XIV: possibly delisted; no timezone found
+
+1 Failed download:
+['XIV']: possibly delisted; no timezone found
+XIV        n=     0 first=NaT last=NaT
+VXX        n=  2177 first=2018-01-25 00:00:00 last=2026-09-24 00:00:00
+HTTP Error 404: Not Found{"quoteSummary":{"result":null,"error":{"code":"Not Found","description":"Quote not found for symbol: ZIV"}}}
+$ZIV: possibly delisted; no timezone found
+
+1 Failed download:
+['ZIV']: possibly delisted; no timezone found
+ZIV        n=     0 first=NaT last=NaT
+^PUT       n=  7576 first=1996-08-02 00:00:00 last=2026-09-24 00:00:00
+^BXM       n=     1 first=2026-09-24 00:00:00 last=2026-09-24 00:00:00
+$^SPVXSPID: possibly delisted; no timezone found
+
+1 Failed download:
+['^SPVXSPID']: possibly delisted; no timezone found
+^SPVXSPID  n=     0 first=NaT last=NaT
+$^VXO: possibly delisted; no timezone found
+
+1 Failed download:
+['^VXO']: possibly delisted; no timezone found
+^VXO       n=     0 first=NaT last=NaT
+F-F_Research_Data_Factors_daily_CSV.zip first 19260701,    0.09,   -0.23,    last(monthly/daily part) 20260731,    0.68,   -0.49,   
+Traceback (most recent call last):
+  File "/tmp/claude-0/-home-user-TDA/e8ef616e-abd8-552a-824c-067c967c7169/scratchpad/ideas/D/check_availability.py", line 15, in <module>
+    print(name, "first", rows[0][:30], "last(monthly/daily part)", [r[:30] for r in rows if len(r.split(',')[0].strip()) in (6,8)][-1])
+                         ~~~~^^^
+IndexError: list index out of range

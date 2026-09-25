@@ -1,0 +1,23 @@
+max |monthly return diff| per ticker, cached vs fresh yfinance (2007-2024):
+SPY    0.000001
+XLK    0.000001
+XLE    0.000001
+EWZ    0.000001
+TLT    0.000002
+GLD    0.000000
+HYG    0.000002
+DBC    0.000000
+SHY    0.000002
+EEM    0.000001
+max monthly |return| per ticker (outlier check):
+SPY    0.165
+XLK    0.161
+XLE    0.344
+EWZ    0.386
+TLT    0.143
+GLD    0.161
+HYG    0.168
+DBC    0.251
+SHY    0.018
+EEM    0.256
+daily |return| > 25% count per ticker: {'SPY': 0, 'XLK': 0, 'XLE': 0, 'EWZ': 1, 'TLT': 0, 'GLD': 0, 'HYG': 0, 'DBC': 0, 'SHY': 0, 'EEM': 0}

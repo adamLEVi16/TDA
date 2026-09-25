@@ -1,0 +1,16 @@
+real graph signals built in 20s
+OWN1                   1927-06..2024-11 rows=1170 mean #assets=46.5
+OWN12                  1927-06..2024-11 rows=1170 mean #assets=46.5
+VOL                    1927-06..2024-11 rows=1170 mean #assets=46.5
+('NET1', 3)            1927-06..2024-11 rows=1170 mean #assets=46.5
+('NET1', 5)            1927-06..2024-11 rows=1170 mean #assets=46.5
+('NET1', 10)           1927-06..2024-11 rows=1170 mean #assets=46.5
+('NET12', 3)           1927-06..2024-11 rows=1170 mean #assets=46.5
+('NET12', 5)           1927-06..2024-11 rows=1170 mean #assets=46.5
+('NET12', 10)          1927-06..2024-11 rows=1170 mean #assets=46.5
+('LAPGAP1', 3)         1927-06..2024-11 rows=1170 mean #assets=46.5
+('LAPGAP1', 5)         1927-06..2024-11 rows=1170 mean #assets=46.5
+('LAPGAP1', 10)        1927-06..2024-11 rows=1170 mean #assets=46.5
+('NET1_PURE', 3)       1927-06..2024-11 rows=1170 mean #assets=46.5
+('NET1_PURE', 5)       1927-06..2024-11 rows=1170 mean #assets=46.5
+('NET1_PURE', 10)      1927-06..2024-11 rows=1170 mean #assets=46.5

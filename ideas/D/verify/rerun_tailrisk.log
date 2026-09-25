@@ -1,0 +1,41 @@
+== Short 1-month variance swap proxy: payoff_{t+1} = IV_t - RV_{t+1} (VIX^2 as strike; approximation)
+1990-02..2026-07: n=438 mean=+107.0 var-pts/month  median=+123.8  NW t=+3.95  frac>0=84.2%  skew=-8.88  min=-7074.3  max=+1141.9
+2000-01..2026-07: n=319 mean=+71.8 var-pts/month  median=+108.1  NW t=+2.07  frac>0=79.9%  skew=-8.11  min=-7074.3  max=+1141.9
+Worst 6 months (origin month t; loss realised in t+1):
+            payoff_varpts  VIX_t  realised_vol_next_ann%
+2020-02-29        -7074.3   40.1                    93.2
+2008-09-30        -4982.8   39.4                    80.8
+2008-08-31        -2210.2   20.6                    51.3
+2025-03-31        -1905.0   22.3                    49.0
+2011-07-31        -1858.2   25.2                    50.0
+2002-06-30        -1054.5   25.4                    41.2
+Cumulative payoff: total +46855; worst single month -7074 = 66 average months of carry
+Sum of payoffs lost in the worst 1% of months: -18030 vs total +46855
+
+SVXY (short VIX-futures ETP; -1x until 2018-02-27, -0.5x after): 2011-10-04..2026-09-24 CAGR=+12.78% ann vol=54.9% maxDD=-95.2% (trough 2020-03-18)
+  worst 5 days: 2018-02-06 -83.0%, 2018-02-05 -32.0%, 2016-06-24 -26.4%, 2018-02-08 -22.3%, 2024-08-05 -21.4%
+  SVXY 2018-02-02: -13.2%
+  SVXY 2018-02-05: -32.0%
+  SVXY 2018-02-06: -83.0%
+  SVXY 2020-03-09: -12.4%
+  SVXY 2020-03-12: -11.9%
+  SVXY 2020-03-16: -19.5%
+  SVXY close 2018-02-02 -> 2018-02-06: -88.4%; 2018-01-12 -> 2018-02-08: -93.1%
+  SVXY 2020-02-19 -> 2020-03-18: -61.2%
+
+SPY same window as SVXY: 2011-10-04..2026-09-24 CAGR=+15.69% ann vol=16.7% maxDD=-33.7% (trough 2020-03-23)
+  worst 5 days: 2020-03-16 -10.9%, 2020-03-12 -9.6%, 2020-03-09 -7.8%, 2025-04-04 -5.9%, 2020-06-11 -5.8%
+
+CBOE S&P500 PutWrite index ^PUT (price index level; no fees/costs): 1996-08-02..2026-09-24 CAGR=+8.55% ann vol=15.2% maxDD=-37.1% (trough 2009-03-09)
+  worst 5 days: 2020-03-16 -28.4%, 2020-03-12 -9.8%, 2008-10-15 -9.4%, 2015-08-24 -8.9%, 2020-03-09 -7.8%
+
+SPY same window as ^PUT: 1996-08-02..2026-09-24 CAGR=+10.33% ann vol=19.3% maxDD=-55.2% (trough 2009-03-09)
+  worst 5 days: 2020-03-16 -10.9%, 2008-10-15 -9.8%, 2020-03-12 -9.6%, 2008-12-01 -8.9%, 2008-09-29 -7.8%
+  monthly put: 1996-09-30..2026-07-31 Sharpe=0.622 [95% CI 0.170,1.075] skew=-1.66 worst month=-17.7%
+  monthly spy: 1996-09-30..2026-07-31 Sharpe=0.579 [95% CI 0.177,0.981] skew=-0.52 worst month=-16.6%
+  ^PUT - SPY: dSharpe=+0.044 CI[-0.153,+0.279] p(<=0)=0.310
+  ^PUT 2008-09..2009-02 return -30.5% vs SPY -41.8%
+  ^PUT 2020-02-19..2020-03-23 return -28.9% vs SPY -33.7%
+
+VXX (long VIX futures ETN, current series): 2018-01-25..2026-09-24 CAGR=-41.29% ann vol=72.9% maxDD=-99.6% (trough 2026-09-23)
+  worst 5 days: 2025-04-09 -20.6%, 2024-08-06 -19.2%, 2021-11-29 -15.7%, 2020-03-23 -15.6%, 2024-12-20 -14.4%

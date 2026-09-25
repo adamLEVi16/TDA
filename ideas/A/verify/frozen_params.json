@@ -1,0 +1,18 @@
+{
+ "k": 5,
+ "corr_window": 252,
+ "min_obs": 240,
+ "alpha": 0.5,
+ "T": 3,
+ "quantile": 0.2,
+ "etf_top_n": 5,
+ "cost_industry": 0.001,
+ "cost_etf": 0.0003,
+ "cost_spy": 0.0002,
+ "selection_rule": "argmax_k mean(net Sharpe NET1 L/S, net Sharpe NET12 L/S), design 1927-07..1989-12",
+ "score": {
+  "3": 0.050911422403518654,
+  "5": 0.13019245771473037,
+  "10": 0.09765380447607817
+ }
+}

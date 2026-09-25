@@ -1,0 +1,8 @@
+Average correlation and stock market ret | 10.2139/ssrn.965354 | Pollet; Wilson (2008) Average Correlation and Stock Market Returns |  ():
+Average correlation and stock market ret | 10.1016/j.jfineco.2010.02.011 | Pollet; Wilson (2010) Average correlation and stock market returns | Journal of Financial Economics 96(3):364-380
+Average correlation and stock market ret | 10.1016/j.frl.2024.105343 | Oh (2024) Predicting stock market returns with average correlation and average variance: Decomposition approach | Finance Research Letters 63():105343
+Average correlation and stock market ret | 10.2139/ssrn.2024422 | Savor; Wilson (2011) Stock Market Beta and Average Returns on Macroeconomic Announcement Days | SSRN Electronic Journal ():
+Performance hypothesis testing with the  | 10.1016/j.frl.2013.08.001 | Auer; Schuhmacher (2013) Performance hypothesis testing with the Sharpe ratio: The case of hedge funds | Finance Research Letters 10(4):196-208
+Performance hypothesis testing with the  | 10.2139/ssrn.985038 | Wolf (2007) Robust Performance Hypothesis Testing with the Sharpe Ratio |  ():
+Performance hypothesis testing with the  | 10.1016/j.jempfin.2008.03.002 | Ledoit; Wolf (2008) Robust performance hypothesis testing with the Sharpe ratio | Journal of Empirical Finance 15(5):850-859
+Performance hypothesis testing with the  | 10.2139/ssrn.4052914 | O'Connor (2022) Revisiting Hypothesis Testing With the Sharpe Ratio |  ():

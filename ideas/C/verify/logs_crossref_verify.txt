@@ -1,0 +1,30 @@
+10.1111/jofi.12513
+  claimed : Moreira & Muir 2017 Volatility-Managed Portfolios, J Finance 72(4):1611-1644
+  crossref: MOREIRA, ALAN; MUIR, TYLER | Volatility‐Managed Portfolios | The Journal of Finance 72(4):1611-1644 | print [2017, 8] online [2017, 5, 15] issued [2017, 5, 15]
+10.1016/j.jfineco.2020.04.015
+  claimed : Cederburg, O'Doherty, Wang, Yan 2020, JFE 138(1):95-117
+  crossref: Cederburg, Scott; O’Doherty, Michael S.; Wang, Feifei; Yan, Xuemin (Sterling) | On the performance of volatility-managed portfolios | Journal of Financial Economics 138(1):95-117 | print [2020, 10] online None issued [2020, 10]
+10.1016/j.jfineco.2010.02.011
+  claimed : Pollet & Wilson 2010 Average correlation and stock market returns, JFE 96(3):364-380
+  crossref: Pollet, Joshua M.; Wilson, Mungo | Average correlation and stock market returns | Journal of Financial Economics 96(3):364-380 | print [2010, 6] online None issued [2010, 6]
+10.1093/rfs/hhm055
+  claimed : Campbell & Thompson 2008, RFS 21(4):1509-1531
+  crossref: Campbell, John Y.; Thompson, Samuel B. | Predicting Excess Stock Returns Out of Sample: Can Anything Beat the Historical Average? | Review of Financial Studies 21(4):1509-1531 | print [2008, 7] online [2007, 11, 20] issued [2007, 11, 20]
+10.1016/j.jeconom.2006.05.023
+  claimed : Clark & West 2007, J Econometrics 138(1):291-311
+  crossref: Clark, Todd E.; West, Kenneth D. | Approximately normal tests for equal predictive accuracy in nested models | Journal of Econometrics 138(1):291-311 | print [2007, 5] online None issued [2007, 5]
+10.3905/jpm.2011.37.4.112
+  claimed : Kritzman, Li, Page, Rigobon 2011, JPM 37(4):112-126
+  crossref: Kritzman, Mark; Li, Yuanzhen; Page, Sébastien; Rigobon, Roberto | Principal Components as a Measure of Systemic Risk | The Journal of Portfolio Management 37(4):112-126 | print [2011, 7, 31] online [2011, 7, 31] issued [2011, 7, 31]
+10.3905/jwm.2007.674809
+  claimed : Faber 2007, J Wealth Management 9(4):69-79
+  crossref: Faber, Mebane T. | A Quantitative Approach to Tactical Asset Allocation | The Journal of Wealth Management 9(4):69-79 | print [2007, 1, 31] online [2007, 1, 31] issued [2007, 1, 31]
+10.1016/j.physa.2017.09.028
+  claimed : Gidea & Katz 2018, Physica A 491:820-834
+  crossref: Gidea, Marian; Katz, Yuri | Topological data analysis of financial time series: Landscapes of crashes | Physica A: Statistical Mechanics and its Applications 491():820-834 | print [2018, 2] online None issued [2018, 2]
+10.1111/j.1540-6261.1981.tb04891.x
+  claimed : Jobson & Korkie 1981, J Finance 36(4):889-908
+  crossref: JOBSON, J. D.; KORKIE, BOB M. | Performance Hypothesis Testing with the Sharpe and Treynor Measures | The Journal of Finance 36(4):889-908 | print [1981, 9] online [2012, 4, 30] issued [1981, 9]
+10.1093/jjfinec/nbp001
+  claimed : Corsi 2009, J Financial Econometrics 7(2):174-196
+  crossref: Corsi, F. | A Simple Approximate Long-Memory Model of Realized Volatility | Journal of Financial Econometrics 7(2):174-196 | print None online [2008, 11, 7] issued [2008, 11, 7]

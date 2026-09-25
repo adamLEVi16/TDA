@@ -1,0 +1,27 @@
+returns 2005-01-03..2024-12-31  5033 days x 83 stocks, NaN count 0
+kept: AAPL ABT ACN ADBE AMAT AMD AMGN AMT AMZN AXP BA BAC BKNG BLK BMY BNY BRK-B C CAT CMCSA COF COP COST CRM CSCO CVS CVX DE DHR DIS DUK EMR FDX GD GE GILD GOOGL GS HD IBM INTC INTU ISRG JNJ JPM KO LIN LLY LMT LOW LRCX MCD MDLZ MDT MMM MO MRK MS MSFT MU NEE NFLX NVDA ORCL PEP PFE PG QCOM RTX SBUX SCHW SO T TMO TXN UNH UNP UPS USB VZ WFC WMT XOM
+dropped (18):
+  ABBV: first price 2013-01-02
+  ANET: first price 2014-06-06
+  AVGO: first price 2009-08-06
+  DELL: first price 2016-08-17
+  GEV: first price 2024-03-27
+  GM: first price 2010-11-18
+  GOOG: duplicate share class of GOOGL
+  MA: first price 2006-05-25
+  META: first price 2012-05-18
+  NOW: first price 2012-06-29
+  PANW: first price 2012-07-20
+  PLTR: first price 2020-09-30
+  PM: first price 2008-03-17
+  SNDK: first price None
+  TMUS: first price 2007-04-19
+  TSLA: first price 2010-06-29
+  UBER: first price 2019-05-10
+  V: first price 2008-03-19
+sector counts: {'Information Technology': 17, 'Health Care': 14, 'Financials': 13, 'Industrials': 12, 'Consumer Staples': 7, 'Consumer Discretionary': 6, 'Communication Services': 6, 'Energy': 3, 'Utilities': 3, 'Real Estate': 1, 'Materials': 1}
+daily |ret|>40% events: [(datetime.date(2008, 10, 13), 'MS', np.float64(0.87)), (datetime.date(2008, 11, 24), 'C', np.float64(0.578)), (datetime.date(2013, 1, 24), 'NFLX', np.float64(0.422)), (datetime.date(2016, 4, 22), 'AMD', np.float64(0.523))]
+FF5 daily 1963-07-01 2026-07-31 ['Mkt-RF', 'SMB', 'HML', 'RMW', 'CMA', 'RF']
+MOM daily 1926-11-03 2026-07-31 ['Mom']
+2005-2014: EW survivor universe ann. return 14.75%  SPY 7.62%
+2015-2024: EW survivor universe ann. return 15.83%  SPY 13.02%

@@ -1,0 +1,9 @@
+{
+ "q": 0.1,
+ "gamma": 3.0,
+ "var_window": 60,
+ "voltarget": 0.15,
+ "sma": 10,
+ "cost_bp": 2,
+ "frozen_on": "design period 1992-02..1999-12"
+}

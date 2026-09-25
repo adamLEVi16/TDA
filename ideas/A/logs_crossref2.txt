@@ -1,0 +1,9 @@
+SEARCH | Market Segmentation and Cross- | 10.1111/j.1540-6261.2010.01578.x | MENZLY; OZBAS | Market Segmentation and Cross‐predictability of Returns | The Journal of Finance | 2010 | vol 65 pp 1555-1580
+SEARCH | Market Segmentation and Cross- | 10.2139/ssrn.517822 | Menzly; Ozbas | Cross-Industry Momentum |  | 2004 | vol None pp None
+SEARCH | Market Segmentation and Cross- | 10.2139/ssrn.436800 | Nguyen | Market Underreaction and Predictability in the Cross-Section of Japanese Stock Returns |  | 2003 | vol None pp None
+SEARCH | Industry Information Diffusion | 10.2139/ssrn.463005 | Hou | Industry Information Diffusion and the Lead-Lag Effect in Stock Returns |  | 2003 | vol None pp None
+SEARCH | Industry Information Diffusion | 10.1093/revfin/hhm003 | Hou | Industry Information Diffusion and the Lead-lag Effect in Stock Returns | Review of Financial Studies | 2007 | vol 20 pp 1113-1138
+SEARCH | Industry Information Diffusion | 10.2139/ssrn.891145 | Bae; Ozoguz; Tan | Foreign Equity Ownership Restriction, the Lead-Lag Cross-Autocorrelations and Information Diffusion in Emerging Stock Market Returns |  | 2006 | vol None pp None
+SEARCH | Network Momentum across Asset  | 10.2139/ssrn.4540651 | Pu; Roberts; Dong; Zohren | Network Momentum across Asset Classes |  | 2023 | vol None pp None
+SEARCH | Network Momentum across Asset  | 10.2139/ssrn.5255258 | Burdorf | Learning to Rank: Enhancing Momentum Strategies Across Asset Classes |  | 2025 | vol None pp None
+SEARCH | Network Momentum across Asset  | 10.1002/9781119599364.ch5 | di Bartolomeo; Zieff | Momentum Across Asset Classes | Market Momentum | 2020 | vol None pp 86-102

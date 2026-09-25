@@ -1,0 +1,34 @@
+D. |monthly - compounded daily|: overall max 0.2074, median over industries of per-industry max 0.0181, mean 0.00020, share of industry-months > 0.5%: 0.0025
+   worst cell: (Timestamp('1932-04-30 00:00:00'), 'RlEst') ; missing codes remaining (<=-0.9999): 0 0
+
+A. INDEPENDENT industry replication, test 1990-01..2024-12, k=5, 10 bp
+  L/S OWN1   gross +3.93% net +0.21% t=+0.10 SR +0.02 TO 3.10 | LO net excess +8.37% SR +0.51
+  L/S OWN12  gross +6.40% net +5.21% t=+1.80 SR +0.31 TO 0.99 | LO net excess +12.16% SR +0.69
+  L/S NET1   gross +2.61% net -1.05% t=-0.47 SR -0.07 TO 3.05 | LO net excess +6.80% SR +0.40
+  L/S NET12  gross +4.48% net +2.96% t=+1.05 SR +0.18 TO 1.26 | LO net excess +9.54% SR +0.55
+  EW all industries net excess +9.05% SR +0.56
+
+C. LAPGAP1, test 1990-2024, 10 bp, quintile L/S
+  builder sign (h - x, 'catch up')                     gross -1.77% (t=-1.05) net -5.51% (t=-3.29) SR -0.53 TO 3.12
+  student's original sign (x - h, long high residual)  gross +1.77% (t=+1.05) net -1.97% (t=-1.15) SR -0.19 TO 3.12
+  original sign, DESIGN 1927-1989: gross +7.76% net +4.14% SR +0.36
+
+A2. INDEPENDENT ETF replication 2007-01..2024-12, 3 bp, long-only (excess RF)
+  EW  net excess +5.60% SR +0.39;  SPY (no cost) excess +9.76% SR +0.62
+  LO top5 NET1   net excess +7.91% SR +0.64 MDD -26%
+  LO top5 NET12  net excess +8.10% SR +0.59 MDD -30%
+  LO top5 OWN12 net excess +5.85% SR +0.40
+
+B. leak demo (1990-1999, NET1 L/S net): correct timing SR +0.13; DELIBERATE look-ahead (neighbours' NEXT-month return) SR +3.57  -> builder's numbers show no such inflation
+
+E1. White reality check: max over 18 post-hoc ETF LO NET cells of Sharpe(cell) - Sharpe(EW), 2007-2024
+  best cell ('NET1', 10, 3) dSR +0.29; reality-check p = 0.315 (n=216 months, 2000 stationary-bootstrap draws, block 6, seed 0)
+  pre-registered cell (NET12,k=5,N=5) dSR +0.20
+
+E2. Holm adjustment, pre-registered H4 tests (p from builder's logs_test_etfs.txt, 4 tests):
+  NET12-OWN12  raw p 0.121 Holm p 0.484
+  NET12-EW     raw p 0.276 Holm p 0.828
+  NET1-EW      raw p 0.281 Holm p 0.828
+  NET1-OWN12   raw p 0.338 Holm p 0.828
+
+  Approx. SE of an annualised Sharpe with T=216 months (Lo 2002 iid): 0.24

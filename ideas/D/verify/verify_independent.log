@@ -1,0 +1,50 @@
+French daily 1926-07-01..2026-07-31 missing-codes=0; monthly 1926-07-31..2026-07-31 missing-codes=0
+
+[1] Month-end date mismatch VIX vs French daily: 0 of 439 months
+  none
+    SPY vs French month-end mismatches: 0 of 402
+
+[2] Independent panel vs builder panel: max|dVRP|=0.00e+00 max|dSPYret| (2000+)=0.00e+00
+    SPY vs French Mkt monthly 2000-01..2026-07: corr=0.9892 mean diff (SPY-Mkt)=-0.32%/yr max |diff|=4.41% on 2000-02-29
+    SPY daily |ret|>12%: {Timestamp('2008-10-13 00:00:00'): 0.145}
+
+[3] Independent OOS R2 (test origins 1999-12..; builder: h1 unres -10.01%, h1 restr +0.69%, h3 unres -14.08%, h3 restr +6.23%)
+  h=1 unres NWlags= 1 n=319 R2=-10.01% CW t=+0.18 p=0.4291 | DM (unadjusted MSPE diff) t=-0.74 p=0.7709
+  h=1 restr NWlags= 1 n=319 R2=+0.69% CW t=+0.87 p=0.1919 | DM (unadjusted MSPE diff) t=+0.29 p=0.3866
+  h=3 unres NWlags= 3 n=317 R2=-14.08% CW t=+0.77 p=0.2194 | DM (unadjusted MSPE diff) t=-0.65 p=0.7425
+  h=3 unres NWlags= 6 n=317 R2=-14.08% CW t=+0.72 p=0.2364 | DM (unadjusted MSPE diff) t=-0.64 p=0.7405
+  h=3 unres NWlags=12 n=317 R2=-14.08% CW t=+0.68 p=0.2482 | DM (unadjusted MSPE diff) t=-0.64 p=0.7397
+  h=3 restr NWlags= 3 n=317 R2=+6.23% CW t=+3.14 p=0.0009 | DM (unadjusted MSPE diff) t=+2.27 p=0.0117
+  h=3 restr NWlags= 6 n=317 R2=+6.23% CW t=+2.72 p=0.0032 | DM (unadjusted MSPE diff) t=+1.96 p=0.0248
+  h=3 restr NWlags=12 n=317 R2=+6.23% CW t=+2.28 p=0.0113 | DM (unadjusted MSPE diff) t=+1.65 p=0.0492
+  h=3 restricted: exact CW p=0.00086; Bonferroni x12 = 0.0103; with NW lags 12: see above. DM (no CW adjustment) p=0.0117, Bonferroni x12 = 0.1400
+  h=3 restr 1999-12..2012-11: R2=+11.55% CW t=+3.39 DM t=+2.80 (NW 6)
+  h=3 restr 2012-12..2026-04: R2=-4.10% CW t=-0.94 DM t=-1.56 (NW 6)
+
+[4] In-sample (NOT OOS) sanity check vs Bollerslev-Tauchen-Zhou sample 1990-01..2007-12, VRP in monthly var units
+  h=1 1990-01..2007-12: slope=+3.584 NW t=+2.26 R2=1.88% T=216
+  h=1 1990-01..2026-06: slope=+0.448 NW t=+0.23 R2=0.12% T=438
+  h=3 1990-01..2007-12: slope=+11.707 NW t=+4.37 R2=6.39% T=216
+  h=3 1990-01..2026-06: slope=+1.995 NW t=+0.58 R2=0.81% T=436
+
+[5] B1 independent: ann ex=7.16% Sharpe=0.472 maxDD=-50.8% turnover/yr=0.04
+
+[5] S1 independent: ann ex=6.52% Sharpe=0.544 maxDD=-34.6% turnover/yr=3.40
+    max |independent S1 net - builder bt_S1.csv ret| = 1.56e-16
+
+[6] ^PUT daily |ret|>8%:
+Date
+2008-10-13    0.1158
+2008-10-15   -0.0937
+2015-08-24   -0.0893
+2020-03-12   -0.0984
+2020-03-13    0.3531
+2020-03-16   -0.2838
+2025-04-09    0.0880
+    ^PUT prior peak before 2020-03-13: 2018.14; 2020-03-13 print 2050.28
+    ^PUT gaps > 5 calendar days: {Timestamp('2001-09-17 00:00:00'): 7.0}
+    ^PUT monthly |ret|>15%: {Timestamp('2008-10-31 00:00:00'): -0.177}
+    ^PUT ann vol all days 15.2%; excluding 2020-03-13/16 12.8%
+
+[7] Short-var proxy: n=438 mean=107.0 total(net)=46855 worst-1% months n=5 sum=-18030; gross carry excl. worst 1% = 64886; share of that gross lost = 27.8%; loss/net total = 38.5%
+    skew (scipy, biased) = -8.88; NW(6) t = +3.95

@@ -1,0 +1,91 @@
+== R1/R2: TEST long-short, net Sharpe by cost level and by sub-period (5 bp)
+         SR_0bp  SR_2bp  SR_5bp  SR_10bp  SR5_2015-2019  t5_2015-2019  SRgross_2015-2019  SR5_2020-2024  t5_2020-2024  SRgross_2020-2024
+signal                                                                                                                                  
+LR1      +0.496  -0.501  -2.014   -4.589         -2.996        -6.584             +0.310         -1.472        -3.560             +0.634
+LR5      +0.320  +0.117  -0.187   -0.689         -0.626        -1.671             +0.080         +0.060        +0.123             +0.477
+LR21     -0.020  -0.075  -0.156   -0.291         -0.693        -1.506             -0.522         +0.208        +0.521             +0.323
+LR12_1   +0.383  +0.370  +0.350   +0.316         +0.436        +1.021             +0.480         +0.303        +0.754             +0.332
+NR1      +0.573  -0.452  -2.008   -4.656         -2.864        -5.816             +0.516         -1.537        -3.774             +0.631
+NR5      +0.335  +0.120  -0.200   -0.727         -0.594        -1.609             +0.158         +0.018        +0.035             +0.455
+NR21     +0.042  -0.013  -0.095   -0.233         +0.150        +0.329             +0.323         -0.267        -0.673             -0.149
+NR12_1   +0.324  +0.311  +0.290   +0.256         +0.380        +0.907             +0.422         +0.238        +0.599             +0.268
+SP21     -0.111  -0.150  -0.210   -0.308         -0.346        -0.768             -0.220         -0.128        -0.310             -0.043
+SP12_1   +0.071  +0.053  +0.025   -0.021         -0.144        -0.332             -0.084         +0.134        +0.335             +0.173
+MOM12_1  +0.211  +0.198  +0.180   +0.148         +0.388        +0.914             +0.429         +0.054        +0.131             +0.080
+REV5     +0.239  +0.057  -0.215   -0.665         -0.480        -1.310             +0.150         -0.069        -0.144             +0.303
+REV21    +0.112  +0.064  -0.007   -0.125         +0.201        +0.441             +0.356         -0.141        -0.354             -0.042
+IREV5    +0.553  +0.293  -0.097   -0.736         -0.012        -0.033             +0.849         -0.154        -0.319             +0.388
+
+== R4: TEST, trade one day late (signal at close t, trade at close t+1), 5 bp
+LR1    lag0: SRgross +0.50 SRnet -2.01 | lag1: SRgross +0.21 SRnet -2.40 t_net -8.18 breakeven +0.40 bp
+NR1    lag0: SRgross +0.57 SRnet -2.01 | lag1: SRgross +0.26 SRnet -2.43 t_net -8.51 breakeven +0.48 bp
+LR5    lag0: SRgross +0.32 SRnet -0.19 | lag1: SRgross +0.32 SRnet -0.22 t_net -0.72 breakeven +2.96 bp
+NR5    lag0: SRgross +0.33 SRnet -0.20 | lag1: SRgross +0.21 SRnet -0.35 t_net -1.13 breakeven +1.87 bp
+REV5   lag0: SRgross +0.24 SRnet -0.22 | lag1: SRgross +0.40 SRnet -0.07 t_net -0.25 breakeven +4.21 bp
+IREV5  lag0: SRgross +0.55 SRnet -0.10 | lag1: SRgross +0.53 SRnet -0.14 t_net -0.43 breakeven +3.97 bp
+
+== R3: original universe restricted to 18 names with data from 2005: ['AAPL', 'MSFT', 'AMZN', 'NVDA', 'GOOGL', 'NFLX', 'JPM', 'PEP', 'CSCO', 'ORCL', 'DIS', 'BAC', 'XOM', 'IBM', 'INTC', 'AMD', 'KO', 'WMT']
+        SR_gross        SR_net         t_net         turn_yr          breakeven_bp         
+period    design   test design   test design   test   design     test       design     test
+signal                                                                                     
+IREV5     -0.032 -0.159 -0.364 -0.501 -1.109 -1.738 +154.994 +155.154       -0.488   -2.333
+LR1       -0.201 +0.393 -1.559 -1.211 -5.223 -3.790 +756.930 +759.299       -0.750   +1.237
+LR12_1    +0.357 +0.619 +0.335 +0.596 +1.034 +2.016  +13.594  +12.249      +80.183 +135.830
+LR21      +0.434 +0.350 +0.372 +0.274 +1.273 +0.921  +36.972  +36.229      +35.047  +23.007
+LR5       +0.248 -0.096 -0.046 -0.431 -0.139 -1.471 +158.436 +157.175       +4.216   -1.441
+MOM12_1   +0.044 +0.352 +0.023 +0.330 +0.073 +1.120  +13.649  +12.545      +10.578  +81.504
+NR1       +0.040 +0.532 -1.325 -1.103 -4.496 -3.360 +756.828 +763.064       +0.149   +1.642
+NR12_1    +0.230 +0.788 +0.206 +0.764 +0.641 +2.651  +14.524  +12.424      +47.293 +169.920
+NR21      -0.137 -0.328 -0.201 -0.405 -0.681 -1.414  +37.714  +35.865      -10.783  -21.541
+NR5       +0.253 -0.138 -0.039 -0.480 -0.123 -1.628 +157.410 +157.556       +4.330   -2.008
+REV21     -0.333 -0.246 -0.393 -0.314 -1.351 -1.116  +37.288  +36.044      -27.519  -18.097
+REV5      +0.324 -0.217 +0.033 -0.521 +0.103 -1.795 +159.018 +158.315       +5.562   -3.560
+SP12_1    +0.151 +0.379 +0.096 +0.334 +0.312 +1.148  +25.368  +22.880      +13.659  +41.964
+SP21      -0.391 -0.144 -0.467 -0.219 -1.425 -0.759  +36.262  +36.726      -25.616   -9.581
+2005-2014: EW-18 ann mean +0.165  EW-83 +0.159  SPY +0.094
+2015-2024: EW-18 ann mean +0.225  EW-83 +0.163  SPY +0.138
+
+== R5: Fama-MacBeth, next-month return on cross-sectional z-scores (monthly slopes, NW 3 lags)
+SP21
+   design: SP21 +0.1bp/mo t=+0.01 (n=118)
+   test: SP21 +1.7bp/mo t=+0.12 (n=119)
+SP21 + REV21 + MOM12_1
+   design: SP21 +4.8bp/mo t=+0.46  REV21 -10.2bp/mo t=-0.71  MOM12_1 -5.5bp/mo t=-0.21 (n=109)
+   test: SP21 +4.0bp/mo t=+0.30  REV21 +1.1bp/mo t=+0.10  MOM12_1 +29.8bp/mo t=+2.40 (n=119)
+SP12_1
+   design: SP12_1 +6.1bp/mo t=+0.38 (n=109)
+   test: SP12_1 -3.4bp/mo t=-0.22 (n=119)
+SP12_1 + REV21 + MOM12_1
+   design: SP12_1 +4.3bp/mo t=+0.29  REV21 -2.4bp/mo t=-0.17  MOM12_1 -0.9bp/mo t=-0.03 (n=109)
+   test: SP12_1 -14.3bp/mo t=-1.08  REV21 +1.5bp/mo t=+0.14  MOM12_1 +32.9bp/mo t=+2.85 (n=119)
+SP21 + SP12_1 + REV21 + MOM12_1
+   design: SP21 +2.1bp/mo t=+0.17  SP12_1 -4.5bp/mo t=-0.26  REV21 -8.6bp/mo t=-0.58  MOM12_1 -3.0bp/mo t=-0.11 (n=109)
+   test: SP21 -0.7bp/mo t=-0.04  SP12_1 -2.5bp/mo t=-0.17  REV21 +1.2bp/mo t=+0.12  MOM12_1 +31.9bp/mo t=+2.73 (n=119)
+
+== A2: TEST, LR12_1 / NR12_1 long-short vs MOM12_1 long-short (net, 5 bp)
+LR12_1: corr with MOM12_1 +0.960; LR12_1 = a + b*MOM12_1: a=+0.034/yr t=+2.05, b=+0.862
+   LR12_1 minus MOM12_1: +0.028/yr NW t=+1.52
+NR12_1: corr with MOM12_1 +0.959; NR12_1 = a + b*MOM12_1: a=+0.022/yr t=+1.33, b=+0.839
+   NR12_1 minus MOM12_1: +0.016/yr NW t=+0.79
+
+== A3: TEST long-only excess over EW-83 (5 bp): leave-one-out contributions, then drop top 5 jointly
+LR12_1: full excess +0.057/yr t=+1.85; top-5 LOO contributors [('NVDA', np.float64(0.0251)), ('AMD', np.float64(0.0113)), ('NFLX', np.float64(0.0089)), ('AMAT', np.float64(0.0083)), ('LRCX', np.float64(0.0075))]; without them -0.002/yr t=-0.07
+MOM12_1: full excess +0.049/yr t=+1.52; top-5 LOO contributors [('NVDA', np.float64(0.0154)), ('AMD', np.float64(0.0093)), ('NFLX', np.float64(0.0073)), ('XOM', np.float64(0.006)), ('COP', np.float64(0.0053))]; without them +0.003/yr t=+0.11
+
+== A1: Ken French 49 industry portfolios (daily VW), long-horizon signals, 10 bp, quintile = 10
+industry data 1926-07-01..2026-07-31 (26296, 49), missing share 5.219%
+                   SR_gross  SR_net  t_net  ann_net  turn_yr  breakeven_bp
+signal  period                                                            
+LR12_1  1927-2004    +0.680  +0.590 +4.850   +0.071  +10.848       +75.227
+        2005-2014    +0.225  +0.158 +0.488   +0.029  +12.190       +33.559
+        2015-2024    +0.388  +0.315 +1.077   +0.053  +12.325       +53.041
+NR12_1  1927-2004    +0.648  +0.559 +4.535   +0.069  +10.984       +72.875
+        2005-2014    +0.135  +0.067 +0.205   +0.012  +12.143       +19.747
+        2015-2024    +0.357  +0.282 +0.961   +0.047  +12.362       +47.642
+MOM12_1 1927-2004    +0.619  +0.533 +4.355   +0.067  +10.842       +71.718
+        2005-2014    +0.191  +0.129 +0.415   +0.025  +11.947       +30.860
+        2015-2024    +0.316  +0.247 +0.835   +0.044  +12.141       +45.859
+industries LR12_1 vs MOM12_1 1927-2004: corr +0.833, intercept +0.018/yr t=+2.68
+industries LR12_1 vs MOM12_1 2015-2024: corr +0.970, intercept +0.013/yr t=+0.95
+industries NR12_1 vs MOM12_1 1927-2004: corr +0.875, intercept +0.012/yr t=+2.04
+industries NR12_1 vs MOM12_1 2015-2024: corr +0.964, intercept +0.007/yr t=+0.52
