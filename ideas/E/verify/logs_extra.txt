@@ -1,0 +1,36 @@
+SPY vs FF mkt 2006-01-01..2026-07-31: n=5176 corr=0.9909 mean diff (bp/day)=-0.10  max |ret| spy=0.145  zero-ret days spy=13
+SPY vs FF mkt 2017-01-01..2026-07-31: n=2407 corr=0.9947 mean diff (bp/day)=-0.02  max |ret| spy=0.109  zero-ret days spy=5
+FF dates missing from SPY 2006-2026-07: 0  SPY dates missing from FF: 0
+
+== SPY (1 bp)
+        rule    n  pct_in  ex_in_bp  ex_out_bp  diff_bp  se_bp  t_nw  share  SR_strat  SR_bh  CAGR_s  CAGR_bh
+SPY EVEN 17- 2407   46.61      2.60       7.66    -5.06   4.83 -1.05  22.85      0.22   0.73    4.48    15.25
+ SPY TOM 06- 5176   19.09      4.75       4.12     0.63   3.81  0.16  21.37      0.26   0.55    3.52    11.13
+
+== cost sensitivity
+         rule    n  pct_in  ex_in_bp  ex_out_bp  diff_bp  se_bp  t_nw  share  SR_strat  SR_bh  CAGR_s  CAGR_bh
+ EVEN 17- 0bp 2407   46.61      3.21       7.16    -3.95   4.98 -0.79  28.12      0.31   0.71    5.70    15.18
+  TOM 06- 0bp 5176   19.09      4.65       4.26     0.39   3.95  0.10  20.46      0.27   0.56    3.69    11.33
+FOMC0 11- 0bp 3855    3.19      8.65       5.04     3.61  11.96  0.30   5.36      0.19   0.73    2.22    13.87
+ EVEN 17- 5bp 2407   46.61      3.21       7.16    -3.95   4.98 -0.79  28.12      0.11   0.71    3.12    15.18
+  TOM 06- 5bp 5176   19.09      4.65       4.26     0.39   3.95  0.10  20.46      0.13   0.56    2.45    11.33
+FOMC0 11- 5bp 3855    3.19      8.65       5.04     3.61  11.96  0.30   5.36     -0.03   0.73    1.40    13.87
+
+== post-publication starts (1 bp)
+          rule    n  pct_in  ex_in_bp  ex_out_bp  diff_bp  se_bp  t_nw  share  SR_strat  SR_bh  CAGR_s  CAGR_bh
+ EVEN 2019-10- 1717   46.77      4.72       6.49    -1.78   6.36 -0.28  38.96      0.39   0.69    7.36    16.20
+FOMC0 2015-02- 2891    3.18      2.78       5.12    -2.34  13.33 -0.18   1.75      0.02   0.70    2.12    14.06
+  TOM 2008-04- 4613   19.08      5.94       4.55     1.39   4.29  0.32  23.54      0.31   0.60    3.70    12.17
+
+== OOS difference vs in-sample magnitude (NW SE)
+EVEN   in-sample diff  12.49 bp  OOS diff  -3.95 bp (SE  4.98)  H0 OOS=in-sample: z=-3.30 p=0.001 | H0 OOS=half: z=-2.05 p=0.041 | 95% CI OOS [-13.7, 5.8]
+FOMC0  in-sample diff  34.31 bp  OOS diff   3.61 bp (SE 11.96)  H0 OOS=in-sample: z=-2.57 p=0.010 | H0 OOS=half: z=-1.13 p=0.258 | 95% CI OOS [-19.8, 27.1]
+TOM    in-sample diff  14.60 bp  OOS diff   0.39 bp (SE  3.95)  H0 OOS=in-sample: z=-3.60 p=0.000 | H0 OOS=half: z=-1.75 p=0.080 | 95% CI OOS [-7.4, 8.1]
+
+OOS week counts (paper def): {-1.0: 385, 0.0: 380, 1.0: 370, 2.0: 353, 3.0: 361, 4.0: 362, 5.0: 169, 6.0: 27}
+OOS week counts without 2020-03-18: {-1.0: 380, 0.0: 375, 1.0: 365, 2.0: 348, 3.0: 357, 4.0: 357, 5.0: 169, 6.0: 32, 7.0: 5, 8.0: 5, 9.0: 5, 10.0: 4, 11.0: 5}
+
+== cancelled-meeting sensitivity, restricting even weeks to <=6 as in the paper
+                 rule    n  pct_in  ex_in_bp  ex_out_bp  diff_bp  se_bp  t_nw  share  SR_strat  SR_bh  CAGR_s  CAGR_bh
+   EVEN no-0318 wk<=6 2407   46.20      2.14       8.05    -5.90   4.75 -1.24  18.61      0.16   0.71    3.75    15.18
+EVEN no-0318 as coded 2407   46.57      3.93       6.53    -2.60   4.95 -0.53  34.40      0.31   0.71    5.88    15.18

@@ -1,0 +1,17 @@
+FF Mkt-RF on 2020-03-18: -5.56%
+
+== FOMC0 OOS 2011-04..2026-07, cancelled-meeting sensitivity (1 bp; bootstrap 5000)
+                                      rule    n  pct_in  ex_in_bp  ex_out_bp  diff_bp  se_bp  t_nw  share  SR_strat  SR_bh  CAGR_s  CAGR_bh   dSR            CI  p_centred  p_pct
+FOMC0 as analyst (incl. cancelled 3/18/20) 3855    3.19      8.65       5.04     3.61  11.96  0.30   5.36      0.14   0.73    2.06    13.87 -0.59 [-1.23,+0.03]       0.07   0.06
+             FOMC0 excl. cancelled 3/18/20 3855    3.16     13.28       4.89     8.39  11.15  0.75   8.15      0.26   0.73    2.44    13.87 -0.47 [-1.18,+0.17]       0.17   0.15
+
+== SPY FOMC0
+               rule    n  pct_in  ex_in_bp  ex_out_bp  diff_bp  se_bp  t_nw  share  SR_strat  SR_bh  CAGR_s  CAGR_bh
+SPY FOMC0 incl 3/18 3855    3.19      7.65       5.06     2.59  11.36  0.23   4.74      0.13   0.76    1.98    13.95
+SPY FOMC0 excl 3/18 3855    3.16     11.87       4.92     6.94  10.68  0.65   7.30      0.24   0.76    2.33    13.95
+
+== timing vs constant mix, both at 0 bp
+EVEN: w=0.466 timing SR 0.31 CAGR 5.70% | const SR 0.71 CAGR 8.74%
+TOM: w=0.191 timing SR 0.27 CAGR 3.69% | const SR 0.56 CAGR 3.82%
+
+paper Panel C $1: A=7.68 B=15.22 C=0.51 | ours with cash=RF: B=20.58 C=0.65 | cash=0: B=15.23 C=0.50
