@@ -73,3 +73,39 @@ If these held, you could hold the index on those days and T-bills otherwise, and
 This matches McLean & Pontiff (2016), *JF* 71(1), doi:10.1111/jofi.12365. Across 97 published predictors, returns were 58% lower after publication, and the effects with the strongest in-sample returns declined the most.
 
 The verifier's `E/verify/` scripts ran against the date list before the December 1993 meeting was added. That addition affects only January 1994, inside the replication period.
+
+## F. Bull put spreads on the S&P 500 (`F/put_spreads.py`, `F/logs_put_spreads.txt`)
+
+No free historical option prices exist, so this uses two real-data angles. It has not been independently re-checked like A–E.
+
+**1. Cboe strategy indices (real traded SPX option prices).**
+
+CNDR is the Cboe iron condor index: sell a ~20-delta put and call, buy ~5-delta wings, monthly, held to expiry. Its put side is a bull put spread.
+
+| Series | Period | Return/yr | Sharpe (excess) | Alpha vs S&P 500 | Max drawdown |
+|---|---|---|---|---|---|
+| CNDR | 1988–2007 | 10.5% | 0.91 | +4.8%/yr (t 3.2) | −16% |
+| CNDR | 2008–Aug 2026 | 0.7% | −0.01 | −1.1%/yr (t −0.6) | −20% |
+| PUT (ATM put writing) | 2008–Aug 2026 | 7.1% | 0.59 | −0.3%/yr | −37% |
+| S&P 500 total return | 2008–Aug 2026 | 11.5% | 0.71 | – | −52% |
+
+Over 1988–2026, CNDR's Sharpe is significantly below the S&P 500's (p 0.01).
+
+**2. Is today's credit worth it?**
+
+- Live SPY chain on 25 Sep 2026, Oct 30 expiry: selling the 743 put (20-delta) and buying the 693 put (5-delta) fills at $2.96. That is 5.9% of the $50 width.
+- The same spread, placed the same number of VIX-sigmas below spot, paid out 3.4% of width on average over 1990–2026 (95% CI 2.1–4.6%). The win rate was 90%.
+- By era, it paid out 2.9% of width in 1990–2007 and 4.3% in 2008–2026.
+- So *if* credits were always as rich as today's, the trade has positive expected value: about +2.4% on capital at risk per ~5-week trade.
+- CNDR's flat post-2008 record says historical credits often were not that rich. A single snapshot cannot settle this.
+
+**Sizing decides the outcome.** Today's credit ratio applied to 370 historical trades, with cash earning nothing:
+
+| Account risked per trade | Return/yr | Worst drawdown |
+|---|---|---|
+| 10% | 2.7% | −13% |
+| 20% | 5.2% | −25% |
+| 50% | 11.5% | −59% |
+| 100% | wiped out | −100% |
+
+At equal drawdown this is roughly S&P-like, not better.
