@@ -1,0 +1,16 @@
+== 1. H1 at the Phase-2 threshold (ripser thresh=0.3 on sqrt(2(1-rho)))
+Technology (5)  windows with any H1 bar: 0/287
+All 20          windows with any H1 bar: 0/287
+
+== 2. VIX closes above 30, 2023-2024 (sec06 claims 47 crisis days)
+1 day(s): ['2024-08-05']
+
+== 3. sec11 eigenvalue table (rho, lambda_1): 0.3->2.14, 0.5->4.52, 0.7->8.91, 0.9->16.34
+matrix sizes n for which every row is possible: none
+sec07/Davidson 'Financials (3 stocks): lambda_1 = 13.5' -> max possible lambda_1 for n=3 is 3
+
+== 4. F1 of always predicting 'up' at base rate p: F1 = 2p/(1+p)
+p=0.500: F1=0.667   (thesis's best model: 0.578)
+p=0.520: F1=0.684   (thesis's best model: 0.578)
+p=0.533: F1=0.695   (thesis's best model: 0.578)
+exit 0
